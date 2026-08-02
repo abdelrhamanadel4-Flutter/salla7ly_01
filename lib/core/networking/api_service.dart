@@ -1,0 +1,33 @@
+import 'dart:core';
+import 'package:dio/dio.dart';
+import 'package:retrofit/retrofit.dart';
+import 'package:salla7ly/core/networking/api_constants.dart';
+import 'package:salla7ly/feature_user/auth/login/data/model/refresh_otp_requset_dto.dart';
+import 'package:salla7ly/feature_user/auth/login/data/model/requset_otp_requset_dto.dart';
+import 'package:salla7ly/feature_user/auth/login/data/model/requset_otp_response-dto.dart';
+import 'package:salla7ly/feature_user/auth/login/data/model/verify_otp_request_dto.dart';
+import 'package:salla7ly/feature_user/auth/login/data/model/verify_otp_response_dto.dart';
+part 'api_service.g.dart';
+
+@RestApi(baseUrl: ApiConstants.baseUrl)
+abstract class ApiService {
+  factory ApiService(Dio dio, {String? baseUrl}) = _ApiService;
+    @POST(ApiConstants.requestOtp)
+  Future<RequsetOtpResponseDto> requestOtp(
+    @Body() RequsetOtpRequsetDto body,
+  );
+
+
+  @POST(ApiConstants.verifyOtp)
+  Future<VerifyOtpResponseDto> verifyOtp(
+    @Body() VerifyOtpRequestDto body,
+  );
+
+  @POST(ApiConstants.refreshOtp)
+  Future<VerifyOtpResponseDto> refreshOtp(
+    @Body() RefreshOtpRequsetDto body,
+  );
+
+
+
+}
