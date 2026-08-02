@@ -49,6 +49,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i521.LoginRepo>(
       () => _i306.LoginRepoImpl(gh<_i204.LoginRemoteDataSources>()),
     );
+    gh.factory<_i815.RefreshOtpUseCases>(
+      () => _i815.RefreshOtpUseCases(gh<_i521.LoginRepo>()),
+    );
     gh.factory<_i34.RequsetOtpUseCases>(
       () => _i34.RequsetOtpUseCases(gh<_i521.LoginRepo>()),
     );
