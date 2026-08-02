@@ -2,10 +2,12 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salla7ly/core/routing/app_router.dart';
+import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class Salla7ly extends StatelessWidget {
-   Salla7ly({super.key, required this._appRouter});
+  Salla7ly({super.key, required this._appRouter});
   final AppRouter _appRouter;
 
   @override
@@ -17,12 +19,22 @@ class Salla7ly extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Salla7ly',
-        theme: ThemeData(
-          scaffoldBackgroundColor: AppColors.scaffoldColor,
-        ),
-           onGenerateRoute: _appRouter.generateRoute,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
+        theme: ThemeData(scaffoldBackgroundColor: AppColors.scaffoldColor),
+        locale: const Locale('ar'),
+        supportedLocales: const [Locale('ar')],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        builder: (context, child) {
+          return Directionality(
+            textDirection: TextDirection.rtl,
+            child: DevicePreview.appBuilder(context, child),
+          );
+        },
+        onGenerateRoute: _appRouter.generateRoute,
+        initialRoute: Routes.signupScreen,
       ),
     );
   }
