@@ -43,10 +43,7 @@ class OtpWidget extends StatelessWidget {
           ),
         ),
 
-        onCompleted: (pin) {
-          // Real OTP validity is decided by the backend inside verifyOtp,
-          // not on the client, so no local check happens here.
-        },
+        
       ),
     );
   }

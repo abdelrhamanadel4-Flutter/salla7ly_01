@@ -3,7 +3,8 @@ class AppValidators {
 
   static String? validateEmail(String? val) {
     RegExp emailRegex = RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    );
     if (val == null || val.trim().isEmpty) {
       return 'this field is required';
     } else if (emailRegex.hasMatch(val) == false) {
@@ -63,5 +64,48 @@ class AppValidators {
     } else {
       return null;
     }
+  }
+
+  static String? validateNationalId(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return "National ID is required";
+    }
+
+    value = value.trim();
+
+    if (!RegExp(r'^\d{14}$').hasMatch(value)) {
+      return "National ID must be 14 digits";
+    }
+
+    // Century
+    final century = value[0];
+    if (century != '2' && century != '3') {
+      return "Invalid National ID";
+    }
+
+    // Year
+    final year = int.parse(value.substring(1, 3));
+
+    // Month
+    final month = int.parse(value.substring(3, 5));
+
+    // Day
+    final day = int.parse(value.substring(5, 7));
+
+    final fullYear = century == '2' ? 1900 + year : 2000 + year;
+
+    try {
+      final birthDate = DateTime(fullYear, month, day);
+
+      if (birthDate.year != fullYear ||
+          birthDate.month != month ||
+          birthDate.day != day) {
+        return "Invalid birth date";
+      }
+    } catch (_) {
+      return "Invalid birth date";
+    }
+
+    return null;
   }
 }

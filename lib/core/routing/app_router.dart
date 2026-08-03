@@ -7,6 +7,7 @@ import 'package:salla7ly/features/auth/login/logic/login_cubit.dart';
 import 'package:salla7ly/features/auth/login/ui/screens/login_screen.dart';
 import 'package:salla7ly/features/auth/login/ui/screens/otp_screen.dart';
 import 'package:salla7ly/features/auth/signup/ui/screens/signup_screen.dart';
+import 'package:salla7ly/features/auth/signup/ui/screens/technician_acceptance_screen.dart';
 import 'package:salla7ly/features/home/home_screen.dart';
 
 class AppRouter {
@@ -34,6 +35,10 @@ class AppRouter {
         case Routes.homeScreen:
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),
+        );
+        case Routes.technicianAcceptanceScreen:
+        return MaterialPageRoute(
+          builder: (_) => const TechnicianAcceptanceScreen(),
         );
      
 

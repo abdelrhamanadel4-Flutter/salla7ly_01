@@ -20,9 +20,29 @@ class AppStyles {
     fontWeight: FontWeightHelper.semiBold,
     color: AppColors.darkBlueColor,
   );
+  static final TextStyle regular14darkBlue = GoogleFonts.cairo(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: AppColors.darkBlueColor,
+  );
   static final TextStyle bold20Primary = GoogleFonts.cairo(
     fontSize: 20.sp,
     fontWeight: FontWeightHelper.bold,
     color: AppColors.primaryColor,
+  );
+  static final TextStyle bold16Primary = GoogleFonts.cairo(
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: AppColors.primaryColor,
+  );
+  static final TextStyle medium16Primary = GoogleFonts.cairo(
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: AppColors.primaryColor,
+  );
+  static final TextStyle regular14Grey = GoogleFonts.cairo(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: AppColors.greyColor,
   );
 }

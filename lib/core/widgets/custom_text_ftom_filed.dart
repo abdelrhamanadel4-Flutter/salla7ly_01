@@ -45,56 +45,50 @@ class CustomTextFormField extends StatefulWidget {
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 12.h, bottom: 20.h),
-      child: TextFormField(
-        style: widget.textStyle,
-        obscureText: widget.isObscureText,
-        keyboardType: widget.keyboardType,
-        controller: widget.controller,
-        validator: widget.validator,
-        readOnly: widget.readonly,
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: widget.filledColor,
-          hintText: widget.hintText,
-          hintStyle: widget.hintStyle,
-          label: widget.label,
-          labelStyle: widget.labelStyle,
-          prefixIcon: widget.prefixIcon,
-          prefixIconConstraints: BoxConstraints(
-            minWidth: 24.w,
-            minHeight: 24.h,
-          ),
-          suffixIcon: widget.isPassword
-              ? IconButton(
-                  onPressed: () {
-                    widget.isObscureText = !widget.isObscureText;
-                    setState(() {});
-                  },
-                  icon: Icon(
-                    widget.isObscureText
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                  ),
-                )
-              : widget.suffixIcon,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
-            borderSide: BorderSide(color: widget.borderColor, width: 1),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
-            borderSide: BorderSide(color: widget.borderColor, width: 1),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
-            borderSide: const BorderSide(color: AppColors.redColor),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
-            borderSide: const BorderSide(color: AppColors.redColor),
-          ),
+    return TextFormField(
+      style: widget.textStyle,
+      obscureText: widget.isObscureText,
+      keyboardType: widget.keyboardType,
+      controller: widget.controller,
+      validator: widget.validator,
+      readOnly: widget.readonly,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: widget.filledColor,
+        hintText: widget.hintText,
+        hintStyle: widget.hintStyle,
+        label: widget.label,
+        labelStyle: widget.labelStyle,
+        prefixIcon: widget.prefixIcon,
+        prefixIconConstraints: BoxConstraints(minWidth: 24.w, minHeight: 24.h),
+        suffixIcon: widget.isPassword
+            ? IconButton(
+                onPressed: () {
+                  widget.isObscureText = !widget.isObscureText;
+                  setState(() {});
+                },
+                icon: Icon(
+                  widget.isObscureText
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                ),
+              )
+            : widget.suffixIcon,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide(color: widget.borderColor, width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide(color: widget.borderColor, width: 1),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: const BorderSide(color: AppColors.redColor),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: const BorderSide(color: AppColors.redColor),
         ),
       ),
     );
