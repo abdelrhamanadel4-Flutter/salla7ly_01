@@ -3,6 +3,7 @@ class ApiConstants {
   static const String requestOtp = 'api/v1/public/auth/request-otp';
   static const String verifyOtp = 'api/v1/public/auth/verify-otp';
   static const String refreshOtp = 'api/v1/public/auth/refresh';
+  static const String signUp = 'api/v1/public/auth/signup';
 }
 
 class ApiErrors {
