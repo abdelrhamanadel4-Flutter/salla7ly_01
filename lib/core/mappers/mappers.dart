@@ -1,5 +1,6 @@
 
 
+import 'package:dio/dio.dart';
 import 'package:salla7ly/features/auth/login/data/model/refresh_otp_requset_dto.dart';
 import 'package:salla7ly/features/auth/login/data/model/requset_otp_requset_dto.dart';
 import 'package:salla7ly/features/auth/login/data/model/requset_otp_response-dto.dart';
@@ -10,6 +11,9 @@ import 'package:salla7ly/features/auth/login/domain/entity/requset_otp_requset.d
 import 'package:salla7ly/features/auth/login/domain/entity/requset_otp_response.dart';
 import 'package:salla7ly/features/auth/login/domain/entity/verify_otp_request.dart';
 import 'package:salla7ly/features/auth/login/domain/entity/verify_otp_response.dart';
+import 'package:salla7ly/features/auth/signup/data/model/sign_up_responsedto.dart';
+import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_requset_entity.dart';
+import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_response.dart';
 
 extension RequestOtpRequestMapper on RequsetOtpRequset {
   RequsetOtpRequsetDto toDto() {
@@ -114,6 +118,176 @@ extension VerifyOtpRequestDtoMapper on VerifyOtpRequest {
     return VerifyOtpRequestDto(
       phone: phone,
       otpCode: otpCode,
+    );
+  }
+}
+
+extension SignupRequestMapper on SignupRequest {
+  Future<FormData> toFormData() async {
+    final formData = FormData();
+
+    formData.fields.addAll([
+      MapEntry('fullName', fullName),
+      MapEntry('city', city),
+      MapEntry('address', address),
+      MapEntry('latitude', latitude.toString()),
+      MapEntry('longitude', longitude.toString()),
+      MapEntry('role', role),
+    ]);
+
+    if (categoryId != null) {
+      formData.fields.add(MapEntry('categoryId', categoryId!));
+    }
+
+    if (nationalId != null) {
+      formData.files.add(
+        MapEntry(
+          'nationalId',
+          await MultipartFile.fromFile(
+            nationalId!.path,
+            filename: nationalId!.path.split('/').last,
+          ),
+        ),
+      );
+    }
+
+    if (criminalRecordFile != null) {
+      formData.files.add(
+        MapEntry(
+          'criminalRecordFile',
+          await MultipartFile.fromFile(
+            criminalRecordFile!.path,
+            filename: criminalRecordFile!.path.split('/').last,
+          ),
+        ),
+      );
+    }
+
+    if (profileImage != null) {
+      formData.files.add(
+        MapEntry(
+          'profileImage',
+          await MultipartFile.fromFile(
+            profileImage!.path,
+            filename: profileImage!.path.split('/').last,
+          ),
+        ),
+      );
+    }
+
+    return formData;
+  }
+}
+
+
+extension SignUpResponseDtoMapper on SignUpResponsedto {
+  SignUpResponse toEntity() {
+    return SignUpResponse(
+      data: data?.toEntity(),
+    );
+  }
+}
+
+extension DataDtoSignUpResponseMapper on DataDtoSignUpResponse {
+  DataSignUpResponse toEntity() {
+    return DataSignUpResponse(
+      user: user?.toEntity(),
+      technicianProfile: technicianProfile?.toEntity(),
+      accountState: accountState,
+      message: message,
+    );
+  }
+}
+
+extension UserDtoSignUpResponseMapper on UserDtoSignUpResponse {
+  UserSignUpResponse toEntity() {
+    return UserSignUpResponse(
+      id: id,
+      fullName: fullName,
+      phone: phone,
+      role: role,
+      status: status,
+      city: city,
+      address: address,
+      latitude: latitude,
+      longitude: longitude,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+    );
+  }
+}
+
+extension TechnicianProfileDtoMapper on TechnicianProfileDto {
+  TechnicianProfile toEntity() {
+    return TechnicianProfile(
+      id: id,
+      UserId: userId,
+      categoryId: categoryId,
+      verificationStatus: verificationStatus,
+      isAvailable: isAvailable,
+      overallRating: overallRating,
+      totalReviews: totalReviews,
+      profileImage: profileImage,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+    );
+  }
+}
+
+////////////////////////////////////////////////////////////////
+/// Entity -> DTO
+////////////////////////////////////////////////////////////////
+
+extension SignUpResponseMapper on SignUpResponse {
+  SignUpResponsedto toDto() {
+    return SignUpResponsedto(
+      data: data?.toDto(),
+    );
+  }
+}
+
+extension DataSignUpResponseMapper on DataSignUpResponse {
+  DataDtoSignUpResponse toDto() {
+    return DataDtoSignUpResponse(
+      user: user?.toDto(),
+      technicianProfile: technicianProfile?.toDto(),
+      accountState: accountState,
+      message: message,
+    );
+  }
+}
+
+extension UserSignUpResponseMapper on UserSignUpResponse {
+  UserDtoSignUpResponse toDto() {
+    return UserDtoSignUpResponse(
+      id: id,
+      fullName: fullName,
+      phone: phone,
+      role: role,
+      status: status,
+      city: city,
+      address: address,
+      latitude: latitude,
+      longitude: longitude,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+    );
+  }
+}
+
+extension TechnicianProfileMapper on TechnicianProfile {
+  TechnicianProfileDto toDto() {
+    return TechnicianProfileDto(
+      id: id,
+      userId: userId,
+      categoryId: categoryId,
+      verificationStatus: verificationStatus,
+      isAvailable: isAvailable,
+      overallRating: overallRating,
+      totalReviews: totalReviews,
+      profileImage: profileImage,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
     );
   }
 }
