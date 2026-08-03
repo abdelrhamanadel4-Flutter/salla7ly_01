@@ -5,7 +5,9 @@ import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/features/auth/login/logic/login_cubit.dart';
 import 'package:salla7ly/features/auth/login/ui/screens/login_screen.dart';
 import 'package:salla7ly/features/auth/login/ui/screens/otp_screen.dart';
-import 'package:salla7ly/features/auth/signup/logic/sign_up_cubit.dart';
+import 'package:salla7ly/features/auth/signup/logic/location/location_cubit.dart';
+import 'package:salla7ly/features/auth/signup/logic/sign_up/sign_up_cubit.dart';
+import 'package:salla7ly/features/auth/signup/ui/screens/map_sceran.dart';
 import 'package:salla7ly/features/auth/signup/ui/screens/signup_screen.dart';
 import 'package:salla7ly/features/home/home_screen.dart';
 
@@ -19,8 +21,6 @@ class AppRouter {
             create: (context) => getIt<LoginCubit>(),
           ),
         );
-      case Routes.signupScreen:
-        return MaterialPageRoute(builder: (_) => const SignupScreen());
       case Routes.otpScreen:
         final cubit = settings.arguments as LoginCubit?;
         return MaterialPageRoute(
@@ -29,14 +29,22 @@ class AppRouter {
             child: const OtpScreen(),
           ),
         );
-      case Routes.homeScreen:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
-        
-      case Routes.signupScreen:
+       case Routes.signupScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<SignupCubit>(),
             child: const SignupScreen(),
+          ),
+        );
+      case Routes.homeScreen:
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
+        
+  
+        case Routes.mapScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<LocationCubit>(),
+            child: const MapScreen(),
           ),
         );
 

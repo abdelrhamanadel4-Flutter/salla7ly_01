@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salla7ly/core/widgets/dilaog_utils.dart';
-import 'package:salla7ly/features/auth/signup/logic/sign_up_cubit.dart';
-import 'package:salla7ly/features/auth/signup/logic/sign_up_state.dart';
+import 'package:salla7ly/features/auth/signup/logic/sign_up/sign_up_cubit.dart';
+import 'package:salla7ly/features/auth/signup/logic/sign_up/sign_up_state.dart';
 
 class SignUpBlocListener extends StatelessWidget {
   final VoidCallback onSuccess;

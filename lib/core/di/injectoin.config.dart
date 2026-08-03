@@ -39,8 +39,8 @@ import 'package:salla7ly/features/auth/signup/domain/repo/sign_up_repo.dart'
     as _i537;
 import 'package:salla7ly/features/auth/signup/domain/use_cases/sign_up_use_case.dart'
     as _i158;
-import 'package:salla7ly/features/auth/signup/logic/sign_up_cubit.dart'
-    as _i965;
+import 'package:salla7ly/features/auth/signup/logic/sign_up/sign_up_cubit.dart'
+    as _i813;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -85,8 +85,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i307.RequsetOtpUseCases>(),
       ),
     );
-    gh.factory<_i965.SignupCubit>(
-      () => _i965.SignupCubit(gh<_i158.SignUpUseCase>()),
+    gh.factory<_i813.SignupCubit>(
+      () => _i813.SignupCubit(gh<_i158.SignUpUseCase>()),
     );
     return this;
   }

@@ -64,4 +64,23 @@ class AppValidators {
       return null;
     }
   }
+  static String? validateCity(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Please select your city';
+    }
+    return null;
+  }
+
+  static String? validateAddress(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Please select your address';
+    }
+    return null;
+  }
+bool validateLocation(double? latitude, double? longitude) {
+  if (latitude == null || longitude == null) {
+    return false;
+  }
+  return true;
+}
 }
