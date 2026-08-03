@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:salla7ly/core/networking/api_result.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_requset_entity.dart';
 import 'package:salla7ly/features/auth/signup/domain/use_cases/sign_up_use_case.dart';
-import 'package:salla7ly/features/auth/signup/logic/sign_up_state.dart';
+import 'package:salla7ly/features/auth/signup/logic/sign_up/sign_up_state.dart';
 
 @injectable
 class SignupCubit extends Cubit<SignUpState> {
