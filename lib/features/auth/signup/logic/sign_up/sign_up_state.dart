@@ -11,6 +11,7 @@ class SignUpState<T> with _$SignUpState<T> {
   const factory SignUpState.loading() = Loading;
   const factory SignUpState.success(T data) = Success<T>;
   const factory SignUpState.error(ApiErrorModel apiErrorModel) = Error;
-     const factory SignUpState.refresh() = Refresh<T>;
+  const factory SignUpState.refresh() = Refresh<T>;
+
 
 }

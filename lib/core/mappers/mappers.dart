@@ -1,5 +1,3 @@
-
-
 import 'package:dio/dio.dart';
 import 'package:salla7ly/features/auth/login/data/model/refresh_otp_requset_dto.dart';
 import 'package:salla7ly/features/auth/login/data/model/requset_otp_requset_dto.dart';
@@ -11,7 +9,9 @@ import 'package:salla7ly/features/auth/login/domain/entity/requset_otp_requset.d
 import 'package:salla7ly/features/auth/login/domain/entity/requset_otp_response.dart';
 import 'package:salla7ly/features/auth/login/domain/entity/verify_otp_request.dart';
 import 'package:salla7ly/features/auth/login/domain/entity/verify_otp_response.dart';
+import 'package:salla7ly/features/auth/signup/data/model/catgireos_response_dto.dart';
 import 'package:salla7ly/features/auth/signup/data/model/sign_up_responsedto.dart';
+import 'package:salla7ly/features/auth/signup/domain/entity/catgireos_response.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_requset_entity.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_response.dart';
 
@@ -288,6 +288,43 @@ extension TechnicianProfileMapper on TechnicianProfile {
       profileImage: profileImage,
       createdAt: createdAt,
       updatedAt: updatedAt,
+    );
+  }
+}
+
+extension CatgireosResponseDtoMapper on CatgireosResponseDto {
+  CatgireosResponse toEntity() {
+    return CatgireosResponse(
+      data: data?.map((e) => e?.toEntity()).toList(),
+    );
+  }
+}
+
+extension DataDtoCatgireosResponseMapper on DataDtoCatgireosResponse {
+  DataCatgireosResponse toEntity() {
+    return DataCatgireosResponse(
+      id: id,
+      name: name,
+    );
+  }
+}
+
+extension CatgireosResponseEntityMapper on CatgireosResponse {
+  CatgireosResponseDto toDto() {
+    return CatgireosResponseDto(
+      data: data?.map((e) => e?.toDto()).toList(),
+    );
+  }
+}
+
+extension DataCatgireosResponseEntityMapper on DataCatgireosResponse {
+  DataDtoCatgireosResponse toDto() {
+    return DataDtoCatgireosResponse(
+      id: id,
+      name: name,
+      homeVisitBasePrice: null,
+      createdAt: null,
+      updatedAt: null,
     );
   }
 }

@@ -37,8 +37,14 @@ import 'package:salla7ly/features/auth/signup/data/repo/sign_up_repo_impl.dart'
     as _i1019;
 import 'package:salla7ly/features/auth/signup/domain/repo/sign_up_repo.dart'
     as _i537;
+import 'package:salla7ly/features/auth/signup/domain/use_cases/categories_use_case.dart'
+    as _i154;
 import 'package:salla7ly/features/auth/signup/domain/use_cases/sign_up_use_case.dart'
     as _i158;
+import 'package:salla7ly/features/auth/signup/logic/categories/categories_cubit.dart'
+    as _i1041;
+import 'package:salla7ly/features/auth/signup/logic/location/location_cubit.dart'
+    as _i694;
 import 'package:salla7ly/features/auth/signup/logic/sign_up/sign_up_cubit.dart'
     as _i813;
 
@@ -50,6 +56,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
+    gh.factory<_i694.LocationCubit>(() => _i694.LocationCubit());
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio());
     gh.lazySingleton<_i837.ApiService>(
       () => dioModule.apiService(gh<_i361.Dio>()),
@@ -66,8 +73,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i247.LoginRepo>(
       () => _i209.LoginRepoImpl(gh<_i175.LoginRemoteDataSources>()),
     );
+    gh.factory<_i154.CategoriesUseCase>(
+      () => _i154.CategoriesUseCase(gh<_i537.SignUpRepo>()),
+    );
     gh.factory<_i158.SignUpUseCase>(
       () => _i158.SignUpUseCase(gh<_i537.SignUpRepo>()),
+    );
+    gh.factory<_i1041.CategoriesCubit>(
+      () => _i1041.CategoriesCubit(gh<_i154.CategoriesUseCase>()),
     );
     gh.factory<_i636.RefreshOtpUseCases>(
       () => _i636.RefreshOtpUseCases(gh<_i247.LoginRepo>()),
