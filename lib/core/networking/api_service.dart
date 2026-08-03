@@ -2,11 +2,11 @@ import 'dart:core';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:salla7ly/core/networking/api_constants.dart';
-import 'package:salla7ly/feature_user/auth/login/data/model/refresh_otp_requset_dto.dart';
-import 'package:salla7ly/feature_user/auth/login/data/model/requset_otp_requset_dto.dart';
-import 'package:salla7ly/feature_user/auth/login/data/model/requset_otp_response-dto.dart';
-import 'package:salla7ly/feature_user/auth/login/data/model/verify_otp_request_dto.dart';
-import 'package:salla7ly/feature_user/auth/login/data/model/verify_otp_response_dto.dart';
+import 'package:salla7ly/features/auth/login/data/model/refresh_otp_requset_dto.dart';
+import 'package:salla7ly/features/auth/login/data/model/requset_otp_requset_dto.dart';
+import 'package:salla7ly/features/auth/login/data/model/requset_otp_response-dto.dart';
+import 'package:salla7ly/features/auth/login/data/model/verify_otp_request_dto.dart';
+import 'package:salla7ly/features/auth/login/data/model/verify_otp_response_dto.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)

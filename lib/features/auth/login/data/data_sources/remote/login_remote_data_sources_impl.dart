@@ -3,12 +3,12 @@ import 'package:salla7ly/core/mappers/mappers.dart';
 import 'package:salla7ly/core/networking/api_error_handler.dart';
 import 'package:salla7ly/core/networking/api_result.dart';
 import 'package:salla7ly/core/networking/api_service.dart';
-import 'package:salla7ly/feature_user/auth/login/data/data_sources/remote/login_remote_data_sources.dart';
-import 'package:salla7ly/feature_user/auth/login/domain/entity/refresh_otp_requset.dart';
-import 'package:salla7ly/feature_user/auth/login/domain/entity/requset_otp_requset.dart';
-import 'package:salla7ly/feature_user/auth/login/domain/entity/requset_otp_response.dart';
-import 'package:salla7ly/feature_user/auth/login/domain/entity/verify_otp_request.dart';
-import 'package:salla7ly/feature_user/auth/login/domain/entity/verify_otp_response.dart';
+import 'package:salla7ly/features/auth/login/data/data_sources/remote/login_remote_data_sources.dart';
+import 'package:salla7ly/features/auth/login/domain/entity/refresh_otp_requset.dart';
+import 'package:salla7ly/features/auth/login/domain/entity/requset_otp_requset.dart';
+import 'package:salla7ly/features/auth/login/domain/entity/requset_otp_response.dart';
+import 'package:salla7ly/features/auth/login/domain/entity/verify_otp_request.dart';
+import 'package:salla7ly/features/auth/login/domain/entity/verify_otp_response.dart';
 @Injectable(as: LoginRemoteDataSources)
 class LoginRemoteDataSourcesImpl extends LoginRemoteDataSources {
     final ApiService _apiService;

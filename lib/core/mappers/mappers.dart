@@ -1,15 +1,15 @@
 
 
-import 'package:salla7ly/feature_user/auth/login/data/model/refresh_otp_requset_dto.dart';
-import 'package:salla7ly/feature_user/auth/login/data/model/requset_otp_requset_dto.dart';
-import 'package:salla7ly/feature_user/auth/login/data/model/requset_otp_response-dto.dart';
-import 'package:salla7ly/feature_user/auth/login/data/model/verify_otp_request_dto.dart';
-import 'package:salla7ly/feature_user/auth/login/data/model/verify_otp_response_dto.dart';
-import 'package:salla7ly/feature_user/auth/login/domain/entity/refresh_otp_requset.dart';
-import 'package:salla7ly/feature_user/auth/login/domain/entity/requset_otp_requset.dart';
-import 'package:salla7ly/feature_user/auth/login/domain/entity/requset_otp_response.dart';
-import 'package:salla7ly/feature_user/auth/login/domain/entity/verify_otp_request.dart';
-import 'package:salla7ly/feature_user/auth/login/domain/entity/verify_otp_response.dart';
+import 'package:salla7ly/features/auth/login/data/model/refresh_otp_requset_dto.dart';
+import 'package:salla7ly/features/auth/login/data/model/requset_otp_requset_dto.dart';
+import 'package:salla7ly/features/auth/login/data/model/requset_otp_response-dto.dart';
+import 'package:salla7ly/features/auth/login/data/model/verify_otp_request_dto.dart';
+import 'package:salla7ly/features/auth/login/data/model/verify_otp_response_dto.dart';
+import 'package:salla7ly/features/auth/login/domain/entity/refresh_otp_requset.dart';
+import 'package:salla7ly/features/auth/login/domain/entity/requset_otp_requset.dart';
+import 'package:salla7ly/features/auth/login/domain/entity/requset_otp_response.dart';
+import 'package:salla7ly/features/auth/login/domain/entity/verify_otp_request.dart';
+import 'package:salla7ly/features/auth/login/domain/entity/verify_otp_response.dart';
 
 extension RequestOtpRequestMapper on RequsetOtpRequset {
   RequsetOtpRequsetDto toDto() {

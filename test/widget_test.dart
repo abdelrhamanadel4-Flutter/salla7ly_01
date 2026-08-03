@@ -13,7 +13,7 @@ import 'package:salla7ly/salla7ly.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget( Salla7ly(appRouter: AppRouter(),));
+    await tester.pumpWidget( Salla7ly(appRouter: AppRouter(), initialRoute: '',));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

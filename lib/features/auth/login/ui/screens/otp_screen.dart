@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
+import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
+import 'package:salla7ly/features/auth/login/domain/entity/requset_otp_requset.dart';
+import 'package:salla7ly/features/auth/login/domain/entity/verify_otp_request.dart';
+import 'package:salla7ly/features/auth/login/logic/login_cubit.dart';
+import 'package:salla7ly/features/auth/login/ui/widgets/login_listener.dart';
 import 'package:salla7ly/features/auth/login/ui/widgets/otp_widget.dart';
 
 class OtpScreen extends StatelessWidget {
@@ -28,10 +35,24 @@ class OtpScreen extends StatelessWidget {
               OtpWidget(),
               verticalSpace(32),
               CustomElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.read<LoginCubit>().verifyOtp(VerifyOtpRequest(
+                    phone: context.read<LoginCubit>().phoneNoController?.text ?? '',
+                    otpCode: context.read<LoginCubit>().otpcontroller.text,
+                  ));
+                },
                 text: 'تمام',
                 backgroundColor: AppColors.primaryColor,
                 textStyle: AppStyles.bold16LightGrey,
+              ),
+              LoginBlocListener(
+                onSuccess: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    Routes.homeScreen,
+                    (route) => false,
+                  );
+                },
               ),
             ],
           ),
