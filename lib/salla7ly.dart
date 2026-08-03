@@ -37,7 +37,7 @@ class Salla7ly extends StatelessWidget {
           );
         },
         onGenerateRoute: _appRouter.generateRoute,
-        initialRoute: Routes.technicianAcceptanceScreen,
+        initialRoute: Routes.loginScreen,
       ),
     );
   }

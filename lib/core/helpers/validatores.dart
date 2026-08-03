@@ -123,7 +123,7 @@ class AppValidators {
     }
     return null;
   }
-bool validateLocation(double? latitude, double? longitude) {
+  static bool validateLocation(double? latitude, double? longitude) {
   if (latitude == null || longitude == null) {
     return false;
   }

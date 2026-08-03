@@ -2,12 +2,14 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 
 class CriminalRecordField extends StatelessWidget {
   final VoidCallback onTap;
+  
 
   const CriminalRecordField({super.key, required this.onTap});
 
@@ -36,7 +38,7 @@ class CriminalRecordField extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 12.w),
                 child: SvgPicture.asset(Assets.svgsCriminalRecordFieldIcon),
               ),
-              SizedBox(width: 8),
+              horizontalSpace(8),
               Text('فيش وتشبيه', style: AppStyles.regular14darkBlue),
             ],
           ),

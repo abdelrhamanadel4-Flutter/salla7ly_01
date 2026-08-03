@@ -7,6 +7,7 @@ import 'package:salla7ly/features/auth/login/data/model/requset_otp_requset_dto.
 import 'package:salla7ly/features/auth/login/data/model/requset_otp_response-dto.dart';
 import 'package:salla7ly/features/auth/login/data/model/verify_otp_request_dto.dart';
 import 'package:salla7ly/features/auth/login/data/model/verify_otp_response_dto.dart';
+import 'package:salla7ly/features/auth/signup/data/model/catgireos_response_dto.dart';
 import 'package:salla7ly/features/auth/signup/data/model/sign_up_responsedto.dart';
 part 'api_service.g.dart';
 
@@ -32,6 +33,8 @@ abstract class ApiService {
   Future<SignUpResponsedto> signUp(
     @Body() FormData formData,
   );
+  @GET(ApiConstants.getCategories)
+  Future<CatgireosResponseDto> getCategories();
 
 
 

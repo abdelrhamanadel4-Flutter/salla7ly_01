@@ -13,6 +13,7 @@ import 'package:salla7ly/features/auth/login/domain/entity/verify_otp_request.da
 import 'package:salla7ly/features/auth/login/logic/login_cubit.dart';
 import 'package:salla7ly/features/auth/login/ui/widgets/login_listener.dart';
 import 'package:salla7ly/features/auth/login/ui/widgets/otp_widget.dart';
+import 'package:salla7ly/features/auth/signup/ui/screens/signup_screen.dart';
 
 class OtpScreen extends StatelessWidget {
   const OtpScreen({super.key});
@@ -49,7 +50,7 @@ class OtpScreen extends StatelessWidget {
                 onSuccess: () {
                   Navigator.pushNamedAndRemoveUntil(
                     context,
-                    Routes.homeScreen,
+                    Routes.signupScreen,
                     (route) => false,
                   );
                 },

@@ -10,6 +10,8 @@ import 'package:salla7ly/core/theming/assets.dart';
 class UploadImageField extends StatelessWidget {
   final VoidCallback onTap;
 
+  
+
   const UploadImageField({super.key, required this.onTap});
 
   @override
@@ -40,7 +42,7 @@ class UploadImageField extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 12.w),
                     child: SvgPicture.asset(Assets.svgsUploadImageIcon),
                   ),
-                  SizedBox(width: 8),
+                  horizontalSpace(8),
                   Text('ارفع صورة شخصية', style: AppStyles.semiBold14darkBlue),
                 ],
               ),
