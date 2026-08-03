@@ -14,21 +14,21 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:salla7ly/core/networking/api_service.dart' as _i837;
 import 'package:salla7ly/core/networking/dio_module.dart' as _i697;
-import 'package:salla7ly/feature_user/auth/login/data/data_sources/remote/login_remote_data_sources.dart'
+import 'package:salla7ly/features/auth/login/data/data_sources/remote/login_remote_data_sources.dart'
     as _i204;
-import 'package:salla7ly/feature_user/auth/login/data/data_sources/remote/login_remote_data_sources_impl.dart'
+import 'package:salla7ly/features/auth/login/data/data_sources/remote/login_remote_data_sources_impl.dart'
     as _i99;
-import 'package:salla7ly/feature_user/auth/login/data/repo/login_repo_impl.dart'
+import 'package:salla7ly/features/auth/login/data/repo/login_repo_impl.dart'
     as _i306;
-import 'package:salla7ly/feature_user/auth/login/domain/repo/login_repo.dart'
+import 'package:salla7ly/features/auth/login/domain/repo/login_repo.dart'
     as _i521;
-import 'package:salla7ly/feature_user/auth/login/domain/use_cases/refresh_otp_use_cases.dart'
+import 'package:salla7ly/features/auth/login/domain/use_cases/refresh_otp_use_cases.dart'
     as _i815;
-import 'package:salla7ly/feature_user/auth/login/domain/use_cases/requset_otp_use_cases.dart'
+import 'package:salla7ly/features/auth/login/domain/use_cases/requset_otp_use_cases.dart'
     as _i34;
-import 'package:salla7ly/feature_user/auth/login/domain/use_cases/verify_otp_use_cases.dart'
+import 'package:salla7ly/features/auth/login/domain/use_cases/verify_otp_use_cases.dart'
     as _i443;
-import 'package:salla7ly/feature_user/auth/login/logic/login_cubit.dart'
+import 'package:salla7ly/features/auth/login/logic/login_cubit.dart'
     as _i864;
 
 extension GetItInjectableX on _i174.GetIt {

@@ -1,13 +1,15 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
+import 'package:salla7ly/features/auth/login/logic/login_cubit.dart';
 
 class OtpWidget extends StatelessWidget {
   OtpWidget({super.key});
 
-  final controller = PinInputController();
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class OtpWidget extends StatelessWidget {
       textDirection: TextDirection.ltr,
       child: MaterialPinField(
         length: 6,
-        pinController: controller,
+        pinController: context.read<LoginCubit>().otpcontroller,
 
         separatorBuilder: (context, index) {
           return SizedBox(width: 12);
@@ -42,9 +44,8 @@ class OtpWidget extends StatelessWidget {
         ),
 
         onCompleted: (pin) {
-          if (pin != '123456') {
-            controller.triggerError();
-          }
+          // Real OTP validity is decided by the backend inside verifyOtp,
+          // not on the client, so no local check happens here.
         },
       ),
     );

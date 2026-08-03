@@ -7,8 +7,10 @@ import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class Salla7ly extends StatelessWidget {
-  Salla7ly({super.key, required this._appRouter});
+  Salla7ly({super.key, required AppRouter appRouter, required this.initialRoute})
+      : _appRouter = appRouter;
   final AppRouter _appRouter;
+  final String initialRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class Salla7ly extends StatelessWidget {
           );
         },
         onGenerateRoute: _appRouter.generateRoute,
-        initialRoute: Routes.signupScreen,
+        initialRoute: initialRoute,
       ),
     );
   }

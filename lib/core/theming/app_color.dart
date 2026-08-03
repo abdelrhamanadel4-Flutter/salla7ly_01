@@ -10,4 +10,11 @@ class AppColors {
     static const Color blackColor = Color(0xFF000000);
     static const Color redColor = Color(0xFFFF0000);
 
+    // Feedback / dialog palette
+    static const Color successColor = Color(0xFF1FAB5A);
+    static const Color successSoft = Color(0xFFE3F7EB);
+    static const Color errorSoft = Color(0xFFFDE8E8);
+    static const Color warningColor = Color(0xFFF5A623);
+    static const Color warningSoft = Color(0xFFFFF3E0);
+    static const Color infoSoft = Color(0xFFE7ECFB);
 }
