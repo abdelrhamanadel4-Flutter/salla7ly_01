@@ -12,36 +12,38 @@ class TechnicianAcceptanceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 56.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              TechnicianAcceptanceProgress(),
-              verticalSpace(72),
-              DottedBorder(
-                options: RoundedRectDottedBorderOptions(
-                  radius: Radius.circular(4.r),
-                  dashPattern: const [8, 4],
-                  strokeWidth: 1.5,
-                  color: AppColors.primaryColor,
-                ),
-                child: Container(
-                  width: 267.w,
-                  height: 50.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4.r),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 56.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TechnicianAcceptanceProgress(),
+                verticalSpace(72),
+                DottedBorder(
+                  options: RoundedRectDottedBorderOptions(
+                    radius: Radius.circular(4.r),
+                    dashPattern: const [8, 4],
+                    strokeWidth: 1.5,
+                    color: AppColors.primaryColor,
                   ),
-                  child: Center(
-                    child: Text(
-                      'معلش استنا وهنرد عليك بكرا',
-                      style: AppStyles.bold16Primary,
+                  child: Container(
+                    width: 267.w,
+                    height: 50.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4.r),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'معلش استنا وهنرد عليك بكرا',
+                        style: AppStyles.bold16Primary,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

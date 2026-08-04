@@ -21,41 +21,43 @@ class OtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-          child: Column(
-            children: [
-              Image.asset(Assets.imagesLogo),
-              verticalSpace(16),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text('😊 دخل الرمز', style: AppStyles.bold24Primary),
-              ),
-              verticalSpace(20),
-              OtpWidget(),
-              verticalSpace(32),
-              CustomElevatedButton(
-                onPressed: () {
-                  context.read<LoginCubit>().verifyOtp(VerifyOtpRequest(
-                    phone: context.read<LoginCubit>().phoneNoController?.text ?? '',
-                    otpCode: context.read<LoginCubit>().otpcontroller.text,
-                  ));
-                },
-                text: 'تمام',
-                backgroundColor: AppColors.primaryColor,
-                textStyle: AppStyles.bold16LightGrey,
-              ),
-              LoginBlocListener(
-                onSuccess: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    Routes.signupScreen,
-                    (route) => false,
-                  );
-                },
-              ),
-            ],
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+            child: Column(
+              children: [
+                Image.asset(Assets.imagesLogo),
+                verticalSpace(16),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('😊 دخل الرمز', style: AppStyles.bold24Primary),
+                ),
+                verticalSpace(20),
+                OtpWidget(),
+                verticalSpace(32),
+                CustomElevatedButton(
+                  onPressed: () {
+                    context.read<LoginCubit>().verifyOtp(VerifyOtpRequest(
+                      phone: context.read<LoginCubit>().phoneNoController?.text ?? '',
+                      otpCode: context.read<LoginCubit>().otpcontroller.text,
+                    ));
+                  },
+                  text: 'تمام',
+                  backgroundColor: AppColors.primaryColor,
+                  textStyle: AppStyles.bold16LightGrey,
+                ),
+                LoginBlocListener(
+                  onSuccess: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      Routes.signupScreen,
+                      (route) => false,
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

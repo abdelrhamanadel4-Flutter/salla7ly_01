@@ -21,56 +21,58 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.asset(Assets.imagesLogo),
-              verticalSpace(8),
-              Text('صباح الفل !', style: AppStyles.bold24Primary),
-              verticalSpace(16),
-              Form(
-                key: context.read<LoginCubit>().formKey,
-                child: CustomTextFormField(
-                  controller: context.read<LoginCubit>().phoneNoController,
-                  validator: (value) {
-                    return AppValidators.validatePhoneNumber(value);
-                  },
-                  hintStyle: AppStyles.semiBold14darkBlue,
-                  hintText: 'دخل رقمك',
-                  prefixIcon: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12.w),
-                    child: SvgPicture.asset(Assets.svgsPhoneIcon),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.asset(Assets.imagesLogo),
+                verticalSpace(8),
+                Text('صباح الفل !', style: AppStyles.bold24Primary),
+                verticalSpace(16),
+                Form(
+                  key: context.read<LoginCubit>().formKey,
+                  child: CustomTextFormField(
+                    controller: context.read<LoginCubit>().phoneNoController,
+                    validator: (value) {
+                      return AppValidators.validatePhoneNumber(value);
+                    },
+                    hintStyle: AppStyles.semiBold14darkBlue,
+                    hintText: 'دخل رقمك',
+                    prefixIcon: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12.w),
+                      child: SvgPicture.asset(Assets.svgsPhoneIcon),
+                    ),
                   ),
                 ),
-              ),
-              verticalSpace(16),
-              CustomElevatedButton(
-                onPressed: () {
-                  context.read<LoginCubit>().requestOtp(
-                    RequsetOtpRequset(
-                      phone:
-                          context.read<LoginCubit>().phoneNoController?.text ??
-                          '',
-                    ),
-                  );
-                },
-                text: 'تمام',
-                backgroundColor: AppColors.primaryColor,
-                textStyle: AppStyles.bold16LightGrey,
-              ),
-              LoginBlocListener(
-                onSuccess: () {
-                  Navigator.pushNamed(
-                    context,
-                    Routes.otpScreen,
-                    arguments: context.read<LoginCubit>(),
-                  );
-                },
-              ),
-            ],
+                verticalSpace(16),
+                CustomElevatedButton(
+                  onPressed: () {
+                    context.read<LoginCubit>().requestOtp(
+                      RequsetOtpRequset(
+                        phone:
+                            context.read<LoginCubit>().phoneNoController?.text ??
+                            '',
+                      ),
+                    );
+                  },
+                  text: 'تمام',
+                  backgroundColor: AppColors.primaryColor,
+                  textStyle: AppStyles.bold16LightGrey,
+                ),
+                LoginBlocListener(
+                  onSuccess: () {
+                    Navigator.pushNamed(
+                      context,
+                      Routes.otpScreen,
+                      arguments: context.read<LoginCubit>(),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
