@@ -7,9 +7,8 @@ class SignupRequest {
   final double latitude;
   final double longitude;
   final String role;
-
   final String? categoryId;
-  final File? nationalId;
+  final String? nationalId;
   final File? criminalRecordFile;
   final File? profileImage;
 

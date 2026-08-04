@@ -25,7 +25,6 @@ class SignupCubit extends Cubit<SignUpState> {
   final locationController = TextEditingController();
   final nationalIdController = TextEditingController();
   File? profileImage;
-  File? nationalId;
   File? criminalRecordFile;
 
   
@@ -60,20 +59,6 @@ class SignupCubit extends Cubit<SignUpState> {
     }
   }
 
-  /// National ID
-  Future<void> pickNationalId() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
-    );
-
-    if (result != null) {
-      nationalId = File(result.files.single.path!);
-
-         emit(const SignUpState.refresh());
-
-    }
-  }
 
   /// Criminal Record
   Future<void> pickCriminalRecord() async {

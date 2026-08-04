@@ -178,7 +178,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             profileImage: context
                                 .read<SignupCubit>()
                                 .profileImage,
-                            nationalId: context.read<SignupCubit>().nationalId,
+                            nationalId: context.read<SignupCubit>().nationalIdController.text,
                             criminalRecordFile: context
                                 .read<SignupCubit>()
                                 .criminalRecordFile,

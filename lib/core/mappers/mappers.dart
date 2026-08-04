@@ -140,15 +140,7 @@ extension SignupRequestMapper on SignupRequest {
     }
 
     if (nationalId != null) {
-      formData.files.add(
-        MapEntry(
-          'nationalId',
-          await MultipartFile.fromFile(
-            nationalId!.path,
-            filename: nationalId!.path.split('/').last,
-          ),
-        ),
-      );
+      formData.fields.add(MapEntry('nationalId', nationalId!));
     }
 
     if (criminalRecordFile != null) {
