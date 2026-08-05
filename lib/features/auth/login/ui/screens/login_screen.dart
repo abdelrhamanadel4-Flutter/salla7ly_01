@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                   textStyle: AppStyles.bold16LightGrey,
                 ),
                 LoginBlocListener(
-                  onSuccess: () {
+                  onSuccess: (_) {
                     Navigator.pushNamed(
                       context,
                       Routes.otpScreen,

@@ -37,7 +37,7 @@ class AppRouter {
             providers: [
               BlocProvider(create: (_) => getIt<SignupCubit>()),
               BlocProvider(
-                create: (_) => getIt<CategoriesCubit>()..getCategories(),
+                create: (_) => getIt<CategoriesCubit>(),
               ),
             ],
             child: const SignupScreen(),
@@ -55,7 +55,10 @@ class AppRouter {
         );
       case Routes.technicianAcceptanceScreen:
         return MaterialPageRoute(
-          builder: (_) => const TechnicianAcceptanceScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<LoginCubit>(),
+            child: const TechnicianAcceptanceScreen(),
+          ),
         );
 
       default:

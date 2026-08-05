@@ -5,7 +5,7 @@ import 'package:salla7ly/features/auth/login/logic/login_cubit.dart';
 import 'package:salla7ly/features/auth/login/logic/login_state.dart';
 
 class LoginBlocListener extends StatelessWidget {
-  final VoidCallback onSuccess;
+  final ValueChanged<dynamic> onSuccess;
 
   const LoginBlocListener({super.key, required this.onSuccess});
 
@@ -21,7 +21,7 @@ class LoginBlocListener extends StatelessWidget {
           },
           success: (loginResponse) {
             DialogUtils.hideLoading(context);
-            onSuccess();
+            onSuccess(loginResponse);
           },
           error: (apiErrorModel) {
             DialogUtils.hideLoading(context);
@@ -31,9 +31,6 @@ class LoginBlocListener extends StatelessWidget {
               type: DialogType.error,
               title: 'حصل خطأ',
               message: apiErrorModel.error?.message ?? "حصل خطأ، حاول تاني",
-              posAction: (){
-                Navigator.of(context).pop();
-              },
             );
           },
         );

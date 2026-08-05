@@ -63,6 +63,12 @@ class LoginCubit extends Cubit<LoginState> {
             tokens.refreshToken!,
           );
         }
+        if (data.data?.accountState != null) {
+          await SharedPrefHelper.setData(
+            SharedPrefKeys.accountState,
+            data.data!.accountState!,
+          );
+        }
         emit(LoginState.success(data));
       },
       failure: (error) {
@@ -86,6 +92,12 @@ class LoginCubit extends Cubit<LoginState> {
           await SharedPrefHelper.setSecuredString(
             SharedPrefKeys.refreshToken,
             tokens.refreshToken!,
+          );
+        }
+        if (data.data?.accountState != null) {
+          await SharedPrefHelper.setData(
+            SharedPrefKeys.accountState,
+            data.data!.accountState!,
           );
         }
         emit(LoginState.success(data));

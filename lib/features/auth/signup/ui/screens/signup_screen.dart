@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:salla7ly/core/helpers/extesions.dart';
+import 'package:salla7ly/core/helpers/flutter_toast.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/helpers/validatores.dart';
 import 'package:salla7ly/core/routing/routes.dart';
@@ -13,6 +14,7 @@ import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
 import 'package:salla7ly/core/widgets/custom_text_ftom_filed.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/select_location.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_requset_entity.dart';
+import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_response.dart';
 import 'package:salla7ly/features/auth/signup/logic/location/location_cubit.dart';
 import 'package:salla7ly/features/auth/signup/logic/sign_up/sign_up_cubit.dart';
 import 'package:salla7ly/features/auth/signup/ui/screens/map_screen.dart';
@@ -149,6 +151,15 @@ class _SignupScreenState extends State<SignupScreen> {
                   verticalSpace(16),
                   CustomElevatedButton(
                     onPressed: () {
+                      if (!isChecked) {
+                        ToastMessage.toastMsg(
+                          'من فضلك فعّل الموافقة على سياسة الخصوصية الأول',
+                          AppColors.redColor,
+                          AppColors.whiteColor,
+                        );
+                        return;
+                      }
+
                       if (context
                               .read<SignupCubit>()
                               .formKey
@@ -204,11 +215,16 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
 
                   SignUpBlocListener(
-                    onSuccess: () {
+                    onSuccess: (data) {
                       if (selectedType == UserType.customer) {
                         context.pushNamed(Routes.homeScreen);
                       } else {
-                        context.pushNamed(Routes.technicianAcceptanceScreen);
+                        final response = data as SignUpResponse?;
+                        Navigator.pushNamed(
+                          context,
+                          Routes.technicianAcceptanceScreen,
+                          arguments: response?.data?.message,
+                        );
                       }
                     },
                   ),

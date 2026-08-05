@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,13 +11,14 @@ import 'package:salla7ly/core/theming/assets.dart';
 
 class UploadImageField extends StatelessWidget {
   final VoidCallback onTap;
+  final File? imageFile;
 
-  
-
-  const UploadImageField({super.key, required this.onTap});
+  const UploadImageField({super.key, required this.onTap, this.imageFile});
 
   @override
   Widget build(BuildContext context) {
+    final hasImage = imageFile != null;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -30,22 +33,57 @@ class UploadImageField extends StatelessWidget {
             ),
             child: Container(
               width: double.infinity,
-              height: 78.h,
+              constraints: BoxConstraints(minHeight: 78.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.r),
                 color: AppColors.whiteColor,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12.w),
-                    child: SvgPicture.asset(Assets.svgsUploadImageIcon),
-                  ),
-                  horizontalSpace(8),
-                  Text('ارفع صورة شخصية', style: AppStyles.semiBold14darkBlue),
-                ],
-              ),
+              padding: EdgeInsets.symmetric(vertical: hasImage ? 8.h : 0),
+              child: hasImage
+                  ? Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.r),
+                            child: Image.file(
+                              imageFile!,
+                              width: 56.w,
+                              height: 56.h,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        horizontalSpace(8),
+                        Expanded(
+                          child: Text(
+                            'تم اختيار الصورة، دوس تاني عشان تغيرها',
+                            style: AppStyles.semiBold14darkBlue,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
+                          child: Icon(
+                            Icons.check_circle_rounded,
+                            color: AppColors.successColor,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
+                          child: SvgPicture.asset(Assets.svgsUploadImageIcon),
+                        ),
+                        horizontalSpace(8),
+                        Text(
+                          'ارفع صورة شخصية',
+                          style: AppStyles.semiBold14darkBlue,
+                        ),
+                      ],
+                    ),
             ),
           ),
         ),
