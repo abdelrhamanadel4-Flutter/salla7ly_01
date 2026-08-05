@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:salla7ly/core/helpers/spacing.dart';
+import 'package:salla7ly/core/theming/app_color.dart';
+import 'package:salla7ly/core/theming/app_style.dart';
+import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
 import 'package:salla7ly/features/auth/signup/logic/location/location_cubit.dart';
 import 'package:salla7ly/features/auth/signup/logic/location/location_state.dart';
-
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -28,18 +31,22 @@ class _MapScreenState extends State<MapScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Choose Location"),
+        title: Text("اختار مكانك", style: AppStyles.bold20Primary),
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(Icons.arrow_back_ios, color: AppColors.primaryColor),
+        ),
       ),
       body: BlocConsumer<LocationCubit, LocationState>(
         listener: (context, state) {
           state.whenOrNull(
             error: (message) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(message),
-                ),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(message)));
             },
           );
         },
@@ -47,19 +54,14 @@ class _MapScreenState extends State<MapScreen> {
           return state.when(
             initial: () => const SizedBox(),
 
-            loading: () => const Center(
-              child: CircularProgressIndicator(),
-            ),
+            loading: () => const Center(child: CircularProgressIndicator()),
 
             loaded: (location) {
               return Stack(
                 children: [
                   GoogleMap(
                     initialCameraPosition: CameraPosition(
-                      target: LatLng(
-                        location.latitude,
-                        location.longitude,
-                      ),
+                      target: LatLng(location.latitude, location.longitude),
                       zoom: 17,
                     ),
 
@@ -67,9 +69,7 @@ class _MapScreenState extends State<MapScreen> {
                     myLocationButtonEnabled: true,
                     zoomControlsEnabled: false,
 
-                    markers: {
-                      if (cubit.marker != null) cubit.marker!,
-                    },
+                    markers: {if (cubit.marker != null) cubit.marker!},
 
                     onMapCreated: cubit.onMapCreated,
 
@@ -87,36 +87,24 @@ class _MapScreenState extends State<MapScreen> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              location.city,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),
+                            Text(location.city, style: AppStyles.bold20Primary),
 
-                            const SizedBox(height: 8),
+                            verticalSpace(8),
 
                             Text(
                               location.address,
+                              style: AppStyles.semiBold14darkBlue,
                               textAlign: TextAlign.center,
                             ),
 
-                            const SizedBox(height: 15),
+                            verticalSpace(16),
 
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  cubit.confirmLocation(
-                                    context,
-                                  );
-                                },
-                                child: const Text(
-                                  "Confirm Location",
-                                ),
-                              ),
-                            )
+                            CustomElevatedButton(
+                              text: "اختار المكان",
+                              onPressed: () {
+                                cubit.confirmLocation(context);
+                              },
+                            ),
                           ],
                         ),
                       ),
@@ -126,11 +114,7 @@ class _MapScreenState extends State<MapScreen> {
               );
             },
 
-            error: (_) => const Center(
-              child: Text(
-                "Something went wrong",
-              ),
-            ),
+            error: (_) => const Center(child: Text("فيه حاجه غلط")),
           );
         },
       ),

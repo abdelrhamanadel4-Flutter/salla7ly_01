@@ -190,17 +190,35 @@ class AppValidators {
     }
   }
 
-  static String? validatePhoneNumber(String? val) {
-    if (val == null || val.isEmpty) {
-      return 'الخانة دي مطلوبة';
-    } else if (int.tryParse(val.trim()) == null) {
-      return 'اكتب أرقام بس';
-    } else if (val.trim().length != 11) {
-      return 'رقم الموبايل لازم يكون 11 رقم';
-    } else {
-      return null;
-    }
+  static String normalizePhone(String phone) {
+  phone = phone.trim().replaceAll(' ', '');
+
+  if (phone.startsWith('+20')) {
+    return '0${phone.substring(3)}';
   }
+
+  if (phone.startsWith('20')) {
+    return '0${phone.substring(2)}';
+  }
+
+  return phone;
+}
+
+  static String? validatePhoneNumber(String? val) {
+  if (val == null || val.trim().isEmpty) {
+    return 'الخانة دي مطلوبة';
+  }
+
+  final phone = normalizePhone(val);
+
+  final regex = RegExp(r'^01[0125]\d{8}$');
+
+  if (!regex.hasMatch(phone)) {
+    return 'اكتب رقم موبايل مصري صحيح';
+  }
+
+  return null;
+}
 
   static String? validateNationalId(String? value) {
     if (value == null || value.trim().isEmpty) {

@@ -36,13 +36,25 @@ const Map<DialogType, _DialogTypeStyle> _dialogStyles = {
 };
 
 class DialogUtils {
+  /// Tracks whether the loading dialog is currently on screen, so we never
+  /// pop a route that isn't actually the loading dialog (and never stack
+  /// more than one loading dialog on top of another).
+  static bool _isLoadingVisible = false;
+
+  /// Tracks whether a message (error/success/etc) dialog is currently on
+  /// screen, so we never stack two of them on top of each other.
+  static bool _isMessageVisible = false;
+
   /// Shows a centered, rounded loading dialog with the app's primary color.
   static void showLoading({
     required BuildContext context,
     String message = 'جاري التحميل...',
   }) {
+    if (_isLoadingVisible) return;
+    _isLoadingVisible = true;
     showDialog(
       barrierDismissible: false,
+      useRootNavigator: true,
       context: context,
       builder: (context) {
         return Dialog(
@@ -87,11 +99,13 @@ class DialogUtils {
           ),
         );
       },
-    );
+    ).then((_) => _isLoadingVisible = false);
   }
 
   static void hideLoading(BuildContext context) {
-    Navigator.pop(context);
+    if (!_isLoadingVisible) return;
+    _isLoadingVisible = false;
+    Navigator.of(context, rootNavigator: true).pop();
   }
 
   /// Shows a rounded feedback dialog with a colored icon that matches [type].
@@ -105,6 +119,9 @@ class DialogUtils {
     String? negActionName,
     Function? negAction,
   }) {
+    if (_isMessageVisible) return;
+    _isMessageVisible = true;
+
     final style = _dialogStyles[type]!;
 
     showDialog(
@@ -206,6 +223,6 @@ class DialogUtils {
           ),
         );
       },
-    );
+    ).then((_) => _isMessageVisible = false);
   }
 }

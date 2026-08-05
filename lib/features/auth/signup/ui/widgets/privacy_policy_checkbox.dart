@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
+import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 
 class PrivacyPolicyCheckbox extends StatelessWidget {
@@ -20,15 +21,11 @@ class PrivacyPolicyCheckbox extends StatelessWidget {
         Checkbox(
           value: value,
           onChanged: onChanged,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+          activeColor: AppColors.primaryColor,
         ),
         horizontalSpace(8),
-        Text(
-          'انا اوافق على سياسة الخصوصية',
-          style: AppStyles.regular14Grey,
-        ),
+        Text('انا اوافق على سياسة الخصوصية', style: AppStyles.regular14Grey),
       ],
     );
   }

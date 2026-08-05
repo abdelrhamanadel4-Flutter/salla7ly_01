@@ -28,6 +28,7 @@ class LoginCubit extends Cubit<LoginState> {
   ) : super(LoginState.initial());
   final formKey = GlobalKey<FormState>();
   Future<void> requestOtp(RequsetOtpRequset body) async {
+    if (state is Loading) return;
     if (formKey.currentState?.validate() == true) {
       emit(LoginState.loading());
       final result = await _requestOtpRequset.invoke(body);
@@ -42,6 +43,7 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
   Future<void> verifyOtp(VerifyOtpRequest body) async {
+    if (state is Loading) return;
     if (body.otpCode == null || body.otpCode!.trim().length < 4) {
       emit(LoginState.error(ApiErrorModel(error: ErrorResponse(message: 'من فضلك دخل الكود بالكامل'))));
       return;
@@ -77,6 +79,7 @@ class LoginCubit extends Cubit<LoginState> {
     );
   }
   Future<void> refreshOtp(RefreshOtpRequset body) async {
+    if (state is Loading) return;
     emit(LoginState.loading());
     final result = await _refreshOtpUseCases.invoke(body);
     result.when(

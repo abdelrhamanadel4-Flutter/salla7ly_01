@@ -35,11 +35,18 @@ class SignupCubit extends Cubit<SignUpState> {
     final result = await _signupUseCase.invoke(request);
 
     result.when(
-      success: (data) {
+      success: (data) async {
+        final accountState = data.data?.accountState;
+        if (accountState != null) {
+          await SharedPrefHelper.setData(
+            SharedPrefKeys.accountState,
+            accountState,
+          );
+        } 
         emit(SignUpState.success(data));
       },
-      failure: (error) async{
-         if (error.statusCode == 401 && await _tryRefreshAccessToken()) {
+      failure: (error) async {
+        if (error.statusCode == 401 && await _tryRefreshAccessToken()) {
           final retryResult = await _signupUseCase.invoke(request);
           retryResult.when(
             success: (data) => emit(SignUpState.success(data)),

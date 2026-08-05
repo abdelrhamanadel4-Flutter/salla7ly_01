@@ -4,8 +4,8 @@ class SignupRequest {
   final String fullName;
   final String city;
   final String address;
-  final double latitude;
-  final double longitude;
+  final double? latitude;
+  final double? longitude;
   final String role;
   final String? categoryId;
   final String? nationalId;
