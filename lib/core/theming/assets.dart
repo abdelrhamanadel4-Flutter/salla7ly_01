@@ -10,9 +10,21 @@ class Assets {
   /// assets/images/logo_plus12.png
   static const String imagesLogoPlus12 = "assets/images/logo_plus12.png";
 
+  /// Assets for imagesNoProfileImage
+  /// assets/images/no_profile_image.png
+  static const String imagesNoProfileImage = "assets/images/no_profile_image.png";
+
+  /// Assets for imagesProfileImage
+  /// assets/images/profile_image.png
+  static const String imagesProfileImage = "assets/images/profile_image.png";
+
   /// Assets for imagesSplashScreenBackground
   /// assets/images/SplashScreen_background.png
   static const String imagesSplashScreenBackground = "assets/images/SplashScreen_background.png";
+
+  /// Assets for svgsCashIcon
+  /// assets/svgs/cash_icon.svg
+  static const String svgsCashIcon = "assets/svgs/cash_icon.svg";
 
   /// Assets for svgsCityIcon
   /// assets/svgs/city_icon.svg

@@ -204,7 +204,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   SignUpBlocListener(
                     onSuccess: (data) {
                       if (selectedType == UserType.customer) {
-                        context.pushNamed(Routes.homeScreen);
+                        context.pushNamed(Routes.profileScreen);
                       } else {
                         final response = data as SignUpResponse?;
                         Navigator.pushNamed(
