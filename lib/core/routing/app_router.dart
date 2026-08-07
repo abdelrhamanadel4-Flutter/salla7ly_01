@@ -12,6 +12,7 @@ import 'package:salla7ly/features/auth/signup/ui/screens/map_screen.dart';
 import 'package:salla7ly/features/auth/signup/ui/screens/signup_screen.dart';
 import 'package:salla7ly/features/auth/signup/ui/screens/technician_acceptance_screen.dart';
 import 'package:salla7ly/features/home/home_screen.dart';
+import 'package:salla7ly/features/profile/ui/screens/profile_screen.dart';
 
 class AppRouter {
   Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -45,6 +46,9 @@ class AppRouter {
         );
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
+
+      case Routes.profileScreen:
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
 
       case Routes.mapScreen:
         return MaterialPageRoute(
