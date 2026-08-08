@@ -6,9 +6,9 @@ import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/dilaog_utils.dart';
-import 'package:salla7ly/features/auth/signup/domain/entity/catgireos_response.dart';
-import 'package:salla7ly/features/auth/signup/logic/categories/categories_cubit.dart';
-import 'package:salla7ly/features/auth/signup/logic/categories/categories_state.dart';
+import 'package:salla7ly/features/categories/domain/entity/categories_responce.dart';
+import 'package:salla7ly/features/categories/logic/categories/categories_cubit.dart';
+import 'package:salla7ly/features/categories/logic/categories/categories_state.dart';
 
 class ServiceDropdown extends StatelessWidget {
   final String? value;
@@ -41,8 +41,8 @@ class ServiceDropdown extends StatelessWidget {
         final isLoading = state is Loading;
 
         final categories = state.maybeWhen(
-          success: (data) => data.data ?? const <DataCatgireosResponse?>[],
-          orElse: () => const <DataCatgireosResponse?>[],
+          success: (data) => data.data ?? const <DataCategoriesResponse?>[],
+          orElse: () => const <DataCategoriesResponse?>[],
         );
 
         return DropdownButtonFormField<String>(

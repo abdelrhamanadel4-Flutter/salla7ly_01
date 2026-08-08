@@ -5,13 +5,16 @@ import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/features/auth/login/logic/login_cubit.dart';
 import 'package:salla7ly/features/auth/login/ui/screens/login_screen.dart';
 import 'package:salla7ly/features/auth/login/ui/screens/otp_screen.dart';
-import 'package:salla7ly/features/auth/signup/logic/categories/categories_cubit.dart';
+import 'package:salla7ly/features/categories/logic/categories/categories_cubit.dart';
 import 'package:salla7ly/features/auth/signup/logic/location/location_cubit.dart';
 import 'package:salla7ly/features/auth/signup/logic/sign_up/sign_up_cubit.dart';
 import 'package:salla7ly/features/auth/signup/ui/screens/map_screen.dart';
 import 'package:salla7ly/features/auth/signup/ui/screens/signup_screen.dart';
 import 'package:salla7ly/features/auth/signup/ui/screens/technician_acceptance_screen.dart';
+import 'package:salla7ly/features/categories/ui/screens/categories_screen.dart';
 import 'package:salla7ly/features/home/home_screen.dart';
+import 'package:salla7ly/features/problem_description/ui/screens/kind_of_problem_screen.dart';
+import 'package:salla7ly/features/problem_description/ui/screens/problem_description_screen.dart';
 import 'package:salla7ly/features/profile/ui/screens/profile_screen.dart';
 
 class AppRouter {
@@ -49,6 +52,20 @@ class AppRouter {
 
       case Routes.profileScreen:
         return MaterialPageRoute(builder: (_) => const ProfileScreen());
+
+      case Routes.kindOfProblemScreen:
+        return MaterialPageRoute(builder: (_) => const KindOfProblemScreen());
+
+      case Routes.problemDescriptionScreen:
+        return MaterialPageRoute(builder: (_) => const ProblemDescriptionScreen());
+
+      case Routes.categoriesScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<CategoriesCubit>(),
+            child: const CategoriesScreen(),
+          ),
+        );
 
       case Routes.mapScreen:
         return MaterialPageRoute(

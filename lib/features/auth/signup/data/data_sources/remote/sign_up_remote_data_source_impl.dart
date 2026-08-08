@@ -4,7 +4,6 @@ import 'package:salla7ly/core/networking/api_error_handler.dart';
 import 'package:salla7ly/core/networking/api_result.dart';
 import 'package:salla7ly/core/networking/api_service.dart';
 import 'package:salla7ly/features/auth/signup/data/data_sources/remote/sign_up_remote_data_source.dart';
-import 'package:salla7ly/features/auth/signup/domain/entity/catgireos_response.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_requset_entity.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_response.dart';
 @Injectable(as: SignUpRemoteDataSource)
@@ -22,12 +21,5 @@ class SignUpRemoteDataSourceImpl implements SignUpRemoteDataSource {
     }
   }
 
-  Future<ApiResult<CatgireosResponse>> getCategories() async {
-    try {
-      final response = await _apiService.getCategories();
-      return ApiResult.success(response.toEntity());
-    } catch (e) {
-      return ApiResult.failure(ApiErrorHandler.handle(e));
-    }
-  }
+  
 }

@@ -10,7 +10,7 @@ import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
-import 'package:salla7ly/core/widgets/custom_text_ftom_filed.dart';
+import 'package:salla7ly/core/widgets/custom_text_form_filed.dart';
 import 'package:salla7ly/features/auth/login/domain/entity/requset_otp_requset.dart';
 import 'package:salla7ly/features/auth/login/logic/login_cubit.dart';
 import 'package:salla7ly/features/auth/login/ui/widgets/login_listener.dart';

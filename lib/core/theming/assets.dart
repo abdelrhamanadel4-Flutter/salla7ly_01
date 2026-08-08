@@ -22,6 +22,10 @@ class Assets {
   /// assets/images/SplashScreen_background.png
   static const String imagesSplashScreenBackground = "assets/images/SplashScreen_background.png";
 
+  /// Assets for svgsCameraIcon
+  /// assets/svgs/camera_icon.svg
+  static const String svgsCameraIcon = "assets/svgs/camera_icon.svg";
+
   /// Assets for svgsCashIcon
   /// assets/svgs/cash_icon.svg
   static const String svgsCashIcon = "assets/svgs/cash_icon.svg";

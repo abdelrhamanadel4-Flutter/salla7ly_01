@@ -1,30 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'catgireos_response_dto.dart';
+part of 'categories_response_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CatgireosResponseDto _$CatgireosResponseDtoFromJson(
+CategoriesResponseDto _$CategoriesResponseDtoFromJson(
   Map<String, dynamic> json,
-) => CatgireosResponseDto(
+) => CategoriesResponseDto(
   data: (json['data'] as List<dynamic>?)
       ?.map(
         (e) => e == null
             ? null
-            : DataDtoCatgireosResponse.fromJson(e as Map<String, dynamic>),
+            : DataDtoCategoriesResponse.fromJson(e as Map<String, dynamic>),
       )
       .toList(),
 );
 
-Map<String, dynamic> _$CatgireosResponseDtoToJson(
-  CatgireosResponseDto instance,
+Map<String, dynamic> _$CategoriesResponseDtoToJson(
+  CategoriesResponseDto instance,
 ) => <String, dynamic>{'data': instance.data};
 
-DataDtoCatgireosResponse _$DataDtoCatgireosResponseFromJson(
+DataDtoCategoriesResponse _$DataDtoCategoriesResponseFromJson(
   Map<String, dynamic> json,
-) => DataDtoCatgireosResponse(
+) => DataDtoCategoriesResponse(
   id: json['id'] as String?,
   name: json['name'] as String?,
   homeVisitBasePrice: json['homeVisitBasePrice'] as String?,
@@ -32,8 +32,8 @@ DataDtoCatgireosResponse _$DataDtoCatgireosResponseFromJson(
   updatedAt: json['updatedAt'] as String?,
 );
 
-Map<String, dynamic> _$DataDtoCatgireosResponseToJson(
-  DataDtoCatgireosResponse instance,
+Map<String, dynamic> _$DataDtoCategoriesResponseToJson(
+  DataDtoCategoriesResponse instance,
 ) => <String, dynamic>{
   'id': instance.id,
   'name': instance.name,
