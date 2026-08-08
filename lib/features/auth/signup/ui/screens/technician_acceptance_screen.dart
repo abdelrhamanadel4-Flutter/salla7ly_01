@@ -80,12 +80,12 @@ class _TechnicianAcceptanceScreenState
         body: SingleChildScrollView(
           child: SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 56.h),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 64.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TechnicianAcceptanceProgress(),
-                  verticalSpace(72),
+                  verticalSpace(80),
                   DottedBorder(
                     options: RoundedRectDottedBorderOptions(
                       radius: Radius.circular(4.r),
@@ -94,14 +94,14 @@ class _TechnicianAcceptanceScreenState
                       color: AppColors.primaryColor,
                     ),
                     child: Container(
-                      width: 267.w,
-                      constraints: BoxConstraints(minHeight: 50.h),
+                      width: 274.w,
+                      constraints: BoxConstraints(minHeight: 40.h),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.r),
                       ),
                       child: Center(
                         child: Text(
-                          'معلش استنا وهنرد عليك بكرا',
+                          'بنراجع ورقك زورنا بكره في البرنامج',
                           style: AppStyles.bold16Primary,
                         ),
                       ),
