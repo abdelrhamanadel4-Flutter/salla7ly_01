@@ -11,6 +11,7 @@ class AppColors {
   static const Color lightGreyColor = Color(0xFFFAFAFA);
   static const Color blackColor = Color(0xFF000000);
   static const Color redColor = Color(0xFFFF0000);
+  static const Color foundationGrey = Color(0xFF828899);
 
   // Feedback / dialog palette
   static const Color successColor = Color(0xFF1FAB5A);

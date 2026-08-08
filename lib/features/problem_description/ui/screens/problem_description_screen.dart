@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
+import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
@@ -33,9 +35,7 @@ class ProblemDescriptionScreen extends StatelessWidget {
                 ),
                 verticalSpace(8),
                 InkWell(
-                  onTap: () {
-                    
-                  },
+                  onTap: () {},
                   child: Container(
                     width: double.infinity,
                     height: 140.h,
@@ -58,7 +58,12 @@ class ProblemDescriptionScreen extends StatelessWidget {
                   ),
                 ),
                 verticalSpace(16),
-                CustomElevatedButton(text: 'تمام', onPressed: () {}),
+                CustomElevatedButton(
+                  text: 'تمام',
+                  onPressed: () {
+                    context.pushReplacementNamed(Routes.aiDetectionScreen);
+                  },
+                ),
               ],
             ),
           ),

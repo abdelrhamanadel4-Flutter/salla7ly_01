@@ -13,8 +13,11 @@ import 'package:salla7ly/features/auth/signup/ui/screens/signup_screen.dart';
 import 'package:salla7ly/features/auth/signup/ui/screens/technician_acceptance_screen.dart';
 import 'package:salla7ly/features/categories/ui/screens/categories_screen.dart';
 import 'package:salla7ly/features/home/home_screen.dart';
+import 'package:salla7ly/features/problem_description/ui/screens/ai_detection_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/kind_of_problem_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/problem_description_screen.dart';
+import 'package:salla7ly/features/problem_description/ui/screens/request_technician_screen.dart';
+import 'package:salla7ly/features/problem_description/ui/screens/tech_profile_customer_view_screen.dart';
 import 'package:salla7ly/features/profile/ui/screens/profile_screen.dart';
 
 class AppRouter {
@@ -58,6 +61,15 @@ class AppRouter {
 
       case Routes.problemDescriptionScreen:
         return MaterialPageRoute(builder: (_) => const ProblemDescriptionScreen());
+
+      case Routes.aiDetectionScreen:
+        return MaterialPageRoute(builder: (_) => const AiDetectionScreen());
+
+      case Routes.requestTechnicianScreen:
+        return MaterialPageRoute(builder: (_) => const RequestTechnicianScreen());
+
+      case Routes.techProfileCustomerViewScreen:
+        return MaterialPageRoute(builder: (_) => const TechProfileCustomerViewScreen());
 
       case Routes.categoriesScreen:
         return MaterialPageRoute(
