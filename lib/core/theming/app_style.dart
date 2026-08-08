@@ -15,6 +15,11 @@ class AppStyles {
     fontWeight: FontWeightHelper.medium,
     color: AppColors.lightGreyColor,
   );
+  static final TextStyle mediun12Primary = GoogleFonts.cairo(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: AppColors.primaryColor,
+  );
   static final TextStyle bold24Primary = GoogleFonts.cairo(
     fontSize: 24.sp,
     fontWeight: FontWeightHelper.bold,
@@ -29,6 +34,16 @@ class AppStyles {
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.semiBold,
     color: AppColors.darkBlueColor,
+  );
+  static final TextStyle semiBold14primary = GoogleFonts.cairo(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: AppColors.primaryColor,
+  );
+  static final TextStyle semiBold11primary = GoogleFonts.cairo(
+    fontSize: 11.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: AppColors.primaryColor,
   );
   static final TextStyle regular14darkBlue = GoogleFonts.cairo(
     fontSize: 14.sp,
@@ -59,5 +74,10 @@ class AppStyles {
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.regular,
     color: AppColors.greyColor,
+  );
+  static final TextStyle medium11FoundationGrey = GoogleFonts.cairo(
+    fontSize: 11.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: AppColors.foundationGrey,
   );
 }

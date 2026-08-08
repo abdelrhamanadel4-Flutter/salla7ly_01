@@ -2,6 +2,10 @@
 class Assets {
   Assets._();
   
+  /// Assets for imagesHeaterImage
+  /// assets/images/heater_image.webp
+  static const String imagesHeaterImage = "assets/images/heater_image.webp";
+
   /// Assets for imagesLogo
   /// assets/images/logo.png
   static const String imagesLogo = "assets/images/logo.png";
@@ -22,6 +26,10 @@ class Assets {
   /// assets/images/SplashScreen_background.png
   static const String imagesSplashScreenBackground = "assets/images/SplashScreen_background.png";
 
+  /// Assets for svgsAiIcon
+  /// assets/svgs/ai_icon.svg
+  static const String svgsAiIcon = "assets/svgs/ai_icon.svg";
+
   /// Assets for svgsCameraIcon
   /// assets/svgs/camera_icon.svg
   static const String svgsCameraIcon = "assets/svgs/camera_icon.svg";
@@ -37,6 +45,10 @@ class Assets {
   /// Assets for svgsCriminalRecordFieldIcon
   /// assets/svgs/criminal_record_field_icon.svg
   static const String svgsCriminalRecordFieldIcon = "assets/svgs/criminal_record_field_icon.svg";
+
+  /// Assets for svgsLocIcon
+  /// assets/svgs/loc_icon.svg
+  static const String svgsLocIcon = "assets/svgs/loc_icon.svg";
 
   /// Assets for svgsLocationIcon
   /// assets/svgs/location_icon.svg
@@ -54,6 +66,10 @@ class Assets {
   /// assets/svgs/phone_icon.svg
   static const String svgsPhoneIcon = "assets/svgs/phone_icon.svg";
 
+  /// Assets for svgsRateIcon
+  /// assets/svgs/rate_icon.svg
+  static const String svgsRateIcon = "assets/svgs/rate_icon.svg";
+
   /// Assets for svgsRoleIcon
   /// assets/svgs/role_icon.svg
   static const String svgsRoleIcon = "assets/svgs/role_icon.svg";
@@ -62,8 +78,16 @@ class Assets {
   /// assets/svgs/service_field_icon.svg
   static const String svgsServiceFieldIcon = "assets/svgs/service_field_icon.svg";
 
+  /// Assets for svgsTechnicianIcon
+  /// assets/svgs/technician_icon.svg
+  static const String svgsTechnicianIcon = "assets/svgs/technician_icon.svg";
+
   /// Assets for svgsUploadImageIcon
   /// assets/svgs/upload_image_icon.svg
   static const String svgsUploadImageIcon = "assets/svgs/upload_image_icon.svg";
+
+  /// Assets for svgsVerifiedIcon
+  /// assets/svgs/verified_icon.svg
+  static const String svgsVerifiedIcon = "assets/svgs/verified_icon.svg";
 }
 
