@@ -9,11 +9,11 @@ import 'package:salla7ly/features/auth/login/domain/entity/requset_otp_requset.d
 import 'package:salla7ly/features/auth/login/domain/entity/requset_otp_response.dart';
 import 'package:salla7ly/features/auth/login/domain/entity/verify_otp_request.dart';
 import 'package:salla7ly/features/auth/login/domain/entity/verify_otp_response.dart';
-import 'package:salla7ly/features/auth/signup/data/model/catgireos_response_dto.dart';
+import 'package:salla7ly/features/categories/data/models/categories_response_dto.dart';
 import 'package:salla7ly/features/auth/signup/data/model/sign_up_responsedto.dart';
-import 'package:salla7ly/features/auth/signup/domain/entity/catgireos_response.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_requset_entity.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_response.dart';
+import 'package:salla7ly/features/categories/domain/entity/categories_responce.dart';
 
 extension RequestOtpRequestMapper on RequsetOtpRequset {
   RequsetOtpRequsetDto toDto() {
@@ -284,34 +284,34 @@ extension TechnicianProfileMapper on TechnicianProfile {
   }
 }
 
-extension CatgireosResponseDtoMapper on CatgireosResponseDto {
-  CatgireosResponse toEntity() {
-    return CatgireosResponse(
+extension CatgireosResponseDtoMapper on CategoriesResponseDto {
+  CategoriesResponse toEntity() {
+    return CategoriesResponse(
       data: data?.map((e) => e?.toEntity()).toList(),
     );
   }
 }
 
-extension DataDtoCatgireosResponseMapper on DataDtoCatgireosResponse {
-  DataCatgireosResponse toEntity() {
-    return DataCatgireosResponse(
+extension DataDtoCatgireosResponseMapper on DataDtoCategoriesResponse {
+  DataCategoriesResponse toEntity() {
+    return DataCategoriesResponse(
       id: id,
       name: name,
     );
   }
 }
 
-extension CatgireosResponseEntityMapper on CatgireosResponse {
-  CatgireosResponseDto toDto() {
-    return CatgireosResponseDto(
+extension CatgireosResponseEntityMapper on CategoriesResponse {
+  CategoriesResponseDto toDto() {
+    return CategoriesResponseDto(
       data: data?.map((e) => e?.toDto()).toList(),
     );
   }
 }
 
-extension DataCatgireosResponseEntityMapper on DataCatgireosResponse {
-  DataDtoCatgireosResponse toDto() {
-    return DataDtoCatgireosResponse(
+extension DataCatgireosResponseEntityMapper on DataCategoriesResponse {
+  DataDtoCategoriesResponse toDto() {
+    return DataDtoCategoriesResponse(
       id: id,
       name: name,
       homeVisitBasePrice: null,

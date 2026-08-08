@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
+import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
@@ -55,7 +57,12 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 verticalSpace(40),
-                CustomElevatedButton(text: 'قولنا مشكلتك', onPressed: () {}),
+                CustomElevatedButton(
+                  text: 'قولنا مشكلتك',
+                  onPressed: () {
+                    context.pushReplacementNamed(Routes.categoriesScreen);
+                  },
+                ),
                 verticalSpace(8),
                 CustomElevatedButton(text: 'اشحن', onPressed: () {}),
                 verticalSpace(8),

@@ -11,7 +11,7 @@ import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
-import 'package:salla7ly/core/widgets/custom_text_ftom_filed.dart';
+import 'package:salla7ly/core/widgets/custom_text_form_filed.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_requset_entity.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_response.dart';
 import 'package:salla7ly/features/auth/signup/logic/sign_up/sign_up_cubit.dart';
