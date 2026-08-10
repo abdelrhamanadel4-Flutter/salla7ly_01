@@ -18,6 +18,7 @@ import 'package:salla7ly/features/problem_description/ui/screens/kind_of_problem
 import 'package:salla7ly/features/problem_description/ui/screens/problem_description_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/request_technician_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/tech_profile_customer_view_screen.dart';
+import 'package:salla7ly/features/problem_description/ui/screens/waiting_request_screen.dart';
 import 'package:salla7ly/features/profile/ui/screens/profile_screen.dart';
 
 class AppRouter {
@@ -70,6 +71,9 @@ class AppRouter {
 
       case Routes.techProfileCustomerViewScreen:
         return MaterialPageRoute(builder: (_) => const TechProfileCustomerViewScreen());
+
+      case Routes.waitingRequestScreen:
+        return MaterialPageRoute(builder: (_) => const WaitingRequestScreen());
 
       case Routes.categoriesScreen:
         return MaterialPageRoute(

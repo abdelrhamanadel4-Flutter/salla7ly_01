@@ -5,11 +5,13 @@ import 'package:salla7ly/core/routing/app_router.dart';
 import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:salla7ly/features/auth/signup/ui/screens/technician_acceptance_screen.dart';
 
 class Salla7ly extends StatelessWidget {
-  Salla7ly({super.key, required AppRouter appRouter, required this.initialRoute})
-      : _appRouter = appRouter;
+  Salla7ly({
+    super.key,
+    required AppRouter appRouter,
+    required this.initialRoute,
+  }) : _appRouter = appRouter;
   final AppRouter _appRouter;
   final String initialRoute;
 

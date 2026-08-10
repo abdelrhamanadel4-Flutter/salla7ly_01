@@ -12,5 +12,6 @@ class Routes {
   static const String aiDetectionScreen = '/aiDetectionScreen';
   static const String requestTechnicianScreen = '/requestTechnicianScreen';
   static const String techProfileCustomerViewScreen = '/techProfileCustomerViewScreen';
+  static const String waitingRequestScreen = '/waitingRequestScreen';
 
 }

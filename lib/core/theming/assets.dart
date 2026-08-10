@@ -3,8 +3,8 @@ class Assets {
   Assets._();
   
   /// Assets for imagesHeaterImage
-  /// assets/images/heater_image.webp
-  static const String imagesHeaterImage = "assets/images/heater_image.webp";
+  /// assets/images/heater_image.png
+  static const String imagesHeaterImage = "assets/images/heater_image.png";
 
   /// Assets for imagesLogo
   /// assets/images/logo.png
