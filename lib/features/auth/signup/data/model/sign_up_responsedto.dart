@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:salla7ly/features/auth/signup/data/model/sign_up_responsedto.dart';
+
 
 part 'sign_up_responsedto.g.dart';
 

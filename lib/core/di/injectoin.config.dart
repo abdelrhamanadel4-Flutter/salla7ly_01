@@ -50,11 +50,22 @@ import 'package:salla7ly/features/categories/data/data_source/categories_remote_
 import 'package:salla7ly/features/categories/data/repo/categories_repo_impl.dart'
     as _i296;
 import 'package:salla7ly/features/categories/domain/repo/categories_repo.dart'
-    as _i925;
+    as _i926;
 import 'package:salla7ly/features/categories/domain/use_cases/categories_use_case.dart'
     as _i160;
 import 'package:salla7ly/features/categories/logic/categories/categories_cubit.dart'
     as _i290;
+import 'package:salla7ly/features/profile/data/data_sources/remote/profile_remote_data_source.dart'
+    as _i551;
+import 'package:salla7ly/features/profile/data/data_sources/remote/profile_remote_data_source_impl.dart'
+    as _i925;
+import 'package:salla7ly/features/profile/data/repo/profile_repo_impl.dart'
+    as _i108;
+import 'package:salla7ly/features/profile/domain/repo/profile_repo.dart'
+    as _i887;
+import 'package:salla7ly/features/profile/domain/use_cases/get_profile_use_case.dart'
+    as _i844;
+import 'package:salla7ly/features/profile/logic/profile_cubit.dart' as _i334;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -69,20 +80,23 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i837.ApiService>(
       () => dioModule.apiService(gh<_i361.Dio>()),
     );
+    gh.factory<_i551.ProfileRemoteDataSource>(
+      () => _i925.ProfileRemoteDataSourceImpl(gh<_i837.ApiService>()),
+    );
     gh.factory<_i711.CategoriesRemoteDataSource>(
       () => _i901.CategoriesRemoteDataSourceImpl(gh<_i837.ApiService>()),
     );
     gh.factory<_i798.SignUpRemoteDataSource>(
       () => _i217.SignUpRemoteDataSourceImpl(gh<_i837.ApiService>()),
     );
-    gh.factory<_i925.CategoriesRepo>(
-      () => _i296.CategoriesRepoImpl(gh<_i711.CategoriesRemoteDataSource>()),
-    );
     gh.factory<_i537.SignUpRepo>(
       () => _i1019.SignUpRepoImpl(gh<_i798.SignUpRemoteDataSource>()),
     );
+    gh.factory<_i926.CategoriesRepo>(
+      () => _i296.CategoriesRepoImpl(gh<_i711.CategoriesRemoteDataSource>()),
+    );
     gh.factory<_i160.CategoriesUseCase>(
-      () => _i160.CategoriesUseCase(gh<_i925.CategoriesRepo>()),
+      () => _i160.CategoriesUseCase(gh<_i926.CategoriesRepo>()),
     );
     gh.factory<_i175.LoginRemoteDataSources>(
       () => _i893.LoginRemoteDataSourcesImpl(gh<_i837.ApiService>()),
@@ -90,8 +104,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i247.LoginRepo>(
       () => _i209.LoginRepoImpl(gh<_i175.LoginRemoteDataSources>()),
     );
+    gh.factory<_i887.ProfileRepo>(
+      () => _i108.ProfileRepoImpl(gh<_i551.ProfileRemoteDataSource>()),
+    );
     gh.factory<_i158.SignUpUseCase>(
       () => _i158.SignUpUseCase(gh<_i537.SignUpRepo>()),
+    );
+    gh.factory<_i844.GetProfileUseCase>(
+      () => _i844.GetProfileUseCase(gh<_i887.ProfileRepo>()),
+    );
+    gh.factory<_i334.ProfileCubit>(
+      () => _i334.ProfileCubit(gh<_i844.GetProfileUseCase>()),
     );
     gh.factory<_i636.RefreshOtpUseCases>(
       () => _i636.RefreshOtpUseCases(gh<_i247.LoginRepo>()),

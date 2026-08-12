@@ -9,6 +9,7 @@ class Routes {
   static const String categoriesScreen = '/categoriesScreen';
   static const String kindOfProblemScreen = '/kindOfProblemScreen';
   static const String problemDescriptionScreen = '/problemDescriptionScreen';
+  static const String problemDescriptionAiScreen = '/problemDescriptionAiScreen';
   static const String aiDetectionScreen = '/aiDetectionScreen';
   static const String requestTechnicianScreen = '/requestTechnicianScreen';
   static const String techProfileCustomerViewScreen = '/techProfileCustomerViewScreen';

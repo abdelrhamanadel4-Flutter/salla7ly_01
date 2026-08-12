@@ -10,8 +10,8 @@ import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
 import 'package:salla7ly/core/widgets/custom_text_form_filed.dart';
 
-class ProblemDescriptionScreen extends StatelessWidget {
-  const ProblemDescriptionScreen({super.key});
+class ProblemDescriptionAiScreen extends StatelessWidget {
+  const ProblemDescriptionAiScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class ProblemDescriptionScreen extends StatelessWidget {
               children: [
                 Image.asset(Assets.imagesLogo),
                 verticalSpace(8),
-                Text('اوصف مشكلتك', style: AppStyles.bold24Primary),
+                Text('اوصف مشكلتك ل Ai', style: AppStyles.bold24Primary),
                 verticalSpace(24),
                 CustomTextFormField(
                   controller: problemController,

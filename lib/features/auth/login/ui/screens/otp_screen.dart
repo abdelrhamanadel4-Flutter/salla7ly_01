@@ -79,7 +79,7 @@ class OtpScreen extends StatelessWidget {
 
                     Navigator.pushNamedAndRemoveUntil(
                       context,
-                      isNewUser ? Routes.signupScreen : Routes.homeScreen,
+                      isNewUser ? Routes.signupScreen : Routes.profileScreen,
                       (route) => false,
                     );
                   },

@@ -15,10 +15,12 @@ import 'package:salla7ly/features/categories/ui/screens/categories_screen.dart';
 import 'package:salla7ly/features/home/home_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/ai_detection_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/kind_of_problem_screen.dart';
+import 'package:salla7ly/features/problem_description/ui/screens/problem_description_ai_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/problem_description_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/request_technician_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/tech_profile_customer_view_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/waiting_request_screen.dart';
+import 'package:salla7ly/features/profile/logic/profile_cubit.dart';
 import 'package:salla7ly/features/profile/ui/screens/profile_screen.dart';
 
 class AppRouter {
@@ -44,9 +46,7 @@ class AppRouter {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(create: (_) => getIt<SignupCubit>()),
-              BlocProvider(
-                create: (_) => getIt<CategoriesCubit>(),
-              ),
+              BlocProvider(create: (_) => getIt<CategoriesCubit>()),
             ],
             child: const SignupScreen(),
           ),
@@ -55,22 +55,38 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const HomeScreen());
 
       case Routes.profileScreen:
-        return MaterialPageRoute(builder: (_) => const ProfileScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<ProfileCubit>()..getProfile(),
+            child: const ProfileScreen(),
+          ),
+        );
 
       case Routes.kindOfProblemScreen:
         return MaterialPageRoute(builder: (_) => const KindOfProblemScreen());
 
+      case Routes.problemDescriptionAiScreen:
+        return MaterialPageRoute(
+          builder: (_) => const ProblemDescriptionAiScreen(),
+        );
+
       case Routes.problemDescriptionScreen:
-        return MaterialPageRoute(builder: (_) => const ProblemDescriptionScreen());
+        return MaterialPageRoute(
+          builder: (_) => const ProblemDescriptionScreen(),
+        );
 
       case Routes.aiDetectionScreen:
         return MaterialPageRoute(builder: (_) => const AiDetectionScreen());
 
       case Routes.requestTechnicianScreen:
-        return MaterialPageRoute(builder: (_) => const RequestTechnicianScreen());
+        return MaterialPageRoute(
+          builder: (_) => const RequestTechnicianScreen(),
+        );
 
       case Routes.techProfileCustomerViewScreen:
-        return MaterialPageRoute(builder: (_) => const TechProfileCustomerViewScreen());
+        return MaterialPageRoute(
+          builder: (_) => const TechProfileCustomerViewScreen(),
+        );
 
       case Routes.waitingRequestScreen:
         return MaterialPageRoute(builder: (_) => const WaitingRequestScreen());
