@@ -14,56 +14,44 @@ import 'package:salla7ly/features/auth/signup/data/model/sign_up_responsedto.dar
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_requset_entity.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_response.dart';
 import 'package:salla7ly/features/categories/domain/entity/categories_responce.dart';
+import 'package:salla7ly/features/profile/data/model/profile_response_dto.dart';
+import 'package:salla7ly/features/profile/domain/entity/profile_response.dart';
 
 extension RequestOtpRequestMapper on RequsetOtpRequset {
   RequsetOtpRequsetDto toDto() {
-    return RequsetOtpRequsetDto(
-      phone: phone,
-    );
+    return RequsetOtpRequsetDto(phone: phone);
   }
 }
 
 extension RequestOtpResponseMapper on RequsetOtpResponseDto {
   RequsetOtpResponse toEntity() {
-    return RequsetOtpResponse(
-      data: data?.toEntity(),
-    );
+    return RequsetOtpResponse(data: data?.toEntity());
   }
 }
 
 extension RequestOtpDataMapper on DataDtoRequsetOtpResponse {
   Data toEntity() {
-    return Data(
-      expiresAt: expiresAt,
-      devOtpCode: devOtpCode,
-    );
+    return Data(expiresAt: expiresAt, devOtpCode: devOtpCode);
   }
 }
+
 extension VerifyOtpResponseMapper on VerifyOtpResponseDto {
   VerifyOtpResponse toEntity() {
-    return VerifyOtpResponse(
-      data: data?.toEntity(),
-    );
+    return VerifyOtpResponse(data: data?.toEntity());
   }
 }
 
 extension VerifyOtpRequestMapper on VerifyOtpRequestDto {
   VerifyOtpRequest toEntity() {
-    return VerifyOtpRequest(
-      phone: phone,
-      otpCode: otpCode,
-    );
+    return VerifyOtpRequest(phone: phone, otpCode: otpCode);
   }
 }
 
 extension RefreshOtpRequestMapper on RefreshOtpRequsetDto {
   RefreshOtpRequset toEntity() {
-    return RefreshOtpRequset(
-      refreshToken: refreshToken,
-    );
+    return RefreshOtpRequset(refreshToken: refreshToken);
   }
 }
-
 
 extension DataVerifyOtpResponseMapper on DataDtoVerifyOtpResponse {
   DataVerifyOtpResponse toEntity() {
@@ -106,19 +94,16 @@ extension UserMapper on UserDto {
     );
   }
 }
+
 extension RefreshOtpRequestDtoMapper on RefreshOtpRequset {
   RefreshOtpRequsetDto toDto() {
-    return RefreshOtpRequsetDto(
-      refreshToken: refreshToken,
-    );
+    return RefreshOtpRequsetDto(refreshToken: refreshToken);
   }
 }
+
 extension VerifyOtpRequestDtoMapper on VerifyOtpRequest {
   VerifyOtpRequestDto toDto() {
-    return VerifyOtpRequestDto(
-      phone: phone,
-      otpCode: otpCode,
-    );
+    return VerifyOtpRequestDto(phone: phone, otpCode: otpCode);
   }
 }
 
@@ -171,12 +156,9 @@ extension SignupRequestMapper on SignupRequest {
   }
 }
 
-
 extension SignUpResponseDtoMapper on SignUpResponsedto {
   SignUpResponse toEntity() {
-    return SignUpResponse(
-      data: data?.toEntity(),
-    );
+    return SignUpResponse(data: data?.toEntity());
   }
 }
 
@@ -232,9 +214,7 @@ extension TechnicianProfileDtoMapper on TechnicianProfileDto {
 
 extension SignUpResponseMapper on SignUpResponse {
   SignUpResponsedto toDto() {
-    return SignUpResponsedto(
-      data: data?.toDto(),
-    );
+    return SignUpResponsedto(data: data?.toDto());
   }
 }
 
@@ -286,26 +266,19 @@ extension TechnicianProfileMapper on TechnicianProfile {
 
 extension CatgireosResponseDtoMapper on CategoriesResponseDto {
   CategoriesResponse toEntity() {
-    return CategoriesResponse(
-      data: data?.map((e) => e?.toEntity()).toList(),
-    );
+    return CategoriesResponse(data: data?.map((e) => e?.toEntity()).toList());
   }
 }
 
 extension DataDtoCatgireosResponseMapper on DataDtoCategoriesResponse {
   DataCategoriesResponse toEntity() {
-    return DataCategoriesResponse(
-      id: id,
-      name: name,
-    );
+    return DataCategoriesResponse(id: id, name: name);
   }
 }
 
 extension CatgireosResponseEntityMapper on CategoriesResponse {
   CategoriesResponseDto toDto() {
-    return CategoriesResponseDto(
-      data: data?.map((e) => e?.toDto()).toList(),
-    );
+    return CategoriesResponseDto(data: data?.map((e) => e?.toDto()).toList());
   }
 }
 
@@ -318,5 +291,38 @@ extension DataCatgireosResponseEntityMapper on DataCategoriesResponse {
       createdAt: null,
       updatedAt: null,
     );
+  }
+}
+
+extension ProfileResponseDtoMapper on ProfileResponseDto {
+  ProfileResponse toEntity() {
+    return ProfileResponse(data: data?.toEntity());
+  }
+}
+
+extension DataProfileResponseDtoMapper on DataProfileResponseDto {
+  DataProfileResponse toEntity() {
+    return DataProfileResponse(
+      user: user?.toEntity(),
+      technician: technician?.toEntity(),
+      accountState: accountState,
+      message: message,
+    );
+  }
+}
+
+extension UserProfileResponseDtoMapper on UserProfileResponseDto {
+  UserProfileResponse toEntity() {
+    return UserProfileResponse(
+      id: id,
+      fullName: fullName,
+      pointsBalance: pointsBalance,
+    );
+  }
+}
+
+extension TechnicianProfileResponseDtoMapper on TechnicianProfileResponseDto {
+  TechnicianProfileResponse toEntity() {
+    return TechnicianProfileResponse(profileImage: profileImage);
   }
 }

@@ -28,12 +28,16 @@ class KindOfProblemScreen extends StatelessWidget {
                   text: 'اوصفهالنا بالAi',
                   onPressed: () {
                     context.pushReplacementNamed(
-                      Routes.problemDescriptionScreen,
+                      Routes.problemDescriptionAiScreen,
                     );
                   },
                 ),
                 verticalSpace(16),
-                CustomElevatedButton(text: 'طلب استشارة فني', onPressed: () {}),
+                CustomElevatedButton(text: 'طلب استشارة فني', onPressed: () {
+                  context.pushReplacementNamed(
+                      Routes.problemDescriptionScreen,
+                    );
+                }),
               ],
             ),
           ),

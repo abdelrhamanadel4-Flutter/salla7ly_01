@@ -7,7 +7,12 @@ import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({super.key});
+  ProfileHeader({
+    super.key,
+    required this.name
+    });
+
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +51,7 @@ class ProfileHeader extends StatelessWidget {
               onPressed: () {},
             ),
             horizontalSpace(4),
-            Text('عبدالرحمن السيد', style: AppStyles.bold24Primary),
+            Text(name, style: AppStyles.bold24Primary),
           ],
         ),
       ],

@@ -9,6 +9,7 @@ import 'package:salla7ly/features/auth/login/data/model/verify_otp_request_dto.d
 import 'package:salla7ly/features/auth/login/data/model/verify_otp_response_dto.dart';
 import 'package:salla7ly/features/categories/data/models/categories_response_dto.dart';
 import 'package:salla7ly/features/auth/signup/data/model/sign_up_responsedto.dart';
+import 'package:salla7ly/features/profile/data/model/profile_response_dto.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
@@ -35,6 +36,9 @@ abstract class ApiService {
   );
   @GET(ApiConstants.getCategories)
   Future<CategoriesResponseDto> getCategories();
+
+  @GET(ApiConstants.getProfile)
+  Future<ProfileResponseDto> getProfile();
 
 
 
