@@ -20,5 +20,6 @@ class Routes {
   static const String mainnavigationscreen = '/mainnavigationscreen';
   static const String questionscreen = '/questionscreen';
     static const String requestReviewScreen = '/requestReviewScreen';
+  static const String chargingScreen = '/chargingScreen';
 
 }
