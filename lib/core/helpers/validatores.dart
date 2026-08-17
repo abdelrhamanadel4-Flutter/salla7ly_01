@@ -109,7 +109,6 @@
 //     return null;
 //   }
 
-
 //   static String? validateCity(String? value) {
 //     if (value == null || value.trim().isEmpty) {
 //       return 'Please select your city';
@@ -177,6 +176,8 @@ class AppValidators {
       return 'الخانة دي مطلوبة';
     } else if (!usernameRegex.hasMatch(val)) {
       return 'اكتب اسم مستخدم صحيح';
+    } else if (val.trim().length < 3) {
+      return 'الاسم يجب أن يكون 3 أحرف على الأقل';
     } else {
       return null;
     }
@@ -190,35 +191,53 @@ class AppValidators {
     }
   }
 
+  String? nameValidator(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'من فضلك أدخل الاسم';
+    }
+
+    if (value.trim().length < 3) {
+      return 'الاسم يجب أن يكون 3 أحرف على الأقل';
+    }
+
+    final nameRegex = RegExp(r'^[a-zA-Z\u0600-\u06FF\s]+$');
+
+    if (!nameRegex.hasMatch(value.trim())) {
+      return 'الاسم يجب أن يحتوي على حروف فقط';
+    }
+
+    return null;
+  }
+
   static String normalizePhone(String phone) {
-  phone = phone.trim().replaceAll(' ', '');
+    phone = phone.trim().replaceAll(' ', '');
 
-  if (phone.startsWith('+20')) {
-    return '0${phone.substring(3)}';
+    if (phone.startsWith('+20')) {
+      return '0${phone.substring(3)}';
+    }
+
+    if (phone.startsWith('20')) {
+      return '0${phone.substring(2)}';
+    }
+
+    return phone;
   }
-
-  if (phone.startsWith('20')) {
-    return '0${phone.substring(2)}';
-  }
-
-  return phone;
-}
 
   static String? validatePhoneNumber(String? val) {
-  if (val == null || val.trim().isEmpty) {
-    return 'الخانة دي مطلوبة';
+    if (val == null || val.trim().isEmpty) {
+      return 'الخانة دي مطلوبة';
+    }
+
+    final phone = normalizePhone(val);
+
+    final regex = RegExp(r'^01[0125]\d{8}$');
+
+    if (!regex.hasMatch(phone)) {
+      return 'اكتب رقم موبايل مصري صحيح';
+    }
+
+    return null;
   }
-
-  final phone = normalizePhone(val);
-
-  final regex = RegExp(r'^01[0125]\d{8}$');
-
-  if (!regex.hasMatch(phone)) {
-    return 'اكتب رقم موبايل مصري صحيح';
-  }
-
-  return null;
-}
 
   static String? validateNationalId(String? value) {
     if (value == null || value.trim().isEmpty) {
@@ -279,4 +298,3 @@ class AppValidators {
     return true;
   }
 }
-

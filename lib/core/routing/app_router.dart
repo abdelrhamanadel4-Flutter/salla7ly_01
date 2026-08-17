@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salla7ly/core/di/injectoin.dart';
 import 'package:salla7ly/core/routing/routes.dart';
+import 'package:salla7ly/core/widgets/navigation/main_navigation_screen.dart';
 import 'package:salla7ly/features/auth/login/logic/login_cubit.dart';
 import 'package:salla7ly/features/auth/login/ui/screens/login_screen.dart';
 import 'package:salla7ly/features/auth/login/ui/screens/otp_screen.dart';
@@ -17,6 +18,8 @@ import 'package:salla7ly/features/problem_description/ui/screens/ai_detection_sc
 import 'package:salla7ly/features/problem_description/ui/screens/kind_of_problem_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/problem_description_ai_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/problem_description_screen.dart';
+import 'package:salla7ly/features/problem_description/ui/screens/question_screen.dart';
+import 'package:salla7ly/features/problem_description/ui/screens/request_review_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/request_technician_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/tech_profile_customer_view_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/waiting_request_screen.dart';
@@ -75,6 +78,10 @@ class AppRouter {
           builder: (_) => const ProblemDescriptionScreen(),
         );
 
+   case Routes.questionscreen:
+        return MaterialPageRoute(
+          builder: (_) => const QuestionScreen(),
+        );
       case Routes.aiDetectionScreen:
         return MaterialPageRoute(builder: (_) => const AiDetectionScreen());
 
@@ -82,7 +89,11 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const RequestTechnicianScreen(),
         );
-
+        
+ case Routes.requestReviewScreen:
+        return MaterialPageRoute(
+          builder: (_) => const RequestReviewScreen(),
+        );
       case Routes.techProfileCustomerViewScreen:
         return MaterialPageRoute(
           builder: (_) => const TechProfileCustomerViewScreen(),
@@ -113,6 +124,8 @@ class AppRouter {
             child: const TechnicianAcceptanceScreen(),
           ),
         );
+      case Routes.mainnavigationscreen:
+        return MaterialPageRoute(builder: (_) => const MainNavigationScreen());
 
       default:
         return null;

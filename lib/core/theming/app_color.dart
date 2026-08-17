@@ -5,6 +5,8 @@ class AppColors {
   static const Color scaffoldColor = Color(0xFFE1E9FC);
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color darkBlueColor = Color(0xFF122A63);
+    static const Color darkerBlueColor = Color(0xFF102B64);
+
   static const Color progressIndicatorColor = Color(0xff9AA6C9);
   //named in figma as background color
   static const Color greyColor = Color(0xFF8E8E93);

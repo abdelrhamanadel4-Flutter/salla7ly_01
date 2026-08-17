@@ -6,6 +6,7 @@ class ApiConstants {
   static const String signUp = 'api/v1/me/signup';
   static const String getCategories = 'api/v1/public/categories';
   static const String getProfile = 'api/v1/me';
+  static const String requestCustomer = 'api/v1/customer/requests';
 
 }
 

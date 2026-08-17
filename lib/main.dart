@@ -28,7 +28,7 @@ void main() async {
   } else if (accountState == 'COMPLETE_PROFILE') {
     initialRoute = Routes.signupScreen;
   } else {
-    initialRoute = Routes.profileScreen;
+    initialRoute = Routes.mainnavigationscreen;
   }
 
   runApp(

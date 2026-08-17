@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
+import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
 import 'package:salla7ly/features/problem_description/ui/widgets/customer_evalution.dart';
 import 'package:salla7ly/features/problem_description/ui/widgets/tech_details.dart';
@@ -29,7 +31,12 @@ class TechProfileCustomerViewScreen extends StatelessWidget {
                 verticalSpace(16),
                 CustomerEvalution(evalutionMessage: 'مش وحش'),
                 verticalSpace(24),
-                CustomElevatedButton(text: 'موافق', onPressed: () {}),
+                CustomElevatedButton(
+                  text: 'موافق',
+                  onPressed: () {
+                    context.pushNamed(Routes.questionscreen);
+                  },
+                ),
               ],
             ),
           ),

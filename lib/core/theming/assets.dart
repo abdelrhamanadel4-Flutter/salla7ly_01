@@ -2,6 +2,10 @@
 class Assets {
   Assets._();
   
+  /// Assets for imagesArrowBack
+  /// assets/images/arrow_back.png
+  static const String imagesArrowBack = "assets/images/arrow_back.png";
+
   /// Assets for imagesHeaterImage
   /// assets/images/heater_image.png
   static const String imagesHeaterImage = "assets/images/heater_image.png";
@@ -22,6 +26,10 @@ class Assets {
   /// assets/images/profile_image.png
   static const String imagesProfileImage = "assets/images/profile_image.png";
 
+  /// Assets for imagesSettingIcon
+  /// assets/images/setting_icon.png
+  static const String imagesSettingIcon = "assets/images/setting_icon.png";
+
   /// Assets for imagesSplashScreenBackground
   /// assets/images/SplashScreen_background.png
   static const String imagesSplashScreenBackground = "assets/images/SplashScreen_background.png";
@@ -29,6 +37,10 @@ class Assets {
   /// Assets for svgsAiIcon
   /// assets/svgs/ai_icon.svg
   static const String svgsAiIcon = "assets/svgs/ai_icon.svg";
+
+  /// Assets for svgsArrowBack
+  /// assets/svgs/arrow_back.svg
+  static const String svgsArrowBack = "assets/svgs/arrow_back.svg";
 
   /// Assets for svgsCameraIcon
   /// assets/svgs/camera_icon.svg
@@ -45,6 +57,22 @@ class Assets {
   /// Assets for svgsCriminalRecordFieldIcon
   /// assets/svgs/criminal_record_field_icon.svg
   static const String svgsCriminalRecordFieldIcon = "assets/svgs/criminal_record_field_icon.svg";
+
+  /// Assets for svgsEditImage
+  /// assets/svgs/edit_image.svg
+  static const String svgsEditImage = "assets/svgs/edit_image.svg";
+
+  /// Assets for svgsIconCatgrioes
+  /// assets/svgs/icon_catgrioes.svg
+  static const String svgsIconCatgrioes = "assets/svgs/icon_catgrioes.svg";
+
+  /// Assets for svgsIconEditProfile
+  /// assets/svgs/icon_edit_profile.svg
+  static const String svgsIconEditProfile = "assets/svgs/icon_edit_profile.svg";
+
+  /// Assets for svgsIconHome
+  /// assets/svgs/icon_home.svg
+  static const String svgsIconHome = "assets/svgs/icon_home.svg";
 
   /// Assets for svgsLocIcon
   /// assets/svgs/loc_icon.svg
@@ -77,6 +105,10 @@ class Assets {
   /// Assets for svgsServiceFieldIcon
   /// assets/svgs/service_field_icon.svg
   static const String svgsServiceFieldIcon = "assets/svgs/service_field_icon.svg";
+
+  /// Assets for svgsSettingIcon
+  /// assets/svgs/setting_icon.svg
+  static const String svgsSettingIcon = "assets/svgs/setting_icon.svg";
 
   /// Assets for svgsTechnicianIcon
   /// assets/svgs/technician_icon.svg

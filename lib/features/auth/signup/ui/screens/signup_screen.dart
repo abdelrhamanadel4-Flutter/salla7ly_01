@@ -72,7 +72,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       CustomTextFormField(
                         controller: cubit.nameController,
                         validator: (value) {
-                          return AppValidators.validateFullName(value);
+                          return AppValidators.validateUsername(
+                            cubit.nameController.text,
+                          );
                         },
                         hintStyle: AppStyles.semiBold14darkBlue,
                         hintText: 'دخل اسمك',
@@ -147,7 +149,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   CustomElevatedButton(
                     onPressed: () {
                       if (selectedType == UserType.technician &&
-                          (cubit.criminalRecordFile == null || cubit.profileImage == null)) {
+                          (cubit.criminalRecordFile == null ||
+                              cubit.profileImage == null)) {
                         ToastMessage.toastMsg(
                           'من فضلك قم بإختيار صورة شخصية و الفيش والتشبيه',
                           AppColors.redColor,
@@ -182,7 +185,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                         );
                       }
-                      
                     },
                     text: 'تمام',
                     backgroundColor: AppColors.primaryColor,
