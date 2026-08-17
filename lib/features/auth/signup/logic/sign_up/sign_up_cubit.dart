@@ -46,52 +46,10 @@ class SignupCubit extends Cubit<SignUpState> {
         emit(SignUpState.success(data));
       },
       failure: (error) async {
-        if (error.statusCode == 401 && await _tryRefreshAccessToken()) {
-          final retryResult = await _signupUseCase.invoke(request);
-          retryResult.when(
-            success: (data) => emit(SignUpState.success(data)),
-            failure: (retryError) => emit(SignUpState.error(retryError)),
-          );
-          return;
-        }
+    
         emit(SignUpState.error(error));
       },
     );
-  }
-
-  Future<bool> _tryRefreshAccessToken() async {
-    try {
-      final refreshToken = await SharedPrefHelper.getSecuredString(
-        SharedPrefKeys.refreshToken,
-      );
-      if (refreshToken.isEmpty) return false;
-
-      final plainDio = Dio(BaseOptions(baseUrl: ApiConstants.baseUrl));
-      final response = await plainDio.post(
-        ApiConstants.refreshOtp,
-        data: {'refreshToken': refreshToken},
-      );
-
-      final tokens = response.data?['data']?['tokens'];
-      final newAccessToken = tokens?['accessToken'] as String?;
-      final newRefreshToken = tokens?['refreshToken'] as String?;
-
-      if (newAccessToken == null || newAccessToken.isEmpty) return false;
-
-      await SharedPrefHelper.setSecuredString(
-        SharedPrefKeys.userToken,
-        newAccessToken,
-      );
-      if (newRefreshToken != null && newRefreshToken.isNotEmpty) {
-        await SharedPrefHelper.setSecuredString(
-          SharedPrefKeys.refreshToken,
-          newRefreshToken,
-        );
-      }
-      return true;
-    } catch (_) {
-      return false;
-    }
   }
 
   /// Profile Image

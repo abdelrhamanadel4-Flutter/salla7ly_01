@@ -12,6 +12,7 @@ import 'package:salla7ly/features/auth/signup/ui/screens/map_screen.dart';
 import 'package:salla7ly/features/auth/signup/ui/screens/signup_screen.dart';
 import 'package:salla7ly/features/auth/signup/ui/screens/technician_acceptance_screen.dart';
 import 'package:salla7ly/features/categories/ui/screens/categories_screen.dart';
+import 'package:salla7ly/features/charging/charging_screen.dart';
 import 'package:salla7ly/features/home/home_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/ai_detection_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/kind_of_problem_screen.dart';
@@ -90,6 +91,9 @@ class AppRouter {
 
       case Routes.waitingRequestScreen:
         return MaterialPageRoute(builder: (_) => const WaitingRequestScreen());
+
+      case Routes.chargingScreen:
+        return MaterialPageRoute(builder: (_) => const ChargingScreen());
 
       case Routes.categoriesScreen:
         return MaterialPageRoute(
