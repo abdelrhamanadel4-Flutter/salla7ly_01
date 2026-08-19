@@ -55,6 +55,18 @@ import 'package:salla7ly/features/categories/domain/use_cases/categories_use_cas
     as _i160;
 import 'package:salla7ly/features/categories/logic/categories/categories_cubit.dart'
     as _i290;
+import 'package:salla7ly/features/problem_description/data/data_source/remote/problem_description_data_source.dart'
+    as _i133;
+import 'package:salla7ly/features/problem_description/data/data_source/remote/problem_description_data_source_impl.dart'
+    as _i907;
+import 'package:salla7ly/features/problem_description/data/repo/problem_description_repo_impl.dart'
+    as _i384;
+import 'package:salla7ly/features/problem_description/domain/repo/problem_description_repo.dart'
+    as _i488;
+import 'package:salla7ly/features/problem_description/domain/use_cases/problem_description_use_case.dart'
+    as _i733;
+import 'package:salla7ly/features/problem_description/logic/problem_description_cubit.dart'
+    as _i249;
 import 'package:salla7ly/features/profile/data/data_sources/remote/profile_remote_data_source.dart'
     as _i551;
 import 'package:salla7ly/features/profile/data/data_sources/remote/profile_remote_data_source_impl.dart'
@@ -92,6 +104,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i537.SignUpRepo>(
       () => _i1019.SignUpRepoImpl(gh<_i798.SignUpRemoteDataSource>()),
     );
+    gh.factory<_i133.ProblemDescriptionRemoteDataSource>(
+      () => _i907.ProblemDescriptionDataSourceImpl(gh<_i837.ApiService>()),
+    );
     gh.factory<_i926.CategoriesRepo>(
       () => _i296.CategoriesRepoImpl(gh<_i711.CategoriesRemoteDataSource>()),
     );
@@ -125,6 +140,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i828.VerifyOtpUseCases>(
       () => _i828.VerifyOtpUseCases(gh<_i247.LoginRepo>()),
     );
+    gh.factory<_i488.ProblemDescriptionRepo>(
+      () => _i384.ProblemDescriptionRepositoryImpl(
+        gh<_i133.ProblemDescriptionRemoteDataSource>(),
+      ),
+    );
     gh.factory<_i290.CategoriesCubit>(
       () => _i290.CategoriesCubit(gh<_i160.CategoriesUseCase>()),
     );
@@ -137,6 +157,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i813.SignupCubit>(
       () => _i813.SignupCubit(gh<_i158.SignUpUseCase>()),
+    );
+    gh.factory<_i733.ProblemDescriptionUseCase>(
+      () => _i733.ProblemDescriptionUseCase(gh<_i488.ProblemDescriptionRepo>()),
+    );
+    gh.factory<_i249.ProblemDescriptionCubit>(
+      () =>
+          _i249.ProblemDescriptionCubit(gh<_i733.ProblemDescriptionUseCase>()),
     );
     return this;
   }

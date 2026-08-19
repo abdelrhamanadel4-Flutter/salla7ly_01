@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/routing/routes.dart';
-import 'package:salla7ly/core/theming/app_color.dart';
-import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_app_bar.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
 import 'package:salla7ly/features/problem_description/ui/widgets/container_review.dart';

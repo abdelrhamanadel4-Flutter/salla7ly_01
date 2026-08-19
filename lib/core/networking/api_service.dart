@@ -9,37 +9,32 @@ import 'package:salla7ly/features/auth/login/data/model/verify_otp_request_dto.d
 import 'package:salla7ly/features/auth/login/data/model/verify_otp_response_dto.dart';
 import 'package:salla7ly/features/categories/data/models/categories_response_dto.dart';
 import 'package:salla7ly/features/auth/signup/data/model/sign_up_responsedto.dart';
+import 'package:salla7ly/features/problem_description/data/models/problem_description_request_dto.dart';
+import 'package:salla7ly/features/problem_description/data/models/problem_description_response_dto.dart';
 import 'package:salla7ly/features/profile/data/model/profile_response_dto.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
 abstract class ApiService {
   factory ApiService(Dio dio, {String? baseUrl}) = _ApiService;
-    @POST(ApiConstants.requestOtp)
-  Future<RequsetOtpResponseDto> requestOtp(
-    @Body() RequsetOtpRequsetDto body,
-  );
-
+  @POST(ApiConstants.requestOtp)
+  Future<RequsetOtpResponseDto> requestOtp(@Body() RequsetOtpRequsetDto body);
 
   @POST(ApiConstants.verifyOtp)
-  Future<VerifyOtpResponseDto> verifyOtp(
-    @Body() VerifyOtpRequestDto body,
-  );
+  Future<VerifyOtpResponseDto> verifyOtp(@Body() VerifyOtpRequestDto body);
 
   @POST(ApiConstants.refreshOtp)
-  Future<VerifyOtpResponseDto> refreshOtp(
-    @Body() RefreshOtpRequsetDto body,
-  );
+  Future<VerifyOtpResponseDto> refreshOtp(@Body() RefreshOtpRequsetDto body);
   @POST(ApiConstants.signUp)
-  Future<SignUpResponsedto> signUp(
-    @Body() FormData formData,
-  );
+  Future<SignUpResponsedto> signUp(@Body() FormData formData);
   @GET(ApiConstants.getCategories)
   Future<CategoriesResponseDto> getCategories();
 
   @GET(ApiConstants.getProfile)
   Future<ProfileResponseDto> getProfile();
 
-
-
+  @POST(ApiConstants.request)
+Future<ProblemDescriptionResponseDto> createProblemDescription(
+  @Body() ProblemDescriptionRequestDto body,
+);
 }

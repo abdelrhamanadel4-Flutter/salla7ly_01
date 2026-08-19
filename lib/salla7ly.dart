@@ -24,7 +24,7 @@ class Salla7ly extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Salla7ly',
-        theme: ThemeData(scaffoldBackgroundColor: AppColors.scaffoldColor,),
+        theme: ThemeData(scaffoldBackgroundColor: AppColors.scaffoldColor),
         locale: const Locale('ar'),
         supportedLocales: const [Locale('ar')],
         localizationsDelegates: const [
@@ -39,7 +39,7 @@ class Salla7ly extends StatelessWidget {
           );
         },
         onGenerateRoute: _appRouter.generateRoute,
-        initialRoute: Routes.chargingScreen,
+        initialRoute: initialRoute,
       ),
     );
   }

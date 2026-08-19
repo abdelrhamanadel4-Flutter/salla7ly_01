@@ -8,7 +8,12 @@ import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
 
 class KindOfProblemScreen extends StatelessWidget {
-  const KindOfProblemScreen({super.key});
+  KindOfProblemScreen({
+    super.key,
+    required this.categoryId
+    });
+
+  final String categoryId;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +41,7 @@ class KindOfProblemScreen extends StatelessWidget {
                 CustomElevatedButton(text: 'طلب استشارة فني', onPressed: () {
                   context.pushReplacementNamed(
                       Routes.problemDescriptionScreen,
+                      arguments: categoryId,
                     );
                 }),
               ],

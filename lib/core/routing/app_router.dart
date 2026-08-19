@@ -15,6 +15,7 @@ import 'package:salla7ly/features/auth/signup/ui/screens/technician_acceptance_s
 import 'package:salla7ly/features/categories/ui/screens/categories_screen.dart';
 import 'package:salla7ly/features/charging/charging_screen.dart';
 import 'package:salla7ly/features/home/home_screen.dart';
+import 'package:salla7ly/features/problem_description/logic/problem_description_cubit.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/ai_detection_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/kind_of_problem_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/problem_description_ai_screen.dart';
@@ -67,7 +68,10 @@ class AppRouter {
         );
 
       case Routes.kindOfProblemScreen:
-        return MaterialPageRoute(builder: (_) => const KindOfProblemScreen());
+        final categoryId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => KindOfProblemScreen(categoryId: categoryId),
+        );
 
       case Routes.problemDescriptionAiScreen:
         return MaterialPageRoute(
@@ -75,14 +79,16 @@ class AppRouter {
         );
 
       case Routes.problemDescriptionScreen:
+        final categoryId = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => const ProblemDescriptionScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ProblemDescriptionCubit>(),
+            child: ProblemDescriptionScreen(categoryId: categoryId),
+          ),
         );
 
-   case Routes.questionscreen:
-        return MaterialPageRoute(
-          builder: (_) => const QuestionScreen(),
-        );
+      case Routes.questionscreen:
+        return MaterialPageRoute(builder: (_) => const QuestionScreen());
       case Routes.aiDetectionScreen:
         return MaterialPageRoute(builder: (_) => const AiDetectionScreen());
 
@@ -90,11 +96,9 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const RequestTechnicianScreen(),
         );
-        
- case Routes.requestReviewScreen:
-        return MaterialPageRoute(
-          builder: (_) => const RequestReviewScreen(),
-        );
+
+      case Routes.requestReviewScreen:
+        return MaterialPageRoute(builder: (_) => const RequestReviewScreen());
       case Routes.techProfileCustomerViewScreen:
         return MaterialPageRoute(
           builder: (_) => const TechProfileCustomerViewScreen(),
