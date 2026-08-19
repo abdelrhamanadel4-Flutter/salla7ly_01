@@ -74,8 +74,12 @@ class AppRouter {
         );
 
       case Routes.problemDescriptionAiScreen:
+        final categoryId = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => const ProblemDescriptionAiScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ProblemDescriptionCubit>(),
+            child: ProblemDescriptionAiScreen(categoryId: categoryId),
+          ),
         );
 
       case Routes.problemDescriptionScreen:

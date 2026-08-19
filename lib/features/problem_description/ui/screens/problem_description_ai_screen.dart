@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/routing/routes.dart';
-import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
 import 'package:salla7ly/core/widgets/custom_text_form_filed.dart';
+import 'package:salla7ly/features/problem_description/domain/entity/problem_description_request.dart';
+import 'package:salla7ly/features/problem_description/logic/problem_description_ai_bloc_listener.dart';
+import 'package:salla7ly/features/problem_description/logic/problem_description_cubit.dart';
+import 'package:salla7ly/features/problem_description/ui/widgets/problem_image_picker.dart';
 
 class ProblemDescriptionAiScreen extends StatelessWidget {
-  const ProblemDescriptionAiScreen({super.key});
+  ProblemDescriptionAiScreen({super.key, required this.categoryId});
+
+  final String categoryId;
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController problemController = TextEditingController();
+    final cubit = context.read<ProblemDescriptionCubit>();
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -29,41 +34,32 @@ class ProblemDescriptionAiScreen extends StatelessWidget {
                 Text('اوصف مشكلتك ل Ai', style: AppStyles.bold24Primary),
                 verticalSpace(24),
                 CustomTextFormField(
-                  controller: problemController,
+                  controller: cubit.descriptionController,
                   hintStyle: AppStyles.semiBold14darkBlue,
                   hintText: 'قول مشكلتك',
                 ),
                 verticalSpace(8),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: double.infinity,
-                    height: 140.h,
-                    decoration: BoxDecoration(
-                      color: AppColors.whiteColor,
-                      borderRadius: BorderRadius.circular(32),
-                      border: BoxBorder.all(color: AppColors.darkBlueColor),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(Assets.svgsCameraIcon),
-                        verticalSpace(4),
-                        Text(
-                          'حط صورة \n للمشكلة',
-                          style: AppStyles.semiBold14darkBlue,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                ProblemImagePicker(),
                 verticalSpace(16),
                 CustomElevatedButton(
                   text: 'تمام',
                   onPressed: () {
-                    context.pushReplacementNamed(Routes.aiDetectionScreen);
+                    final request = ProblemDescriptionRequest(
+                      description: cubit.descriptionController.text.trim(),
+                      requestType: 'CONSULTATION',
+                      categoryId: categoryId,
+                    );
+                    cubit.createProblemDescription(request);
                   },
                 ),
+                verticalSpace(8),
+                CustomElevatedButton(
+                  text: 'خرجني',
+                  onPressed: () {
+                    context.pushReplacementNamed(Routes.mainnavigationscreen);
+                  },
+                ),
+                ProblemDescriptionAiBlocListener(),
               ],
             ),
           ),

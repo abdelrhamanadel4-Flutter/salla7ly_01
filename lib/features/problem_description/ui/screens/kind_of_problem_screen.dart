@@ -34,6 +34,7 @@ class KindOfProblemScreen extends StatelessWidget {
                   onPressed: () {
                     context.pushReplacementNamed(
                       Routes.problemDescriptionAiScreen,
+                      arguments: categoryId,
                     );
                   },
                 ),
