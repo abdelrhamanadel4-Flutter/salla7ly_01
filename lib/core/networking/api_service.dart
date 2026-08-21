@@ -2,6 +2,7 @@ import 'dart:core';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:salla7ly/core/networking/api_constants.dart';
+import 'package:salla7ly/features/ai_detection/data/model/ai_estimation_response_dto.dart';
 import 'package:salla7ly/features/auth/login/data/model/refresh_otp_requset_dto.dart';
 import 'package:salla7ly/features/auth/login/data/model/requset_otp_requset_dto.dart';
 import 'package:salla7ly/features/auth/login/data/model/requset_otp_response-dto.dart';
@@ -36,5 +37,10 @@ abstract class ApiService {
   @POST(ApiConstants.request)
 Future<ProblemDescriptionResponseDto> createProblemDescription(
   @Body() ProblemDescriptionRequestDto body,
+);
+
+  @POST(ApiConstants.aiEstimation)
+Future<AiEstimationResponseDto> getAiEstimation(
+  @Path('id') String id,
 );
 }

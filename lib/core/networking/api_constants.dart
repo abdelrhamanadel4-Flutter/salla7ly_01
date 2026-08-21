@@ -7,7 +7,8 @@ class ApiConstants {
   static const String getCategories = 'api/v1/public/categories';
   static const String getProfile = 'api/v1/me';
   static const String request = 'api/v1/customer/requests';
-
+  static const String aiEstimation =
+    'api/v1/customer/requests/{id}/ai-estimation';
 
 }
 

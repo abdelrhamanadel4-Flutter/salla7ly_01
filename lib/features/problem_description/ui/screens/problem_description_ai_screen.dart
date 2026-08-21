@@ -46,7 +46,7 @@ class ProblemDescriptionAiScreen extends StatelessWidget {
                   onPressed: () {
                     final request = ProblemDescriptionRequest(
                       description: cubit.descriptionController.text.trim(),
-                      requestType: 'CONSULTATION',
+                      requestType: 'AI_ESTIMATION',
                       categoryId: categoryId,
                     );
                     cubit.createProblemDescription(request);

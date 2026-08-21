@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:salla7ly/features/ai_detection/data/model/ai_estimation_response_dto.dart';
+import 'package:salla7ly/features/ai_detection/domain/entities/ai_estimation_response.dart';
 import 'package:salla7ly/features/auth/login/data/model/refresh_otp_requset_dto.dart';
 import 'package:salla7ly/features/auth/login/data/model/requset_otp_requset_dto.dart';
 import 'package:salla7ly/features/auth/login/data/model/requset_otp_response-dto.dart';
@@ -371,6 +373,26 @@ extension DataProblemDescriptionResponseDtoMapper on DataProblemDescriptionRespo
       serviceLongitude: serviceLongitude,
       images: images,
       offersCount: offersCount,
+    );
+  }
+}
+
+extension AiEstimationResponseDtoMapper on AiEstimationResponseDto {
+  AiEstimationResponse toEntity() {
+    return AiEstimationResponse(
+      estimation: data?.estimation?.toEntity(),
+      pointsCharged: data?.pointsCharged,
+      pointsBalance: data?.pointsBalance,
+    );
+  }
+}
+
+extension EstimationDtoMapper on EstimationDto {
+  AiEstimation toEntity() {
+    return AiEstimation(
+      severity: severity,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
     );
   }
 }

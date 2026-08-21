@@ -23,7 +23,7 @@ class ProblemDescriptionCubit extends Cubit<ProblemDescriptionState> {
   Future<void> createProblemDescription(ProblemDescriptionRequest request) async {
     
     if (state is Loading) return;
-    if (formKey.currentState?.validate() == true) {
+    
       emit(ProblemDescriptionState.loading());
       final result = await _problemDescriptionUseCase.createProblemDescription(request);
       result.when(
@@ -34,7 +34,7 @@ class ProblemDescriptionCubit extends Cubit<ProblemDescriptionState> {
           emit(ProblemDescriptionState.error(error));
         },
       );
-    }
+    
   }
 
   Future<void> pickProblemImage() async {
