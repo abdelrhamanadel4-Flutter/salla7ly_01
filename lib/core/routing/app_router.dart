@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salla7ly/core/di/injectoin.dart';
 import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/widgets/navigation/main_navigation_screen.dart';
+import 'package:salla7ly/features/ai_detection/logic/ai_estimation_cubit.dart';
 import 'package:salla7ly/features/auth/login/logic/login_cubit.dart';
 import 'package:salla7ly/features/auth/login/ui/screens/login_screen.dart';
 import 'package:salla7ly/features/auth/login/ui/screens/otp_screen.dart';
@@ -15,7 +16,8 @@ import 'package:salla7ly/features/auth/signup/ui/screens/technician_acceptance_s
 import 'package:salla7ly/features/categories/ui/screens/categories_screen.dart';
 import 'package:salla7ly/features/charging/charging_screen.dart';
 import 'package:salla7ly/features/home/home_screen.dart';
-import 'package:salla7ly/features/problem_description/ui/screens/ai_detection_screen.dart';
+import 'package:salla7ly/features/problem_description/logic/problem_description_cubit.dart';
+import 'package:salla7ly/features/ai_detection/ui/screens/ai_detection_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/kind_of_problem_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/problem_description_ai_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/problem_description_screen.dart';
@@ -67,34 +69,51 @@ class AppRouter {
         );
 
       case Routes.kindOfProblemScreen:
-        return MaterialPageRoute(builder: (_) => const KindOfProblemScreen());
+        final categoryId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => KindOfProblemScreen(categoryId: categoryId),
+        );
 
       case Routes.problemDescriptionAiScreen:
+        final categoryId = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => const ProblemDescriptionAiScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ProblemDescriptionCubit>(),
+            child: ProblemDescriptionAiScreen(categoryId: categoryId),
+          ),
         );
 
       case Routes.problemDescriptionScreen:
+        final categoryId = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => const ProblemDescriptionScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ProblemDescriptionCubit>(),
+            child: ProblemDescriptionScreen(categoryId: categoryId),
+          ),
         );
 
-   case Routes.questionscreen:
-        return MaterialPageRoute(
-          builder: (_) => const QuestionScreen(),
-        );
+      case Routes.questionscreen:
+        return MaterialPageRoute(builder: (_) => const QuestionScreen());
+
+
       case Routes.aiDetectionScreen:
-        return MaterialPageRoute(builder: (_) => const AiDetectionScreen());
+        final requestId = settings.arguments as String;
+
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<AiEstimationCubit>(),
+            child: AiDetectionScreen(requestId: requestId),
+          ),
+        );
+        
 
       case Routes.requestTechnicianScreen:
         return MaterialPageRoute(
           builder: (_) => const RequestTechnicianScreen(),
         );
-        
- case Routes.requestReviewScreen:
-        return MaterialPageRoute(
-          builder: (_) => const RequestReviewScreen(),
-        );
+
+      case Routes.requestReviewScreen:
+        return MaterialPageRoute(builder: (_) => const RequestReviewScreen());
       case Routes.techProfileCustomerViewScreen:
         return MaterialPageRoute(
           builder: (_) => const TechProfileCustomerViewScreen(),

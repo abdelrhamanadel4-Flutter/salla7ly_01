@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:salla7ly/features/ai_detection/data/model/ai_estimation_response_dto.dart';
+import 'package:salla7ly/features/ai_detection/domain/entities/ai_estimation_response.dart';
 import 'package:salla7ly/features/auth/login/data/model/refresh_otp_requset_dto.dart';
 import 'package:salla7ly/features/auth/login/data/model/requset_otp_requset_dto.dart';
 import 'package:salla7ly/features/auth/login/data/model/requset_otp_response-dto.dart';
@@ -14,6 +16,10 @@ import 'package:salla7ly/features/auth/signup/data/model/sign_up_responsedto.dar
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_requset_entity.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_response.dart';
 import 'package:salla7ly/features/categories/domain/entity/categories_responce.dart';
+import 'package:salla7ly/features/problem_description/data/models/problem_description_request_dto.dart';
+import 'package:salla7ly/features/problem_description/data/models/problem_description_response_dto.dart';
+import 'package:salla7ly/features/problem_description/domain/entity/problem_description_request.dart';
+import 'package:salla7ly/features/problem_description/domain/entity/problem_description_response.dart';
 import 'package:salla7ly/features/profile/data/model/profile_response_dto.dart';
 import 'package:salla7ly/features/profile/domain/entity/profile_response.dart';
 
@@ -326,3 +332,69 @@ extension TechnicianProfileResponseDtoMapper on TechnicianProfileResponseDto {
     return TechnicianProfileResponse(profileImage: profileImage);
   }
 }
+
+extension ProblemDescriptionRequestMapper on ProblemDescriptionRequest {
+  ProblemDescriptionRequestDto toDto() {
+    return ProblemDescriptionRequestDto(
+      title: title,
+      description: description,
+      categoryId: categoryId,
+      requestType: requestType,
+      images: images,
+      serviceAddress: serviceAddress,
+      serviceCity: serviceCity,
+      latitude: latitude,
+      longitude: longitude,
+    );
+  }
+}
+
+extension ProblemDescriptionResponseDtoMapper on ProblemDescriptionResponseDto {
+  ProblemDescriptionResponse toEntity() {
+    return ProblemDescriptionResponse(
+        data: data?.toEntity()
+    );
+  }
+}
+
+extension DataProblemDescriptionResponseDtoMapper on DataProblemDescriptionResponseDto {
+  DataProblemDescriptionResponse toEntity() {
+    return DataProblemDescriptionResponse(
+      id: id,
+      categoryId: categoryId,
+      categoryName: categoryName,
+      requestType: requestType,
+      title: title,
+      description: description,
+      status: status,
+      serviceAddress: serviceAddress,
+      serviceCity: serviceCity,
+      serviceLatitude: serviceLatitude,
+      serviceLongitude: serviceLongitude,
+      images: images,
+      offersCount: offersCount,
+    );
+  }
+}
+
+extension AiEstimationResponseDtoMapper on AiEstimationResponseDto {
+  AiEstimationResponse toEntity() {
+    return AiEstimationResponse(
+      estimation: data?.estimation?.toEntity(),
+      pointsCharged: data?.pointsCharged,
+      pointsBalance: data?.pointsBalance,
+    );
+  }
+}
+
+extension EstimationDtoMapper on EstimationDto {
+  AiEstimation toEntity() {
+    return AiEstimation(
+      severity: severity,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+    );
+  }
+}
+
+

@@ -115,13 +115,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           mainAxisSpacing: 16.h,
                           childAspectRatio: 1.6,
                           children: categories
-                              .where((category) => category != null)
+                              .where((category) => category?.id != null)
                               .map(
                                 (category) => CategoriesItem(
                                   categoryName: category!.name ?? '',
                                   onTap: () {
                                     context.pushReplacementNamed(
                                       Routes.kindOfProblemScreen,
+                                      arguments: category.id!,
                                     );
                                   },
                                 ),

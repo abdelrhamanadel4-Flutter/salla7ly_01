@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
-import 'package:salla7ly/features/problem_description/ui/widgets/problem_container_painter.dart';
+import 'package:salla7ly/features/ai_detection/ui/widgets/problem_container_painter.dart';
 
 class AiMessageWidget extends StatelessWidget {
   AiMessageWidget({
