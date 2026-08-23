@@ -5,11 +5,11 @@ import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBarTech extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onTap;
 
-  const BottomNavBar({
+  const BottomNavBarTech({
     super.key,
     required this.currentIndex,
     required this.onTap,
@@ -33,14 +33,14 @@ class BottomNavBar extends StatelessWidget {
           _buildItem(index: 0, icon: Assets.svgsIconHome, label: 'الرئيسية'),
           _buildItem(
             index: 1,
-            icon: Assets.svgsIconCatgrioes,
-            label: 'الأقسام',
+            icon: Assets.svgsComssions,
+            label: 'عمولات',
           ),
 
           _buildItem(
             index: 2,
-            icon: Assets.svgsIconEditProfile,
-            label: 'حسابك',
+            icon: Assets.svgsOffers,
+            label: 'عروض',
           ),
         ],
       ),

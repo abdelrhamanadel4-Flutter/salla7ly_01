@@ -71,6 +71,12 @@ class LoginCubit extends Cubit<LoginState> {
             data.data!.accountState!,
           );
         }
+        if (data.data?.user?.role != null) {
+          await SharedPrefHelper.setData(
+            SharedPrefKeys.userRole,
+            data.data!.user!.role!,
+          );
+        }
         emit(LoginState.success(data));
       },
       failure: (error) {
@@ -101,6 +107,12 @@ class LoginCubit extends Cubit<LoginState> {
           await SharedPrefHelper.setData(
             SharedPrefKeys.accountState,
             data.data!.accountState!,
+          );
+        }
+        if (data.data?.user?.role != null) {
+          await SharedPrefHelper.setData(
+            SharedPrefKeys.userRole,
+            data.data!.user!.role!,
           );
         }
         emit(LoginState.success(data));

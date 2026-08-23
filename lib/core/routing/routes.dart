@@ -7,6 +7,8 @@ class Routes {
   static const String homeScreen = '/homeScreen';
   static const String mapScreen = '/mapScreen';
   static const String profileScreen = '/profileScreen';
+    static const String editprofilescrean = '/editprofileScreen';
+
   static const String categoriesScreen = '/categoriesScreen';
   static const String kindOfProblemScreen = '/kindOfProblemScreen';
   static const String problemDescriptionScreen = '/problemDescriptionScreen';
@@ -21,5 +23,15 @@ class Routes {
   static const String questionscreen = '/questionscreen';
     static const String requestReviewScreen = '/requestReviewScreen';
   static const String chargingScreen = '/chargingScreen';
+    static const String   ordersscreen
+ = '/  ordersscreen';
+
+    static const String mainnavigationscreentech = '/mainnavigationscreentech';
+        static const String editprofilescreantech = '/editprofilescreantech';
+
+
+    
+
+  
 
 }

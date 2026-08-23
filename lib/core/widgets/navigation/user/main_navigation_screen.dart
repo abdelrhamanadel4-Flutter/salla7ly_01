@@ -4,6 +4,7 @@ import 'package:salla7ly/core/di/injectoin.dart';
 import 'package:salla7ly/features/categories/logic/categories/categories_cubit.dart';
 import 'package:salla7ly/features/edit_profile/ui/screens/edit_profile_screan.dart';
 import 'package:salla7ly/features/categories/ui/screens/categories_screen.dart';
+import 'package:salla7ly/features/orders/screens/orders_screen.dart';
 import 'package:salla7ly/features/profile/logic/profile_cubit.dart';
 import 'package:salla7ly/features/profile/ui/screens/profile_screen.dart';
 
@@ -34,11 +35,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         create: (context) => getIt<CategoriesCubit>()..getCategories(),
         child: const CategoriesScreen(),
       ),
-
-      BlocProvider(
-        create: (_) => getIt<ProfileCubit>()..getProfile(),
-        child: const EditProfileScrean(),
-      ),
+      OrdersScreen(),
     ];
   }
 
