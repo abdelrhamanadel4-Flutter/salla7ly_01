@@ -21,5 +21,6 @@ class AppColors {
   static const Color errorSoft = Color(0xFFFDE8E8);
   static const Color warningColor = Color(0xFFF5A623);
   static const Color warningSoft = Color(0xFFFFF3E0);
+  static const Color orangeColor = Color(0xFFFF6B1A);
   static const Color infoSoft = Color(0xFFE7ECFB);
 }

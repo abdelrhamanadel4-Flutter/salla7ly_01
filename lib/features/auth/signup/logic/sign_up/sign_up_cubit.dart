@@ -42,7 +42,11 @@ class SignupCubit extends Cubit<SignUpState> {
             SharedPrefKeys.accountState,
             accountState,
           );
-        } 
+        }
+        final role = data.data?.user?.role;
+        if (role != null && role.isNotEmpty) {
+          await SharedPrefHelper.setData(SharedPrefKeys.userRole, role);
+        }
         emit(SignUpState.success(data));
       },
       failure: (error) async {

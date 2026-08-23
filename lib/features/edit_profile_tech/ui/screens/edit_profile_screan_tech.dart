@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
+import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
@@ -14,8 +15,8 @@ import 'package:salla7ly/features/profile/logic/profile_state.dart';
 import 'package:salla7ly/features/profile/ui/widgets/profile_header.dart';
 import 'package:salla7ly/features/profile/ui/widgets/profile_shimmer.dart';
 
-class EditProfileScrean extends StatelessWidget {
-  const EditProfileScrean({super.key});
+class EditProfileScreanTech extends StatelessWidget {
+  const EditProfileScreanTech({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,6 +104,31 @@ class EditProfileScrean extends StatelessWidget {
                           ),
                           verticalSpace(10.h),
                           CustomElevatedButton(text: 'تأكيد', onPressed: () {}),
+                          verticalSpace(10.h),
+                          Container(
+                            width: double.infinity,
+                            height: 60.h,
+
+                            decoration: BoxDecoration(
+                              color: AppColors.whiteColor,
+                              borderRadius: BorderRadius.circular(8.r),
+                              border: BoxBorder.all(
+                                color: AppColors.orangeColor,
+                                width: 1.7,
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('للشكاوي', style: AppStyles.bold16Primary),
+                                verticalSpace(2.h),
+                                Text(
+                                  '0123456789',
+                                  style: AppStyles.bold16Primary,
+                                ),
+                              ],
+                            ),
+                          ),
                           verticalSpace(10.h),
                           SizedBox(
                             child: Row(

@@ -62,7 +62,7 @@ class _TechnicianAcceptanceScreenState
     _pollTimer?.cancel();
     Navigator.pushNamedAndRemoveUntil(
       context,
-      Routes.homeScreen,
+      Routes.mainnavigationscreentech,
       (route) => false,
     );
   }
