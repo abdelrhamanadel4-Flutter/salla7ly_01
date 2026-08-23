@@ -18,8 +18,10 @@ import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_response.dar
 import 'package:salla7ly/features/categories/domain/entity/categories_responce.dart';
 import 'package:salla7ly/features/problem_description/data/models/problem_description_request_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/problem_description_response_dto.dart';
+import 'package:salla7ly/features/problem_description/data/models/publish_request_response_dto.dart';
 import 'package:salla7ly/features/problem_description/domain/entity/problem_description_request.dart';
 import 'package:salla7ly/features/problem_description/domain/entity/problem_description_response.dart';
+import 'package:salla7ly/features/problem_description/domain/entity/publish_request_response.dart';
 import 'package:salla7ly/features/profile/data/model/profile_response_dto.dart';
 import 'package:salla7ly/features/profile/domain/entity/profile_response.dart';
 
@@ -397,4 +399,29 @@ extension EstimationDtoMapper on EstimationDto {
   }
 }
 
+extension PublishRequestResponseDtoMapper
+    on PublishRequestResponseDto {
+  PublishRequestResponse toEntity() {
+    return PublishRequestResponse(
+      data: data?.toEntity(),
+    );
+  }
+}
 
+extension PublishRequestDataDtoMapper on PublishRequestDataDto {
+  PublishRequestData toEntity() {
+    return PublishRequestData(
+      request: request?.toEntity(),
+      technicianCount: technicianCount,
+    );
+  }
+}
+
+extension PublishRequestDtoMapper on PublishRequestDto {
+  PublishRequest toEntity() {
+    return PublishRequest(
+      id: id,
+      status: status,
+    );
+  }
+}

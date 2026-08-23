@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/widgets/dilaog_utils.dart';
-import 'package:salla7ly/features/problem_description/logic/problem_description_cubit.dart';
-import 'package:salla7ly/features/problem_description/logic/problem_description_state.dart';
+import 'package:salla7ly/features/problem_description/logic/problem_description/problem_description_cubit.dart';
+import 'package:salla7ly/features/problem_description/logic/problem_description/problem_description_state.dart';
+import 'package:salla7ly/features/problem_description/logic/publish_request/publish_cubit.dart';
 
 class ProblemDescriptionBlocListener extends StatelessWidget {
   const ProblemDescriptionBlocListener({super.key});
@@ -21,7 +22,21 @@ class ProblemDescriptionBlocListener extends StatelessWidget {
           },
 
           success: (data) {
-            DialogUtils.hideLoading(context);
+            final requestId = data.data?.id;
+
+            if (requestId == null) {
+              DialogUtils.hideLoading(context);
+
+              DialogUtils.showMessage(
+                context: context,
+                type: DialogType.error,
+                title: 'حصل خطأ',
+                message: 'رقم الطلب غير موجود',
+              );
+
+              return;
+            }
+            context.read<PublishCubit>().publishRequest(requestId);
 
             context.pushReplacementNamed(Routes.waitingRequestScreen);
           },

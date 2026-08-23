@@ -12,6 +12,7 @@ import 'package:salla7ly/features/categories/data/models/categories_response_dto
 import 'package:salla7ly/features/auth/signup/data/model/sign_up_responsedto.dart';
 import 'package:salla7ly/features/problem_description/data/models/problem_description_request_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/problem_description_response_dto.dart';
+import 'package:salla7ly/features/problem_description/data/models/publish_request_response_dto.dart';
 import 'package:salla7ly/features/profile/data/model/profile_response_dto.dart';
 part 'api_service.g.dart';
 
@@ -35,12 +36,13 @@ abstract class ApiService {
   Future<ProfileResponseDto> getProfile();
 
   @POST(ApiConstants.request)
-Future<ProblemDescriptionResponseDto> createProblemDescription(
-  @Body() ProblemDescriptionRequestDto body,
-);
+  Future<ProblemDescriptionResponseDto> createProblemDescription(
+    @Body() ProblemDescriptionRequestDto body,
+  );
 
   @POST(ApiConstants.aiEstimation)
-Future<AiEstimationResponseDto> getAiEstimation(
-  @Path('id') String id,
-);
+  Future<AiEstimationResponseDto> getAiEstimation(@Path('id') String id);
+
+  @POST(ApiConstants.publishRequest)
+  Future<PublishRequestResponseDto> publishRequest(@Path('id') String id);
 }

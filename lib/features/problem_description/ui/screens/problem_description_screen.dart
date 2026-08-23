@@ -7,8 +7,9 @@ import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
 import 'package:salla7ly/core/widgets/custom_text_form_filed.dart';
 import 'package:salla7ly/features/problem_description/domain/entity/problem_description_request.dart';
-import 'package:salla7ly/features/problem_description/logic/problem_description_bloc_listener.dart';
-import 'package:salla7ly/features/problem_description/logic/problem_description_cubit.dart';
+import 'package:salla7ly/features/problem_description/logic/problem_description/problem_description_bloc_listener.dart';
+import 'package:salla7ly/features/problem_description/logic/problem_description/problem_description_cubit.dart';
+import 'package:salla7ly/features/problem_description/logic/publish_request/publish_bloc_listener.dart';
 import 'package:salla7ly/features/problem_description/ui/widgets/problem_image_picker.dart';
 
 class ProblemDescriptionScreen extends StatelessWidget {
@@ -63,13 +64,14 @@ class ProblemDescriptionScreen extends StatelessWidget {
                       categoryId: categoryId,
                       images: ["/uploads/1712-sink.jpg"],
                       serviceAddress: 'agami',
-                      serviceCity:'alex'
+                      serviceCity: 'alex',
                     );
                     cubit.createProblemDescription(request);
                   },
                 ),
 
-                ProblemDescriptionBlocListener(),
+                const ProblemDescriptionBlocListener(),
+                const PublishBlocListener(),
               ],
             ),
           ),
