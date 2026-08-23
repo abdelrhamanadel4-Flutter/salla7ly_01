@@ -71,14 +71,26 @@ import 'package:salla7ly/features/problem_description/data/data_source/remote/pr
     as _i133;
 import 'package:salla7ly/features/problem_description/data/data_source/remote/problem_description_data_source_impl.dart'
     as _i907;
+import 'package:salla7ly/features/problem_description/data/data_source/remote/publish_remote_data_source.dart'
+    as _i322;
+import 'package:salla7ly/features/problem_description/data/data_source/remote/publish_remote_data_source_impl.dart'
+    as _i941;
 import 'package:salla7ly/features/problem_description/data/repo/problem_description_repo_impl.dart'
     as _i384;
+import 'package:salla7ly/features/problem_description/data/repo/publish_repo_impl.dart'
+    as _i493;
 import 'package:salla7ly/features/problem_description/domain/repo/problem_description_repo.dart'
     as _i488;
+import 'package:salla7ly/features/problem_description/domain/repo/publish_repo.dart'
+    as _i624;
 import 'package:salla7ly/features/problem_description/domain/use_cases/problem_description_use_case.dart'
     as _i733;
-import 'package:salla7ly/features/problem_description/logic/problem_description_cubit.dart'
+import 'package:salla7ly/features/problem_description/domain/use_cases/publish_use_case.dart'
+    as _i1014;
+import 'package:salla7ly/features/problem_description/logic/problem_description/problem_description_cubit.dart'
     as _i249;
+import 'package:salla7ly/features/problem_description/logic/publish_request/publish_cubit.dart'
+    as _i575;
 import 'package:salla7ly/features/profile/data/data_sources/remote/profile_remote_data_source.dart'
     as _i551;
 import 'package:salla7ly/features/profile/data/data_sources/remote/profile_remote_data_source_impl.dart'
@@ -122,6 +134,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i133.ProblemDescriptionRemoteDataSource>(
       () => _i907.ProblemDescriptionDataSourceImpl(gh<_i837.ApiService>()),
     );
+    gh.factory<_i322.PublishRemoteDataSource>(
+      () => _i941.PublishRemoteDataSourceImpl(gh<_i837.ApiService>()),
+    );
     gh.factory<_i926.CategoriesRepo>(
       () => _i296.CategoriesRepoImpl(gh<_i711.CategoriesRemoteDataSource>()),
     );
@@ -137,6 +152,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i247.LoginRepo>(
       () => _i209.LoginRepoImpl(gh<_i175.LoginRemoteDataSources>()),
+    );
+    gh.factory<_i624.PublishRepo>(
+      () => _i493.PublishRepoImpl(gh<_i322.PublishRemoteDataSource>()),
     );
     gh.factory<_i134.AiEstimationUseCase>(
       () => _i134.AiEstimationUseCase(gh<_i262.AiEstimationRepo>()),
@@ -169,6 +187,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i384.ProblemDescriptionRepositoryImpl(
         gh<_i133.ProblemDescriptionRemoteDataSource>(),
       ),
+    );
+    gh.factory<_i1014.PublishUseCase>(
+      () => _i1014.PublishUseCase(gh<_i624.PublishRepo>()),
+    );
+    gh.factory<_i575.PublishCubit>(
+      () => _i575.PublishCubit(gh<_i1014.PublishUseCase>()),
     );
     gh.factory<_i290.CategoriesCubit>(
       () => _i290.CategoriesCubit(gh<_i161.CategoriesUseCase>()),

@@ -6,8 +6,8 @@ import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
-import 'package:salla7ly/features/problem_description/logic/problem_description_cubit.dart';
-import 'package:salla7ly/features/problem_description/logic/problem_description_state.dart';
+import 'package:salla7ly/features/problem_description/logic/problem_description/problem_description_cubit.dart';
+import 'package:salla7ly/features/problem_description/logic/problem_description/problem_description_state.dart';
 
 class ProblemImagePicker extends StatelessWidget {
   const ProblemImagePicker({super.key});

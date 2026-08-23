@@ -16,8 +16,9 @@ import 'package:salla7ly/features/auth/signup/ui/screens/technician_acceptance_s
 import 'package:salla7ly/features/categories/ui/screens/categories_screen.dart';
 import 'package:salla7ly/features/charging/charging_screen.dart';
 import 'package:salla7ly/features/home/home_screen.dart';
-import 'package:salla7ly/features/problem_description/logic/problem_description_cubit.dart';
+import 'package:salla7ly/features/problem_description/logic/problem_description/problem_description_cubit.dart';
 import 'package:salla7ly/features/ai_detection/ui/screens/ai_detection_screen.dart';
+import 'package:salla7ly/features/problem_description/logic/publish_request/publish_cubit.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/kind_of_problem_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/problem_description_ai_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/problem_description_screen.dart';
@@ -86,8 +87,13 @@ class AppRouter {
       case Routes.problemDescriptionScreen:
         final categoryId = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<ProblemDescriptionCubit>(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<ProblemDescriptionCubit>(),
+              ),
+              BlocProvider(create: (context) => getIt<PublishCubit>()),
+            ],
             child: ProblemDescriptionScreen(categoryId: categoryId),
           ),
         );
@@ -95,17 +101,18 @@ class AppRouter {
       case Routes.questionscreen:
         return MaterialPageRoute(builder: (_) => const QuestionScreen());
 
-
       case Routes.aiDetectionScreen:
         final requestId = settings.arguments as String;
 
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (_) => getIt<AiEstimationCubit>(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => getIt<AiEstimationCubit>()),
+              BlocProvider(create: (context) => getIt<PublishCubit>()),
+            ],
             child: AiDetectionScreen(requestId: requestId),
           ),
         );
-        
 
       case Routes.requestTechnicianScreen:
         return MaterialPageRoute(

@@ -10,15 +10,15 @@ import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
 import 'package:salla7ly/features/ai_detection/logic/ai_estimation_cubit.dart';
 import 'package:salla7ly/features/ai_detection/logic/ai_estimation_state.dart';
+import 'package:salla7ly/features/ai_detection/ui/widgets/ai_detection_bloc_listener.dart';
 import 'package:salla7ly/features/ai_detection/ui/widgets/ai_message_widget.dart';
+import 'package:salla7ly/features/problem_description/logic/publish_request/publish_bloc_listener.dart';
+import 'package:salla7ly/features/problem_description/logic/publish_request/publish_cubit.dart';
 
 class AiDetectionScreen extends StatefulWidget {
   final String requestId;
 
-  const AiDetectionScreen({
-    super.key,
-    required this.requestId,
-  });
+  const AiDetectionScreen({super.key, required this.requestId});
 
   @override
   State<AiDetectionScreen> createState() => _AiDetectionScreenState();
@@ -28,7 +28,7 @@ class _AiDetectionScreenState extends State<AiDetectionScreen> {
   @override
   void initState() {
     super.initState();
-      context.read<AiEstimationCubit>().getAiEstimation(widget.requestId);
+    context.read<AiEstimationCubit>().getAiEstimation(widget.requestId);
   }
 
   String _getSeverityMessage(String? severity) {
@@ -50,20 +50,14 @@ class _AiDetectionScreenState extends State<AiDetectionScreen> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 16.w,
-              vertical: 16.h,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(Assets.imagesLogo),
                 verticalSpace(8),
 
-                Text(
-                  'ال Ai بيقول ......',
-                  style: AppStyles.bold24Primary,
-                ),
+                Text('ال Ai بيقول ......', style: AppStyles.bold24Primary),
 
                 verticalSpace(16),
 
@@ -94,8 +88,7 @@ class _AiDetectionScreenState extends State<AiDetectionScreen> {
                                 verticalSpace(16),
 
                                 AiMessageWidget(
-                                  message:
-                                      'هل ابعت طلب للفنين المتاحين ؟؟؟؟',
+                                  message: 'هل ابعت طلب للفنين المتاحين ؟؟؟؟',
                                 ),
 
                                 verticalSpace(16),
@@ -103,9 +96,10 @@ class _AiDetectionScreenState extends State<AiDetectionScreen> {
                                 CustomElevatedButton(
                                   text: 'ابعت',
                                   onPressed: () {
-                                    context.pushReplacementNamed(
-                                      Routes.waitingRequestScreen,
+                                    context.read<PublishCubit>().publishRequest(
+                                      widget.requestId,
                                     );
+                                    
                                   },
                                 ),
 
@@ -114,7 +108,9 @@ class _AiDetectionScreenState extends State<AiDetectionScreen> {
                                 CustomElevatedButton(
                                   text: 'خرجني',
                                   onPressed: () {
-                                    context.pushReplacementNamed(Routes.mainnavigationscreen);
+                                    context.pushReplacementNamed(
+                                      Routes.mainnavigationscreen,
+                                    );
                                   },
                                 ),
                               ],
@@ -127,6 +123,8 @@ class _AiDetectionScreenState extends State<AiDetectionScreen> {
                         const SizedBox.shrink();
                   },
                 ),
+                const PublishBlocListener(),
+                const AiEstimationBlocListener(),
               ],
             ),
           ),
