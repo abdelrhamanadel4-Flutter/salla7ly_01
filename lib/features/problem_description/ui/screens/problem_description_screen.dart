@@ -37,6 +37,12 @@ class ProblemDescriptionScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       CustomTextFormField(
+                        controller: cubit.titleController,
+                        hintStyle: AppStyles.semiBold14darkBlue,
+                        hintText: 'عنوان مشكلتك',
+                      ),
+                      verticalSpace(8),
+                      CustomTextFormField(
                         controller: cubit.descriptionController,
                         hintStyle: AppStyles.semiBold14darkBlue,
                         hintText: 'قول مشكلتك',
@@ -51,9 +57,13 @@ class ProblemDescriptionScreen extends StatelessWidget {
                   text: 'تمام',
                   onPressed: () {
                     final request = ProblemDescriptionRequest(
+                      title: cubit.titleController.text.trim(),
                       description: cubit.descriptionController.text.trim(),
                       requestType: 'CONSULTATION',
                       categoryId: categoryId,
+                      images: ["/uploads/1712-sink.jpg"],
+                      serviceAddress: 'agami',
+                      serviceCity:'alex'
                     );
                     cubit.createProblemDescription(request);
                   },

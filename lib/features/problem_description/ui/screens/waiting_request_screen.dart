@@ -1,7 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
+import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
@@ -57,7 +59,9 @@ class WaitingRequestScreen extends StatelessWidget {
                   ),
                 ),
                 verticalSpace(24),
-                CustomElevatedButton(text: 'خرجني', onPressed: () {}),
+                CustomElevatedButton(text: 'خرجني', onPressed: () {
+                  context.pushReplacementNamed(Routes.mainnavigationscreen);
+                }),
               ],
             ),
           ),

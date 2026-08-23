@@ -34,6 +34,12 @@ class ProblemDescriptionAiScreen extends StatelessWidget {
                 Text('اوصف مشكلتك ل Ai', style: AppStyles.bold24Primary),
                 verticalSpace(24),
                 CustomTextFormField(
+                  controller: cubit.titleController,
+                  hintStyle: AppStyles.semiBold14darkBlue,
+                  hintText: 'عنوان مشكلتك',
+                ),
+                verticalSpace(8),
+                CustomTextFormField(
                   controller: cubit.descriptionController,
                   hintStyle: AppStyles.semiBold14darkBlue,
                   hintText: 'قول مشكلتك',
@@ -45,9 +51,13 @@ class ProblemDescriptionAiScreen extends StatelessWidget {
                   text: 'تمام',
                   onPressed: () {
                     final request = ProblemDescriptionRequest(
+                      title: cubit.titleController.text.trim(),
                       description: cubit.descriptionController.text.trim(),
                       requestType: 'AI_ESTIMATION',
                       categoryId: categoryId,
+                      images: ["/uploads/1712-sink.jpg"],
+                      serviceAddress: 'agami',
+                      serviceCity: 'alex',
                     );
                     cubit.createProblemDescription(request);
                   },
