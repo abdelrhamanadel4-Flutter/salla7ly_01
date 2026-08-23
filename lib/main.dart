@@ -6,6 +6,7 @@ import 'package:salla7ly/core/helpers/constansts.dart';
 import 'package:salla7ly/core/helpers/shared_pref_helper.dart';
 import 'package:salla7ly/core/routing/app_router.dart';
 import 'package:salla7ly/core/routing/routes.dart';
+import 'package:salla7ly/core/widgets/navigation/tech/main_navigation_screen_tech.dart';
 import 'package:salla7ly/salla7ly.dart';
 
 void main() async {
@@ -19,6 +20,7 @@ void main() async {
   final accountState = await SharedPrefHelper.getString(
     SharedPrefKeys.accountState,
   );
+  final userRole = await SharedPrefHelper.getString(SharedPrefKeys.userRole);
 
   String initialRoute;
   if (token.isEmpty) {
@@ -27,15 +29,19 @@ void main() async {
     initialRoute = Routes.technicianAcceptanceScreen;
   } else if (accountState == 'COMPLETE_PROFILE') {
     initialRoute = Routes.signupScreen;
+  } else if (userRole == 'TECHNICIAN') {
+    initialRoute = Routes.mainnavigationscreentech;
   } else {
     initialRoute = Routes.mainnavigationscreen;
   }
 
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) =>
-          Salla7ly(appRouter: AppRouter(), initialRoute: initialRoute),
+      enabled: false,
+      builder: (context) => Salla7ly(
+        appRouter: AppRouter(),
+        initialRoute:initialRoute,
+      ),
     ),
   );
 }

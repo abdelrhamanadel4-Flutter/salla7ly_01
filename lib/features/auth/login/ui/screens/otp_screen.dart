@@ -58,6 +58,8 @@ class OtpScreen extends StatelessWidget {
                     final accountState = response?.data?.accountState;
                     final message = response?.data?.message;
                     final isNewUser = response?.data?.isNewUser ?? true;
+                    final isTechnician =
+                        response?.data?.user?.role == 'TECHNICIAN';
 
                     if (accountState == 'WAITING_FOR_APPROVAL') {
                       Navigator.pushNamedAndRemoveUntil(
@@ -79,7 +81,15 @@ class OtpScreen extends StatelessWidget {
 
                     Navigator.pushNamedAndRemoveUntil(
                       context,
-                      isNewUser ? Routes.signupScreen : Routes.mainnavigationscreen,
+                      // A technician can still be marked as a new user by
+                      // the API while completing their technician profile.
+                      // Their role must take precedence so they never enter
+                      // the customer flow.
+                      isTechnician
+                          ? Routes.mainnavigationscreentech
+                          : isNewUser
+                          ? Routes.signupScreen
+                          : Routes.mainnavigationscreen,
                       (route) => false,
                     );
                   },

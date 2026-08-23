@@ -35,6 +35,11 @@ class AppStyles {
     fontWeight: FontWeightHelper.semiBold,
     color: AppColors.primaryColor,
   );
+  static final TextStyle semiBold20lightGreyColor = GoogleFonts.cairo(
+    fontSize: 20.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: AppColors.lightGreyColor,
+  );
   static final TextStyle Bold24darkerBlue = GoogleFonts.cairo(
     fontSize: 24.sp,
     fontWeight: FontWeightHelper.bold,

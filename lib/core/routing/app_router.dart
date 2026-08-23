@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salla7ly/core/di/injectoin.dart';
 import 'package:salla7ly/core/routing/routes.dart';
-import 'package:salla7ly/core/widgets/navigation/main_navigation_screen.dart';
+import 'package:salla7ly/core/widgets/navigation/tech/main_navigation_screen_tech.dart';
+import 'package:salla7ly/core/widgets/navigation/user/main_navigation_screen.dart';
 import 'package:salla7ly/features/ai_detection/logic/ai_estimation_cubit.dart';
 import 'package:salla7ly/features/auth/login/logic/login_cubit.dart';
 import 'package:salla7ly/features/auth/login/ui/screens/login_screen.dart';
@@ -15,8 +16,11 @@ import 'package:salla7ly/features/auth/signup/ui/screens/signup_screen.dart';
 import 'package:salla7ly/features/auth/signup/ui/screens/technician_acceptance_screen.dart';
 import 'package:salla7ly/features/categories/ui/screens/categories_screen.dart';
 import 'package:salla7ly/features/charging/charging_screen.dart';
+import 'package:salla7ly/features/edit_profile/ui/screens/edit_profile_screan.dart';
+import 'package:salla7ly/features/edit_profile_tech/ui/screens/edit_profile_screan_tech.dart';
 import 'package:salla7ly/features/home/home_screen.dart';
 import 'package:salla7ly/features/problem_description/logic/problem_description/problem_description_cubit.dart';
+import 'package:salla7ly/features/orders/screens/orders_screen.dart';
 import 'package:salla7ly/features/ai_detection/ui/screens/ai_detection_screen.dart';
 import 'package:salla7ly/features/problem_description/logic/publish_request/publish_cubit.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/kind_of_problem_screen.dart';
@@ -68,6 +72,13 @@ class AppRouter {
             child: const ProfileScreen(),
           ),
         );
+      case Routes.editprofilescrean:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<ProfileCubit>()..getProfile(),
+            child: const EditProfileScrean(),
+          ),
+        );
 
       case Routes.kindOfProblemScreen:
         final categoryId = settings.arguments as String;
@@ -100,6 +111,15 @@ class AppRouter {
 
       case Routes.questionscreen:
         return MaterialPageRoute(builder: (_) => const QuestionScreen());
+      case Routes.ordersscreen:
+        return MaterialPageRoute(builder: (_) => const OrdersScreen());
+      case Routes.editprofilescreantech:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<ProfileCubit>()..getProfile(),
+            child: const EditProfileScreanTech(),
+          ),
+        );
 
       case Routes.aiDetectionScreen:
         final requestId = settings.arguments as String;
@@ -156,6 +176,10 @@ class AppRouter {
         );
       case Routes.mainnavigationscreen:
         return MaterialPageRoute(builder: (_) => const MainNavigationScreen());
+      case Routes.mainnavigationscreentech:
+        return MaterialPageRoute(
+          builder: (_) => const MainNavigationScreenTech(),
+        );
 
       default:
         return null;
