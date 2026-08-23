@@ -113,7 +113,9 @@ class _AiDetectionScreenState extends State<AiDetectionScreen> {
 
                                 CustomElevatedButton(
                                   text: 'خرجني',
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    context.pushReplacementNamed(Routes.mainnavigationscreen);
+                                  },
                                 ),
                               ],
                             );

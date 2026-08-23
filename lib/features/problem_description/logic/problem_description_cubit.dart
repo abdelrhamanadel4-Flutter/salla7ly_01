@@ -17,6 +17,7 @@ class ProblemDescriptionCubit extends Cubit<ProblemDescriptionState> {
 
   final formKey = GlobalKey<FormState>();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
   final ImagePicker _imagePicker = ImagePicker();
   File? problemImage;
 
@@ -54,6 +55,7 @@ class ProblemDescriptionCubit extends Cubit<ProblemDescriptionState> {
   @override
   Future<void> close() {
     descriptionController.dispose();
+    titleController.dispose();
     return super.close();
   }
 

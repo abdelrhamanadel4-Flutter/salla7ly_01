@@ -25,7 +25,7 @@ class ProblemDescriptionAiBlocListener extends StatelessWidget {
 
             context.pushReplacementNamed(
               Routes.aiDetectionScreen,
-              arguments: data.id,
+              arguments: data.data.id
               );
           },
 
