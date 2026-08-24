@@ -7,24 +7,27 @@ import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 
 class OffersHeader extends StatelessWidget {
-  const OffersHeader({super.key});
+  const OffersHeader({
+    super.key,
+    this.showBackButton = true,
+  });
+
+  final bool showBackButton;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: Stack(
         children: [
-          // Back
-          Positioned(
-            left: 8.w,
-            top: 8.h,
-            child: GestureDetector(
-              onTap: () {
-                context.pop();
-              },
-              child: SvgPicture.asset(Assets.svgsArrowBack),
+          if (showBackButton)
+            Positioned(
+              left: 8.w,
+              top: 8.h,
+              child: GestureDetector(
+                onTap: context.pop,
+                child: SvgPicture.asset(Assets.svgsArrowBack),
+              ),
             ),
-          ),
 
           // Settings
           Positioned(

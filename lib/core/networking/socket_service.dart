@@ -20,6 +20,12 @@ class SocketService {
   final _requestUpdatedController =
       StreamController<RequestUpdatedEvent>.broadcast();
 
+  final _jobNewController =
+      StreamController<JobNewEvent>.broadcast();
+
+  final _jobClosedController =
+      StreamController<JobClosedEvent>.broadcast();
+
   final _reconnectedController =
       StreamController<void>.broadcast();
 
@@ -28,6 +34,12 @@ class SocketService {
 
   Stream<RequestUpdatedEvent> get requestUpdated =>
       _requestUpdatedController.stream;
+
+  Stream<JobNewEvent> get jobNew =>
+      _jobNewController.stream;
+
+  Stream<JobClosedEvent> get jobClosed =>
+      _jobClosedController.stream;
 
   Stream<void> get reconnected =>
       _reconnectedController.stream;
@@ -116,6 +128,14 @@ class SocketService {
       ..on(
         SocketEvents.requestUpdated,
         _handleRequestUpdated,
+      )
+      ..on(
+        SocketEvents.jobNew,
+        _handleJobNew,
+      )
+      ..on(
+        SocketEvents.jobClosed,
+        _handleJobClosed,
       )
       ..onConnect((_) {
         print('SOCKET: ===============================');
@@ -222,6 +242,30 @@ class SocketService {
         'SOCKET: failed to parse request:updated -> $e',
       );
     }
+  }
+
+  void _handleJobNew(dynamic data) {
+    try {
+      if (data is! Map) {
+        return;
+      }
+
+      _jobNewController.add(
+        JobNewEvent.fromJson(Map<String, dynamic>.from(data)),
+      );
+    } catch (_) {}
+  }
+
+  void _handleJobClosed(dynamic data) {
+    try {
+      if (data is! Map) {
+        return;
+      }
+
+      _jobClosedController.add(
+        JobClosedEvent.fromJson(Map<String, dynamic>.from(data)),
+      );
+    } catch (_) {}
   }
 
   Future<void> _reconnectWithFreshToken() async {
@@ -362,6 +406,8 @@ class SocketService {
 
     await _offerNewController.close();
     await _requestUpdatedController.close();
+    await _jobNewController.close();
+    await _jobClosedController.close();
     await _reconnectedController.close();
   }
 }

@@ -27,6 +27,8 @@ import 'package:salla7ly/features/problem_description/domain/entity/problem_desc
 import 'package:salla7ly/features/problem_description/domain/entity/publish_request_response.dart';
 import 'package:salla7ly/features/profile/data/model/profile_response_dto.dart';
 import 'package:salla7ly/features/profile/domain/entity/profile_response.dart';
+import 'package:salla7ly/features/orders/data/models/customer_orders_response_dto.dart';
+import 'package:salla7ly/features/orders/domain/entities/customer_order.dart';
 import 'package:salla7ly/features/requsets/data/models/technician_jobs_response_dto.dart';
 import 'package:salla7ly/features/requsets/domain/entity/technician_job.dart';
 
@@ -573,5 +575,21 @@ extension JobCustomerDtoMapper on JobCustomerDto {
 extension JobFeeDtoMapper on JobFeeDto {
   JobFee toDomain() {
     return JobFee(suggested: suggested, min: min, max: max);
+  }
+}
+
+extension CustomerOrderDtoMapper on CustomerOrderDto {
+  CustomerOrder toEntity() {
+    return CustomerOrder(
+      id: id,
+      title: title,
+      categoryName: categoryName,
+      status: status,
+      requestType: requestType,
+      visitFee: visitFee,
+      technicianName: technicianName,
+      offersCount: offersCount,
+      createdAt: createdAt,
+    );
   }
 }
