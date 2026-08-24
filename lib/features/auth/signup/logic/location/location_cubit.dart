@@ -7,8 +7,11 @@ import 'package:injectable/injectable.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/select_location.dart';
 
 import 'location_state.dart';
+
 @injectable
 class LocationCubit extends Cubit<LocationState> {
+  static const _fallbackLocation = LatLng(30.0444, 31.2357);
+
   LocationCubit() : super(const LocationState.initial());
 
   GoogleMapController? mapController;
@@ -23,31 +26,22 @@ class LocationCubit extends Cubit<LocationState> {
     emit(const LocationState.loading());
 
     try {
-      bool serviceEnabled =
-          await Geolocator.isLocationServiceEnabled();
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
       if (!serviceEnabled) {
-        emit(
-          const LocationState.error(
-            "Please enable location service",
-          ),
-        );
+        await changeLocation(_fallbackLocation);
         return;
       }
 
-      LocationPermission permission =
-          await Geolocator.checkPermission();
+      LocationPermission permission = await Geolocator.checkPermission();
 
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
       }
 
-      if (permission == LocationPermission.deniedForever) {
-        emit(
-          const LocationState.error(
-            "Location permission denied",
-          ),
-        );
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        await changeLocation(_fallbackLocation);
         return;
       }
 
@@ -55,89 +49,41 @@ class LocationCubit extends Cubit<LocationState> {
         desiredAccuracy: LocationAccuracy.high,
       );
 
-      currentLatLng = LatLng(
-        position.latitude,
-        position.longitude,
-      );
+      currentLatLng = LatLng(position.latitude, position.longitude);
 
       marker = Marker(
         markerId: const MarkerId("current_location"),
         position: currentLatLng!,
       );
 
-      final places = await placemarkFromCoordinates(
-        currentLatLng!.latitude,
-        currentLatLng!.longitude,
-      );
-
-      final place = places.first;
-
-      selectedLocation = _buildSelectedLocation(
-        place,
-        currentLatLng!.latitude,
-        currentLatLng!.longitude,
-      );
+      selectedLocation = await _locationFromCoordinates(currentLatLng!);
 
       mapController?.animateCamera(
-        CameraUpdate.newLatLngZoom(
-          currentLatLng!,
-          17,
-        ),
+        CameraUpdate.newLatLngZoom(currentLatLng!, 17),
       );
 
-      emit(
-        LocationState.loaded(
-          selectedLocation!,
-        ),
-      );
-    } catch (e) {
-      emit(
-        LocationState.error(
-          e.toString(),
-        ),
-      );
+      emit(LocationState.loaded(selectedLocation!));
+    } catch (_) {
+      await changeLocation(_fallbackLocation);
     }
   }
 
-  Future<void> changeLocation(
-    LatLng latLng,
-  ) async {
+  Future<void> changeLocation(LatLng latLng) async {
     try {
       currentLatLng = latLng;
 
-      mapController?.animateCamera(
-        CameraUpdate.newLatLng(latLng),
-      );
+      mapController?.animateCamera(CameraUpdate.newLatLng(latLng));
 
       marker = Marker(
         markerId: const MarkerId("selected_location"),
         position: latLng,
       );
 
-      final places = await placemarkFromCoordinates(
-        latLng.latitude,
-        latLng.longitude,
-      );
+      selectedLocation = await _locationFromCoordinates(latLng);
 
-      final place = places.first;
-
-      selectedLocation = _buildSelectedLocation(
-        place,
-        latLng.latitude,
-        latLng.longitude,
-      );
-
-      emit(
-        LocationState.loaded(
-          selectedLocation!,
-        ),
-      );
+      emit(LocationState.loaded(selectedLocation!));
     } catch (e) {
-      emit(
-        LocationState.error(
-          e.toString(),
-        ),
-      );
+      emit(LocationState.error(e.toString()));
     }
   }
 
@@ -146,19 +92,13 @@ class LocationCubit extends Cubit<LocationState> {
     double latitude,
     double longitude,
   ) {
-final city = place.administrativeArea ??
-    place.locality ??
-    "";
+    final city = place.administrativeArea ?? place.locality ?? "";
     final address = [
       place.name,
       place.street,
       place.subLocality,
       place.locality,
-    ]
-        .where(
-          (e) => e != null && e.isNotEmpty,
-        )
-        .join(", ");
+    ].where((e) => e != null && e.isNotEmpty).join(", ");
 
     return SelectedLocation(
       city: city,
@@ -168,20 +108,43 @@ final city = place.administrativeArea ??
     );
   }
 
-  void onMapCreated(
-    GoogleMapController controller,
-  ) {
-    mapController = controller;
+  Future<SelectedLocation> _locationFromCoordinates(LatLng latLng) async {
+    try {
+      final places = await placemarkFromCoordinates(
+        latLng.latitude,
+        latLng.longitude,
+      );
+
+      if (places.isNotEmpty) {
+        return _buildSelectedLocation(
+          places.first,
+          latLng.latitude,
+          latLng.longitude,
+        );
+      }
+    } catch (_) {
+      // Reverse geocoding is optional: keep the map usable if it fails.
+    }
+
+    return SelectedLocation(
+      city: '',
+      address:
+          '${latLng.latitude.toStringAsFixed(6)}, ${latLng.longitude.toStringAsFixed(6)}',
+      latitude: latLng.latitude,
+      longitude: latLng.longitude,
+    );
   }
 
-  void confirmLocation(
-    BuildContext context,
-  ) {
+  void onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+    if (currentLatLng != null) {
+      controller.animateCamera(CameraUpdate.newLatLngZoom(currentLatLng!, 17));
+    }
+  }
+
+  void confirmLocation(BuildContext context) {
     if (selectedLocation != null) {
-      Navigator.pop(
-        context,
-        selectedLocation,
-      );
+      Navigator.pop(context, selectedLocation);
     }
   }
 }

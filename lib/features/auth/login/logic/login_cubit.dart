@@ -19,8 +19,8 @@ class LoginCubit extends Cubit<LoginState> {
   RefreshOtpUseCases _refreshOtpUseCases;
   VerifyOtpUseCases _verifyOtpUseCases;
   RequsetOtpUseCases _requestOtpRequset;
-  TextEditingController? phoneNoController= TextEditingController();
-   final otpcontroller = PinInputController();
+  TextEditingController? phoneNoController = TextEditingController();
+  final otpcontroller = PinInputController();
   LoginCubit(
     this._refreshOtpUseCases,
     this._verifyOtpUseCases,
@@ -34,6 +34,13 @@ class LoginCubit extends Cubit<LoginState> {
       final result = await _requestOtpRequset.invoke(body);
       result.when(
         success: (data) async {
+          // The API exposes this value for development environments.  Set it
+          // before emitting success so the OTP screen opens with the code
+          // already populated.
+          final devOtpCode = data.data?.devOtpCode;
+          if (devOtpCode != null && devOtpCode.isNotEmpty) {
+            otpcontroller.text = devOtpCode;
+          }
           emit(LoginState.success(data));
         },
         failure: (error) {
@@ -42,10 +49,17 @@ class LoginCubit extends Cubit<LoginState> {
       );
     }
   }
+
   Future<void> verifyOtp(VerifyOtpRequest body) async {
     if (state is Loading) return;
     if (body.otpCode == null || body.otpCode!.trim().length < 4) {
-      emit(LoginState.error(ApiErrorModel(error: ErrorResponse(message: 'من فضلك دخل الكود بالكامل'))));
+      emit(
+        LoginState.error(
+          ApiErrorModel(
+            error: ErrorResponse(message: 'من فضلك دخل الكود بالكامل'),
+          ),
+        ),
+      );
       return;
     }
     emit(LoginState.loading());
@@ -84,6 +98,7 @@ class LoginCubit extends Cubit<LoginState> {
       },
     );
   }
+
   Future<void> refreshOtp(RefreshOtpRequset body) async {
     if (state is Loading) return;
     emit(LoginState.loading());

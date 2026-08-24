@@ -7,7 +7,7 @@ import UIKit
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    GMSServices.provideAPIKey("AIzaSyBZ3fDf7k5fl3Ex5cLMyLcHIwA-uV108P8")
+    GMSServices.provideAPIKey("AIzaSyCSUBZpCVaZFVWSyiQzTltdvnU3FJpyqGg")
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 
