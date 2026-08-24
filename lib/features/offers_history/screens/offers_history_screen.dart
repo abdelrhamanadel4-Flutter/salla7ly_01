@@ -18,7 +18,7 @@ class OffersHistoryScreen extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(5.w, 4.h, 5.w, 8.h),
           child: Column(
             children: [
-              const CommissionsHeader(),
+              const CommissionsHeader(showBackButton: false),
               Text('سجل العروض السابقة', style: AppStyles.semiBold24Primary),
 
               SizedBox(height: 10.h),

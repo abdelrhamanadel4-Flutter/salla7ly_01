@@ -6,18 +6,17 @@ import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
+import 'package:salla7ly/core/widgets/custom_app_bar.dart';
 
 class KindOfProblemScreen extends StatelessWidget {
-  KindOfProblemScreen({
-    super.key,
-    required this.categoryId
-    });
+  const KindOfProblemScreen({super.key, required this.categoryId});
 
   final String categoryId;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const BackAppBar(),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -39,12 +38,15 @@ class KindOfProblemScreen extends StatelessWidget {
                   },
                 ),
                 verticalSpace(16),
-                CustomElevatedButton(text: 'طلب استشارة فني', onPressed: () {
-                  context.pushReplacementNamed(
+                CustomElevatedButton(
+                  text: 'طلب استشارة فني',
+                  onPressed: () {
+                    context.pushReplacementNamed(
                       Routes.problemDescriptionScreen,
                       arguments: categoryId,
                     );
-                }),
+                  },
+                ),
               ],
             ),
           ),

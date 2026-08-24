@@ -31,7 +31,7 @@ class OffersScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const OffersHeader(),
+                      const OffersHeader(showBackButton: false),
                       SizedBox(height: 20.h),
                       Text('عروض', style: AppStyles.semiBold24Primary),
                       SizedBox(height: 10.h),
