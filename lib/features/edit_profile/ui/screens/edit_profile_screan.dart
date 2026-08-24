@@ -13,6 +13,7 @@ import 'package:salla7ly/features/profile/logic/profile_cubit.dart';
 import 'package:salla7ly/features/profile/logic/profile_state.dart';
 import 'package:salla7ly/features/profile/ui/widgets/profile_header.dart';
 import 'package:salla7ly/features/profile/ui/widgets/profile_shimmer.dart';
+import 'package:salla7ly/features/profile/ui/widgets/profile_edit_form.dart';
 
 class EditProfileScrean extends StatelessWidget {
   const EditProfileScrean({super.key});
@@ -64,6 +65,9 @@ class EditProfileScrean extends StatelessWidget {
                     final user = profileResponse.data?.user;
                     final fullName = user?.fullName;
 
+                    return ProfileEditForm(profile: profileResponse);
+
+                    // ignore: dead_code
                     return Form(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,

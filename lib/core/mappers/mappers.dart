@@ -330,6 +330,12 @@ extension UserProfileResponseDtoMapper on UserProfileResponseDto {
     return UserProfileResponse(
       id: id,
       fullName: fullName,
+      phone: phone,
+      city: city,
+      address: address,
+      latitude: latitude,
+      longitude: longitude,
+      profileImage: profileImage,
       pointsBalance: pointsBalance,
     );
   }
@@ -337,7 +343,10 @@ extension UserProfileResponseDtoMapper on UserProfileResponseDto {
 
 extension TechnicianProfileResponseDtoMapper on TechnicianProfileResponseDto {
   TechnicianProfileResponse toEntity() {
-    return TechnicianProfileResponse(profileImage: profileImage);
+    return TechnicianProfileResponse(
+      profileImage: profileImage,
+      overallRating: overallRating,
+    );
   }
 }
 
@@ -359,13 +368,12 @@ extension ProblemDescriptionRequestMapper on ProblemDescriptionRequest {
 
 extension ProblemDescriptionResponseDtoMapper on ProblemDescriptionResponseDto {
   ProblemDescriptionResponse toEntity() {
-    return ProblemDescriptionResponse(
-        data: data?.toEntity()
-    );
+    return ProblemDescriptionResponse(data: data?.toEntity());
   }
 }
 
-extension DataProblemDescriptionResponseDtoMapper on DataProblemDescriptionResponseDto {
+extension DataProblemDescriptionResponseDtoMapper
+    on DataProblemDescriptionResponseDto {
   DataProblemDescriptionResponse toEntity() {
     return DataProblemDescriptionResponse(
       id: id,
@@ -405,12 +413,9 @@ extension EstimationDtoMapper on EstimationDto {
   }
 }
 
-extension PublishRequestResponseDtoMapper
-    on PublishRequestResponseDto {
+extension PublishRequestResponseDtoMapper on PublishRequestResponseDto {
   PublishRequestResponse toEntity() {
-    return PublishRequestResponse(
-      data: data?.toEntity(),
-    );
+    return PublishRequestResponse(data: data?.toEntity());
   }
 }
 
@@ -425,10 +430,7 @@ extension PublishRequestDataDtoMapper on PublishRequestDataDto {
 
 extension PublishRequestDtoMapper on PublishRequestDto {
   PublishRequest toEntity() {
-    return PublishRequest(
-      id: id,
-      status: status,
-    );
+    return PublishRequest(id: id, status: status);
   }
 }
 
@@ -536,11 +538,7 @@ extension JobAiEstimationDtoMapper on JobAiEstimationDto {
 
 extension JobCustomerDtoMapper on JobCustomerDto {
   JobCustomer toDomain() {
-    return JobCustomer(
-      fullName: fullName,
-      city: city,
-      distanceKm: distanceKm,
-    );
+    return JobCustomer(fullName: fullName, city: city, distanceKm: distanceKm);
   }
 }
 
@@ -549,4 +547,3 @@ extension JobFeeDtoMapper on JobFeeDto {
     return JobFee(suggested: suggested, min: min, max: max);
   }
 }
-

@@ -27,7 +27,12 @@ class SocketService {
   bool get isConnected => _socket?.connected ?? false;
 
   Future<void> connect() async {
-    if (_socket != null) return;
+    if (_socket != null) {
+      if (!_socket!.connected) {
+        _socket!.connect();
+      }
+      return;
+    }
 
     final token = await SharedPrefHelper.getSecuredString(
       SharedPrefKeys.userToken,

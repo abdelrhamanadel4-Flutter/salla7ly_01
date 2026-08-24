@@ -5,23 +5,19 @@ import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 
 class RatingSection extends StatelessWidget {
-  const RatingSection({this.size = 38});
+  const RatingSection({super.key, this.size = 38, this.rating = 0});
   final double size;
+  final double rating;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _Star(filled: false, size: size),
-        horizontalSpace(6),
-        _Star(filled: false, size: size),
-        horizontalSpace(6),
-        _Star(filled: true, size: size),
-        horizontalSpace(6),
-        _Star(filled: true, size: size),
-        horizontalSpace(6),
-        _Star(filled: true, size: size),
+        for (var index = 1; index <= 5; index++) ...[
+          _Star(filled: rating >= index, size: size),
+          if (index < 5) horizontalSpace(6),
+        ],
       ],
     );
   }

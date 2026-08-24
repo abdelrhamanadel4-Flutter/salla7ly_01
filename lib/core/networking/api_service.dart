@@ -39,6 +39,12 @@ abstract class ApiService {
   @GET(ApiConstants.getProfile)
   Future<ProfileResponseDto> getProfile();
 
+  @PATCH(ApiConstants.getProfile)
+  Future<ProfileResponseDto> updateProfile(@Body() Map<String, dynamic> body);
+
+  @PATCH(ApiConstants.getProfile)
+  Future<ProfileResponseDto> updateProfileWithImage(@Body() FormData body);
+
   @POST(ApiConstants.request)
   Future<ProblemDescriptionResponseDto> createProblemDescription(
     @Body() ProblemDescriptionRequestDto body,
@@ -72,4 +78,3 @@ abstract class ApiService {
     @Body() SubmitJobOfferDto body,
   );
 }
-

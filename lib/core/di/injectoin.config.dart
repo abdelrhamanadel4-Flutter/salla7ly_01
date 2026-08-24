@@ -126,6 +126,8 @@ import 'package:salla7ly/features/profile/domain/repo/profile_repo.dart'
     as _i887;
 import 'package:salla7ly/features/profile/domain/use_cases/get_profile_use_case.dart'
     as _i844;
+import 'package:salla7ly/features/profile/domain/use_cases/update_profile_use_case.dart'
+    as _i945;
 import 'package:salla7ly/features/profile/logic/profile_cubit.dart' as _i334;
 import 'package:salla7ly/features/requsets/data/data_source/remote/technician_jobs_remote_data_source.dart'
     as _i234;
@@ -234,6 +236,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i844.GetProfileUseCase>(
       () => _i844.GetProfileUseCase(gh<_i887.ProfileRepo>()),
     );
+    gh.factory<_i945.UpdateProfileUseCase>(
+      () => _i945.UpdateProfileUseCase(gh<_i887.ProfileRepo>()),
+    );
     gh.factory<_i1007.AcceptOfferUseCase>(
       () => _i1007.AcceptOfferUseCase(gh<_i542.AcceptOfferRepo>()),
     );
@@ -242,9 +247,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i1048.SubmitJobOfferUseCase>(
       () => _i1048.SubmitJobOfferUseCase(gh<_i744.TechnicianJobsRepo>()),
-    );
-    gh.factory<_i334.ProfileCubit>(
-      () => _i334.ProfileCubit(gh<_i844.GetProfileUseCase>()),
     );
     gh.factory<_i636.RefreshOtpUseCases>(
       () => _i636.RefreshOtpUseCases(gh<_i247.LoginRepo>()),
@@ -286,6 +288,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i636.RefreshOtpUseCases>(),
         gh<_i828.VerifyOtpUseCases>(),
         gh<_i307.RequsetOtpUseCases>(),
+      ),
+    );
+    gh.factory<_i334.ProfileCubit>(
+      () => _i334.ProfileCubit(
+        gh<_i844.GetProfileUseCase>(),
+        gh<_i945.UpdateProfileUseCase>(),
       ),
     );
     gh.factory<_i896.AcceptOfferCubit>(

@@ -18,29 +18,37 @@ class TechnicianJobsCubit extends Cubit<TechnicianJobsState> {
   StreamSubscription? _jobClosedSub;
 
   TechnicianJobsCubit(this._getJobsUseCase, this._socketService)
-      : super(TechnicianJobsInitial());
+    : super(TechnicianJobsInitial());
 
   List<TechnicianJob> jobs = [];
   int currentPage = 1;
   bool isLastPage = false;
+  String _status = 'PENDING';
   static const int limit = 20;
 
-  Future<void> fetchJobs({bool isLoadMore = false}) async {
+  Future<void> fetchJobs({
+    bool isLoadMore = false,
+    String status = 'PENDING',
+  }) async {
     if (isLoadMore) {
       if (isLastPage) return;
       currentPage++;
       emit(TechnicianJobsLoadingMore(jobs));
     } else {
+      _status = status;
       currentPage = 1;
       jobs.clear();
       isLastPage = false;
       emit(TechnicianJobsLoading());
     }
 
+    await _socketService.connect();
+    _listenToSocket();
+
     final result = await _getJobsUseCase.execute(
       page: currentPage,
       limit: limit,
-      status: 'PENDING',
+      status: _status,
     );
 
     result.when(
@@ -49,14 +57,12 @@ class TechnicianJobsCubit extends Cubit<TechnicianJobsState> {
           isLastPage = true;
         }
         jobs.addAll(newJobs);
-        _listenToSocket();
         emit(TechnicianJobsSuccess(List.from(jobs)));
       },
       failure: (error) {
         if (isLoadMore) {
           currentPage--;
-          emit(TechnicianJobsLoadMoreError(
-              error.error?.message ?? '', jobs));
+          emit(TechnicianJobsLoadMoreError(error.error?.message ?? '', jobs));
         } else {
           emit(TechnicianJobsError(error.error?.message ?? ''));
         }
@@ -65,10 +71,13 @@ class TechnicianJobsCubit extends Cubit<TechnicianJobsState> {
   }
 
   void _listenToSocket() {
-    _jobNewSub ??= _socketService.jobNew.listen((event) {
-      jobs.insert(0, event.job);
-      emit(TechnicianJobsSuccess(List.from(jobs)));
-    });
+    if (_status == 'PENDING') {
+      _jobNewSub ??= _socketService.jobNew.listen((event) {
+        if (_status != 'PENDING') return;
+        jobs.insert(0, event.job);
+        emit(TechnicianJobsSuccess(List.from(jobs)));
+      });
+    }
 
     _jobClosedSub ??= _socketService.jobClosed.listen((event) {
       jobs.removeWhere((job) => job.request?.id == event.requestId);
