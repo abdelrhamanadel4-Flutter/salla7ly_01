@@ -8,6 +8,7 @@ import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
+import 'package:salla7ly/features/home/widgets/rating.dart';
 import 'package:salla7ly/features/profile/logic/profile_cubit.dart';
 import 'package:salla7ly/features/profile/logic/profile_state.dart';
 import 'package:salla7ly/features/profile/ui/widgets/profile_header.dart';
@@ -15,7 +16,9 @@ import 'package:salla7ly/features/profile/ui/widgets/profile_shimmer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final VoidCallback? onCommissionsTap;
+
+  const HomeScreen({super.key, this.onCommissionsTap});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +69,7 @@ class HomeScreen extends StatelessWidget {
 
                         verticalSpace(24),
 
-                        const _RatingSection(),
+                        const RatingSection(),
 
                         verticalSpace(18),
 
@@ -74,20 +77,27 @@ class HomeScreen extends StatelessWidget {
 
                         verticalSpace(10),
 
-                        const _PreviousCommissionsButton(),
+                        GestureDetector(
+                          onTap: onCommissionsTap,
+                          child: const _PreviousCommissionsButton(),
+                        ),
 
                         verticalSpace(14),
 
-                        _ProfileActionButton(
+                        ProfileActionButton(
                           title: 'عرض الطلبات',
-                          onPressed: () {},
+                          onPressed: () {
+                            context.pushNamed(Routes.requsetsscreen);
+                          },
                         ),
 
                         verticalSpace(10),
 
-                        _ProfileActionButton(
+                        ProfileActionButton(
                           title: 'تقييماتك',
-                          onPressed: () {},
+                          onPressed: () {
+                            context.pushNamed(Routes.reviewsscreen);
+                          },
                         ),
                       ],
                     );
@@ -109,39 +119,6 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class _RatingSection extends StatelessWidget {
-  const _RatingSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _Star(filled: false),
-        horizontalSpace(6),
-        _Star(filled: false),
-        horizontalSpace(6),
-        _Star(filled: true),
-        horizontalSpace(6),
-        _Star(filled: true),
-        horizontalSpace(6),
-        _Star(filled: true),
-      ],
-    );
-  }
-}
-
-class _Star extends StatelessWidget {
-  final bool filled;
-
-  const _Star({required this.filled});
-
-  @override
-  Widget build(BuildContext context) {
-    return SvgPicture.asset(filled ? Assets.svgsStar : Assets.svgsStarNptFill);
   }
 }
 
@@ -229,11 +206,11 @@ class _PreviousCommissionsButton extends StatelessWidget {
   }
 }
 
-class _ProfileActionButton extends StatelessWidget {
+class ProfileActionButton extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
 
-  const _ProfileActionButton({required this.title, required this.onPressed});
+  ProfileActionButton({required this.title, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

@@ -26,7 +26,16 @@ class _MainNavigationScreenTechState extends State<MainNavigationScreenTech> {
     super.initState();
 
     screens = [
-      BlocProvider(create: (context) =>  getIt<ProfileCubit>()..getProfile(), child: HomeScreen()),
+      BlocProvider(
+        create: (context) => getIt<ProfileCubit>()..getProfile(),
+        child: HomeScreen(
+          onCommissionsTap: () {
+            setState(() {
+              currentIndex = 1;
+            });
+          },
+        ),
+      ),
       CommissionsScreen(),
       OffersScreen(),
     ];
