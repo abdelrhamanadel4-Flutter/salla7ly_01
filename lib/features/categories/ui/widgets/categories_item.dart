@@ -4,11 +4,7 @@ import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 
 class CategoriesItem extends StatelessWidget {
-  CategoriesItem({
-    super.key,
-    required this.categoryName,
-    this.onTap
-    });
+  CategoriesItem({super.key, required this.categoryName, this.onTap});
 
   String categoryName;
   final VoidCallback? onTap;
@@ -26,7 +22,9 @@ class CategoriesItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.r),
           border: Border.all(color: AppColors.primaryColor, width: 1.w),
         ),
-        child: Center(child: Text(categoryName, style: AppStyles.mediun16LightGrey)),
+        child: Center(
+          child: Text(categoryName, style: AppStyles.mediun16LightGrey),
+        ),
       ),
     );
   }

@@ -36,7 +36,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       ),
       BlocProvider(
         create: (context) => getIt<CategoriesCubit>()..getCategories(),
-        child: const CategoriesScreen(),
+        child: const CategoriesScreen(showBackButton: false),
       ),
       OrdersScreen(),
     ];
