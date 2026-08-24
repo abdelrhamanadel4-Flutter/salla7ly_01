@@ -7,6 +7,7 @@ import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
+import 'package:salla7ly/core/widgets/custom_app_bar.dart';
 import 'package:salla7ly/core/widgets/dilaog_utils.dart';
 import 'package:salla7ly/features/categories/domain/entity/categories_responce.dart';
 import 'package:salla7ly/features/categories/logic/categories/categories_cubit.dart';
@@ -14,7 +15,9 @@ import 'package:salla7ly/features/categories/logic/categories/categories_state.d
 import 'package:salla7ly/features/categories/ui/widgets/categories_item.dart';
 
 class CategoriesScreen extends StatefulWidget {
-  const CategoriesScreen({super.key});
+  const CategoriesScreen({super.key, this.showBackButton = true});
+
+  final bool showBackButton;
 
   @override
   State<CategoriesScreen> createState() => _CategoriesScreenState();
@@ -33,6 +36,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: widget.showBackButton ? const BackAppBar() : null,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -120,7 +124,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                 (category) => CategoriesItem(
                                   categoryName: category!.name ?? '',
                                   onTap: () {
-                                    context.pushReplacementNamed(
+                                    context.pushNamed(
                                       Routes.kindOfProblemScreen,
                                       arguments: category.id!,
                                     );

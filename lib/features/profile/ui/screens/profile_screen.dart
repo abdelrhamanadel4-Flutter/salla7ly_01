@@ -120,9 +120,7 @@ class ProfileScreen extends StatelessWidget {
                         CustomElevatedButton(
                           text: 'قولنا مشكلتك',
                           onPressed: () {
-                            context.pushReplacementNamed(
-                              Routes.categoriesScreen,
-                            );
+                            context.pushNamed(Routes.categoriesScreen);
                           },
                         ),
                         verticalSpace(8),

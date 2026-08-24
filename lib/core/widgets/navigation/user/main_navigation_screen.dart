@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salla7ly/core/di/injectoin.dart';
 import 'package:salla7ly/features/categories/logic/categories/categories_cubit.dart';
-import 'package:salla7ly/features/edit_profile/ui/screens/edit_profile_screan.dart';
 import 'package:salla7ly/features/categories/ui/screens/categories_screen.dart';
 import 'package:salla7ly/features/orders/screens/orders_screen.dart';
 import 'package:salla7ly/features/profile/logic/profile_cubit.dart';
@@ -11,10 +10,7 @@ import 'package:salla7ly/features/profile/ui/screens/profile_screen.dart';
 import 'bottom_nav_bar.dart';
 
 class MainNavigationScreen extends StatefulWidget {
-  const MainNavigationScreen({
-    super.key,
-    this.initialIndex = 0,
-  });
+  const MainNavigationScreen({super.key, this.initialIndex = 0});
 
   final int initialIndex;
 
@@ -40,7 +36,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       ),
       BlocProvider(
         create: (context) => getIt<CategoriesCubit>()..getCategories(),
-        child: const CategoriesScreen(),
+        child: const CategoriesScreen(showBackButton: false),
       ),
       OrdersScreen(),
     ];

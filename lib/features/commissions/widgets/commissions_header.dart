@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hive/hive.dart';
 import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/theming/assets.dart';
-import 'package:salla7ly/core/theming/app_color.dart';
-import 'package:salla7ly/core/theming/app_style.dart';
 
 class CommissionsHeader extends StatelessWidget {
-  const CommissionsHeader({super.key});
+  const CommissionsHeader({super.key, this.showBackButton = true});
+
+  final bool showBackButton;
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +23,13 @@ class CommissionsHeader extends StatelessWidget {
 
           const Spacer(),
 
-          GestureDetector(
-            onTap: () {
-              context.pop();
-            },
-            child: SvgPicture.asset(Assets.svgsArrowBack),
-          ),
+          if (showBackButton)
+            GestureDetector(
+              onTap: () {
+                context.pop();
+              },
+              child: SvgPicture.asset(Assets.svgsArrowBack),
+            ),
         ],
       ),
     );
