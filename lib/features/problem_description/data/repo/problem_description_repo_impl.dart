@@ -19,7 +19,7 @@ class ProblemDescriptionRepositoryImpl extends ProblemDescriptionRepo {
   ) async {
     
     final result = await _remoteDataSource.createProblemDescription(
-      request.toDto(),
+      request,
     );
 
     return result.when(

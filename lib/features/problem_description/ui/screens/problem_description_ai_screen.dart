@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salla7ly/core/helpers/extesions.dart';
+import 'package:salla7ly/core/helpers/flutter_toast.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/routing/routes.dart';
+import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
@@ -50,14 +52,23 @@ class ProblemDescriptionAiScreen extends StatelessWidget {
                 CustomElevatedButton(
                   text: 'تمام',
                   onPressed: () {
+                    if (cubit.problemImage == null) {
+                      ToastMessage.toastMsg(
+                        'من فضلك حط صورة للمشكلة',
+                        AppColors.redColor,
+                        AppColors.whiteColor,
+                      );
+                      return;
+                    }
                     final request = ProblemDescriptionRequest(
                       title: cubit.titleController.text.trim(),
                       description: cubit.descriptionController.text.trim(),
                       requestType: 'AI_ESTIMATION',
                       categoryId: categoryId,
-                      images: ["/uploads/1712-sink.jpg"],
-                      serviceAddress: 'agami',
-                      serviceCity: 'alex',
+                      images: [cubit.problemImage!],
+                      // serviceAddress / serviceCity / latitude / longitude
+                      // are optional and default to the customer's profile
+                      // address when omitted.
                     );
                     cubit.createProblemDescription(request);
                   },
