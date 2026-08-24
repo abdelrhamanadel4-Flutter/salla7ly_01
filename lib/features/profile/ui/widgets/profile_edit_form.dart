@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/shared_pref_helper.dart';
+import 'package:salla7ly/core/helpers/validatores.dart';
 import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
@@ -53,10 +54,27 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null || !mounted) return;
 
-    setState(() => _profileImage = File(image.path));
+    final file = File(image.path);
+    final validationError = AppValidators.validateImageSize(file);
+    if (validationError != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(validationError)),
+      );
+      return;
+    }
+
+    setState(() => _profileImage = file);
   }
 
   void _save() {
+    final imageSizeError = AppValidators.validateImageSize(_profileImage);
+    if (imageSizeError != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(imageSizeError)),
+      );
+      return;
+    }
+
     final fullName = _fullNameController.text.trim();
     final hasNameChange = fullName.isNotEmpty && fullName != _user?.fullName;
 
