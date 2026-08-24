@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salla7ly/core/di/injectoin.dart';
-import 'package:salla7ly/features/commissions/screens/commissions_screen.dart';
+import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/features/home/home_screen.dart';
+import 'package:salla7ly/features/offers_history/screens/offers_history_screen.dart';
 import 'package:salla7ly/features/offers/screens/offers_screen.dart';
 import 'package:salla7ly/features/profile/logic/profile_cubit.dart';
 import 'package:salla7ly/features/requsets/logic/technician_jobs_cubit.dart';
@@ -35,13 +36,11 @@ class _MainNavigationScreenTechState extends State<MainNavigationScreenTech> {
         create: (context) => getIt<ProfileCubit>()..getProfile(),
         child: HomeScreen(
           onCommissionsTap: () {
-            setState(() {
-              currentIndex = 1;
-            });
+            Navigator.of(context).pushNamed(Routes.commissionsScreen);
           },
         ),
       ),
-      CommissionsScreen(),
+      const OffersHistoryScreen(),
       BlocProvider.value(
         value: _submittedJobsCubit,
         child: const OffersScreen(),

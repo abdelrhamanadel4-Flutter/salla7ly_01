@@ -31,17 +31,9 @@ class BottomNavBarTech extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildItem(index: 0, icon: Assets.svgsIconHome, label: 'الرئيسية'),
-          _buildItem(
-            index: 1,
-            icon: Assets.svgsComssions,
-            label: 'عمولات',
-          ),
+          _buildItem(index: 1, icon: Assets.svgsComssions, label: 'سجلك'),
 
-          _buildItem(
-            index: 2,
-            icon: Assets.svgsOffers,
-            label: 'عروض',
-          ),
+          _buildItem(index: 2, icon: Assets.svgsOffers, label: 'عروض'),
         ],
       ),
     );

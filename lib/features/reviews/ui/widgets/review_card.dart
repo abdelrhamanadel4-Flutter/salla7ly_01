@@ -9,50 +9,50 @@ import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/features/home/widgets/rating.dart';
 
 class ReviewCard extends StatelessWidget {
-  const ReviewCard({super.key});
+  const ReviewCard({super.key, this.comment, this.rating = 0});
+
+  final String? comment;
+  final double rating;
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-              padding: EdgeInsets.symmetric(horizontal: 7.w),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 7.w),
 
-              width: double.infinity,
-              height: 100.h,
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor,
-                border: Border.all(color: AppColors.primaryColor, width: 1.7),
-                borderRadius: BorderRadius.circular(16.r),
+      width: double.infinity,
+      height: 100.h,
+      decoration: BoxDecoration(
+        color: AppColors.whiteColor,
+        border: Border.all(color: AppColors.primaryColor, width: 1.7),
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(Assets.svgsIconReview),
+              verticalSpace(4.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                child: RatingSection(size: 15, rating: rating),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(Assets.svgsIconReview),
-                      verticalSpace(4.h),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 8.w,
-                          vertical: 8.h,
-                        ),
-                        child: RatingSection(size: 15),
-                      ),
-                    ],
-                  ),
-                  Expanded(
-                    child: AutoSizeText(
-                      'بشمهندس احمد ممتاز جدا جدا وصل في وقته بظبط و خلص الشغل بسرعه و من غير ولا غلطه',
-                      style: AppStyles.regular14darkBlue.copyWith(
-                        color: AppColors.primaryColor,
-                      ),
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
+            ],
+          ),
+          Expanded(
+            child: AutoSizeText(
+              comment ?? '',
+              style: AppStyles.regular14darkBlue.copyWith(
+                color: AppColors.primaryColor,
               ),
-            );
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

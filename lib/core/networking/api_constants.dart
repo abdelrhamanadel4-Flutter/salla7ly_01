@@ -7,16 +7,25 @@ class ApiConstants {
   static const String getCategories = 'api/v1/public/categories';
   static const String getProfile = 'api/v1/me';
   static const String request = 'api/v1/customer/requests';
-  static const String aiEstimation = 'api/v1/customer/requests/{id}/ai-estimation';
+  static const String aiEstimation =
+      'api/v1/customer/requests/{id}/ai-estimation';
   static const String publishRequest = 'api/v1/customer/requests/{id}/publish';
   static const String customerOffers = 'api/v1/customer/requests/{id}/offers';
   static const String acceptOffer =
       'api/v1/customer/requests/{id}/offers/{offerId}/accept';
   static const String technicianJobs = 'api/v1/technician/jobs';
   static const String submitJobOffer = 'api/v1/technician/jobs/{id}/offer';
+
   static const String customerTechReviews =
       'api/v1/customer/technicians/{id}/reviews';
   static const String cancelRequest = 'api/v1/customer/requests/{id}/cancel';
+
+  static const String notifications = 'api/v1/me/notifications';
+  static const String notificationsUnreadCount =
+      'api/v1/me/notifications/unread-count';
+  static const String notificationsReadAll = 'api/v1/me/notifications/read-all';
+  static const String technicianReviews = 'api/v1/technician/reviews';
+
 
   // Socket.IO runs on the REST API origin. 443 is the standard HTTPS port,
   // stated explicitly because socket_io_client otherwise serializes it as :0.

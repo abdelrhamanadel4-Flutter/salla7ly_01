@@ -19,6 +19,9 @@ import 'package:salla7ly/features/orders/data/models/customer_orders_response_dt
 import 'package:salla7ly/features/requsets/data/models/submit_job_offer_dto.dart';
 import 'package:salla7ly/features/requsets/data/models/technician_jobs_response_dto.dart';
 import 'package:salla7ly/features/reviews/data/models/customer_tech_reviews_response_dto.dart';
+
+import 'package:salla7ly/features/reviews/data/models/technician_reviews_response_dto.dart';
+
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
@@ -89,10 +92,32 @@ abstract class ApiService {
   @GET(ApiConstants.customerTechReviews)
   Future<CustomerTechReviewsResponseDto> getCustomerTechReviews(
     @Path('id') String id, {
+      @Query('page') int page = 1,
+    @Query('limit') int limit = 20,
+  });
+
+  @GET(ApiConstants.notifications)
+  Future<Map<String, dynamic>> getNotifications({
     @Query('page') int page = 1,
     @Query('limit') int limit = 20,
   });
 
+  
   @POST(ApiConstants.cancelRequest)
   Future<ProblemDescriptionResponseDto> cancelRequest(@Path('id') String id);
+
+
+
+  @GET(ApiConstants.notificationsUnreadCount)
+  Future<Map<String, dynamic>> getNotificationsUnreadCount();
+
+  @PATCH(ApiConstants.notificationsReadAll)
+  Future<Map<String, dynamic>> markAllNotificationsAsRead();
+
+  @GET(ApiConstants.technicianReviews)
+  Future<TechnicianReviewsResponseDto> getTechnicianReviews({
+    @Query('page') int? page,
+    @Query('limit') int? limit,
+  });
+
 }

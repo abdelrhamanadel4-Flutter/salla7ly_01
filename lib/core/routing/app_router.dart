@@ -20,6 +20,7 @@ import 'package:salla7ly/features/customer_account_in_tech_view/customer_account
 import 'package:salla7ly/features/edit_profile/ui/screens/edit_profile_screan.dart';
 import 'package:salla7ly/features/edit_profile_tech/ui/screens/edit_profile_screan_tech.dart';
 import 'package:salla7ly/features/home/home_screen.dart';
+import 'package:salla7ly/features/commissions/screens/commissions_screen.dart';
 import 'package:salla7ly/features/problem_description/logic/problem_description/problem_description_cubit.dart';
 import 'package:salla7ly/features/orders/screens/orders_screen.dart';
 import 'package:salla7ly/features/ai_detection/ui/screens/ai_detection_screen.dart';
@@ -43,7 +44,11 @@ import 'package:salla7ly/features/requsets/logic/submit_job_offer_cubit.dart';
 import 'package:salla7ly/features/requsets/logic/technician_jobs_cubit.dart';
 import 'package:salla7ly/features/requsets/ui/screens/requsets_screen.dart';
 import 'package:salla7ly/features/reviews/ui/screens/reviews_screen.dart';
+
 import 'package:salla7ly/features/reviews/logic/customer_tech_reviews_cubit.dart';
+
+import 'package:salla7ly/features/reviews/logic/technician_reviews_cubit.dart';
+
 
 class AppRouter {
   Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -193,7 +198,6 @@ class AppRouter {
         );
 
       case Routes.waitingRequestScreen:
-
         final requestId = settings.arguments as String;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -202,14 +206,19 @@ class AppRouter {
           ),
         );
 
-        
       case Routes.reviewsscreen:
-        return MaterialPageRoute(builder: (_) => const ReviewsScreen());
-
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<TechnicianReviewsCubit>()..getMyReviews(),
+            child: const ReviewsScreen(),
+          ),
+        );
 
       case Routes.chargingScreen:
         return MaterialPageRoute(builder: (_) => const ChargingScreen());
-            case Routes.customeraccount:
+      case Routes.commissionsScreen:
+        return MaterialPageRoute(builder: (_) => const CommissionsScreen());
+      case Routes.customeraccount:
         final job = settings.arguments as TechnicianJob;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -217,8 +226,6 @@ class AppRouter {
             child: CustomerAccount(job: job),
           ),
         );
-
-        
 
       case Routes.categoriesScreen:
         return MaterialPageRoute(
@@ -251,7 +258,6 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const MainNavigationScreenTech(),
         );
-
       default:
         return null;
     }
