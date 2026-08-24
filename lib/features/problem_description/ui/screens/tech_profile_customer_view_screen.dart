@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
-import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
+import 'package:salla7ly/features/problem_description/domain/entity/customer_offer.dart';
+import 'package:salla7ly/features/problem_description/logic/accept_offer/accept_offer_bloc_listener.dart';
+import 'package:salla7ly/features/problem_description/logic/accept_offer/accept_offer_cubit.dart';
 import 'package:salla7ly/features/problem_description/ui/widgets/customer_evalution.dart';
 import 'package:salla7ly/features/problem_description/ui/widgets/tech_details.dart';
 import 'package:salla7ly/features/problem_description/ui/widgets/tech_profile_header.dart';
 
 class TechProfileCustomerViewScreen extends StatelessWidget {
-  const TechProfileCustomerViewScreen({super.key});
+  const TechProfileCustomerViewScreen({super.key, required this.offer});
+
+  final CustomerOffer offer;
 
   @override
   Widget build(BuildContext context) {
+    final technician = offer.technician;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -21,9 +27,9 @@ class TechProfileCustomerViewScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                TechProfileHeader(),
+                TechProfileHeader(technician: technician),
                 verticalSpace(40),
-                TechDetails(),
+                TechDetails(technician: technician),
                 verticalSpace(24),
                 CustomerEvalution(evalutionMessage: 'ممتاز'),
                 verticalSpace(16),
@@ -34,9 +40,17 @@ class TechProfileCustomerViewScreen extends StatelessWidget {
                 CustomElevatedButton(
                   text: 'موافق',
                   onPressed: () {
-                    context.pushNamed(Routes.questionscreen);
+                    final requestId = offer.requestId;
+                    final offerId = offer.offerId;
+                    if (requestId == null || offerId == null) return;
+
+                    context.read<AcceptOfferCubit>().acceptOffer(
+                          requestId,
+                          offerId,
+                        );
                   },
                 ),
+                const AcceptOfferBlocListener(),
               ],
             ),
           ),

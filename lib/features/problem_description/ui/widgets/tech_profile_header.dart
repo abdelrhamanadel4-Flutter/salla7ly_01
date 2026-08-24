@@ -1,13 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
+import 'package:salla7ly/features/problem_description/domain/entity/customer_offer.dart';
 
 class TechProfileHeader extends StatelessWidget {
-  const TechProfileHeader({super.key});
+  const TechProfileHeader({super.key, required this.technician});
+
+  final OfferTechnician? technician;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,8 @@ class TechProfileHeader extends StatelessWidget {
           ),
           child: ClipOval(
             child: CachedNetworkImage(
-              imageUrl: Assets.imagesProfileImage,
+              imageUrl: technician?.profileImage.toFullImageUrl() ??
+                  Assets.imagesProfileImage,
               fit: BoxFit.cover,
               placeholder: (context, url) => Center(
                 child: CircularProgressIndicator(color: AppColors.primaryColor),
@@ -34,7 +39,7 @@ class TechProfileHeader extends StatelessWidget {
           ),
         ),
         verticalSpace(16),
-        Text('محمد احمد', style: AppStyles.bold24Primary),
+        Text(technician?.fullName ?? '', style: AppStyles.bold24Primary),
       ],
     );
   }

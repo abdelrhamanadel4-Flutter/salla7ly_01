@@ -10,6 +10,8 @@ import 'package:salla7ly/features/auth/login/data/model/verify_otp_request_dto.d
 import 'package:salla7ly/features/auth/login/data/model/verify_otp_response_dto.dart';
 import 'package:salla7ly/features/categories/data/models/categories_response_dto.dart';
 import 'package:salla7ly/features/auth/signup/data/model/sign_up_responsedto.dart';
+import 'package:salla7ly/features/problem_description/data/models/accept_offer_response_dto.dart';
+import 'package:salla7ly/features/problem_description/data/models/offers_response_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/problem_description_request_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/problem_description_response_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/publish_request_response_dto.dart';
@@ -45,4 +47,13 @@ abstract class ApiService {
 
   @POST(ApiConstants.publishRequest)
   Future<PublishRequestResponseDto> publishRequest(@Path('id') String id);
+
+  @GET(ApiConstants.customerOffers)
+  Future<OffersResponseDto> getOffers(@Path('id') String id);
+
+  @POST(ApiConstants.acceptOffer)
+  Future<AcceptOfferResponseDto> acceptOffer(
+    @Path('id') String id,
+    @Path('offerId') String offerId,
+  );
 }

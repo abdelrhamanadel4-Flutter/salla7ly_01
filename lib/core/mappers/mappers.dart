@@ -16,9 +16,13 @@ import 'package:salla7ly/features/auth/signup/data/model/sign_up_responsedto.dar
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_requset_entity.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_response.dart';
 import 'package:salla7ly/features/categories/domain/entity/categories_responce.dart';
+import 'package:salla7ly/features/problem_description/data/models/accept_offer_response_dto.dart';
+import 'package:salla7ly/features/problem_description/data/models/offers_response_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/problem_description_request_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/problem_description_response_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/publish_request_response_dto.dart';
+import 'package:salla7ly/features/problem_description/domain/entity/accept_offer_response.dart';
+import 'package:salla7ly/features/problem_description/domain/entity/customer_offer.dart';
 import 'package:salla7ly/features/problem_description/domain/entity/problem_description_request.dart';
 import 'package:salla7ly/features/problem_description/domain/entity/problem_description_response.dart';
 import 'package:salla7ly/features/problem_description/domain/entity/publish_request_response.dart';
@@ -423,5 +427,69 @@ extension PublishRequestDtoMapper on PublishRequestDto {
       id: id,
       status: status,
     );
+  }
+}
+
+extension OffersResponseDtoMapper on OffersResponseDto {
+  List<CustomerOffer> toEntityList() {
+    return data?.offers?.map((e) => e.toEntity()).toList() ?? [];
+  }
+}
+
+extension OfferDtoMapper on OfferDto {
+  CustomerOffer toEntity() {
+    return CustomerOffer(
+      offerId: id,
+      requestId: requestId,
+      price: price,
+      consultationFee: consultationFee,
+      status: status,
+      createdAt: createdAt,
+      technician: technician?.toEntity(),
+    );
+  }
+}
+
+extension OfferTechnicianDtoMapper on OfferTechnicianDto {
+  OfferTechnician toEntity() {
+    return OfferTechnician(
+      id: id,
+      fullName: fullName,
+      phone: phone,
+      categoryName: categoryName,
+      city: city,
+      address: address,
+      overallRating: overallRating,
+      totalReviews: totalReviews,
+      profileImage: profileImage,
+      distanceKm: distanceKm,
+    );
+  }
+}
+
+extension AcceptOfferResponseDtoMapper on AcceptOfferResponseDto {
+  AcceptOfferResponse toEntity() {
+    return AcceptOfferResponse(data: data?.toEntity());
+  }
+}
+
+extension AcceptOfferDataDtoMapper on AcceptOfferDataDto {
+  AcceptOfferData toEntity() {
+    return AcceptOfferData(
+      request: request?.toEntity(),
+      technician: technician?.toEntity(),
+    );
+  }
+}
+
+extension AcceptOfferRequestDtoMapper on AcceptOfferRequestDto {
+  AcceptedRequest toEntity() {
+    return AcceptedRequest(id: id, status: status);
+  }
+}
+
+extension AcceptOfferTechnicianDtoMapper on AcceptOfferTechnicianDto {
+  AcceptedTechnician toEntity() {
+    return AcceptedTechnician(id: id, fullName: fullName, phone: phone);
   }
 }

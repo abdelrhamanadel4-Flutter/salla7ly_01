@@ -1,4 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:salla7ly/core/networking/api_constants.dart';
+
+extension ImageUrlExtension on String? {
+  String? toFullImageUrl() {
+    final path = this;
+    if (path == null || path.isEmpty) return null;
+    if (path.startsWith('http')) return path;
+
+    return '${ApiConstants.socketUrl}$path';
+  }
+}
 
 extension Navigation on BuildContext {
   Future<dynamic> pushNamed(

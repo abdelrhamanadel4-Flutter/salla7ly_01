@@ -14,6 +14,7 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:salla7ly/core/networking/api_service.dart' as _i837;
 import 'package:salla7ly/core/networking/dio_module.dart' as _i697;
+import 'package:salla7ly/core/networking/socket_service.dart' as _i188;
 import 'package:salla7ly/features/ai_detection/data/data_source/ai_estimation_remote_data_source.dart'
     as _i156;
 import 'package:salla7ly/features/ai_detection/data/data_source/ai_estimation_remote_data_source_impl.dart'
@@ -67,6 +68,14 @@ import 'package:salla7ly/features/categories/domain/use_cases/categories_use_cas
     as _i161;
 import 'package:salla7ly/features/categories/logic/categories/categories_cubit.dart'
     as _i290;
+import 'package:salla7ly/features/problem_description/data/data_source/remote/accept_offer_remote_data_source.dart'
+    as _i221;
+import 'package:salla7ly/features/problem_description/data/data_source/remote/accept_offer_remote_data_source_impl.dart'
+    as _i484;
+import 'package:salla7ly/features/problem_description/data/data_source/remote/offers_remote_data_source.dart'
+    as _i860;
+import 'package:salla7ly/features/problem_description/data/data_source/remote/offers_remote_data_source_impl.dart'
+    as _i902;
 import 'package:salla7ly/features/problem_description/data/data_source/remote/problem_description_data_source.dart'
     as _i133;
 import 'package:salla7ly/features/problem_description/data/data_source/remote/problem_description_data_source_impl.dart'
@@ -75,22 +84,38 @@ import 'package:salla7ly/features/problem_description/data/data_source/remote/pu
     as _i322;
 import 'package:salla7ly/features/problem_description/data/data_source/remote/publish_remote_data_source_impl.dart'
     as _i941;
+import 'package:salla7ly/features/problem_description/data/repo/accept_offer_repo_impl.dart'
+    as _i162;
+import 'package:salla7ly/features/problem_description/data/repo/offers_repo_impl.dart'
+    as _i40;
 import 'package:salla7ly/features/problem_description/data/repo/problem_description_repo_impl.dart'
     as _i384;
 import 'package:salla7ly/features/problem_description/data/repo/publish_repo_impl.dart'
     as _i493;
+import 'package:salla7ly/features/problem_description/domain/repo/accept_offer_repo.dart'
+    as _i542;
+import 'package:salla7ly/features/problem_description/domain/repo/offers_repo.dart'
+    as _i881;
 import 'package:salla7ly/features/problem_description/domain/repo/problem_description_repo.dart'
     as _i488;
 import 'package:salla7ly/features/problem_description/domain/repo/publish_repo.dart'
     as _i624;
+import 'package:salla7ly/features/problem_description/domain/use_cases/accept_offer_use_case.dart'
+    as _i1007;
+import 'package:salla7ly/features/problem_description/domain/use_cases/get_offers_use_case.dart'
+    as _i663;
 import 'package:salla7ly/features/problem_description/domain/use_cases/problem_description_use_case.dart'
     as _i733;
 import 'package:salla7ly/features/problem_description/domain/use_cases/publish_use_case.dart'
     as _i1014;
+import 'package:salla7ly/features/problem_description/logic/accept_offer/accept_offer_cubit.dart'
+    as _i896;
 import 'package:salla7ly/features/problem_description/logic/problem_description/problem_description_cubit.dart'
-    as _i249;
+    as _i351;
 import 'package:salla7ly/features/problem_description/logic/publish_request/publish_cubit.dart'
-    as _i575;
+    as _i899;
+import 'package:salla7ly/features/problem_description/logic/request_offers/request_offers_cubit.dart'
+    as _i437;
 import 'package:salla7ly/features/profile/data/data_sources/remote/profile_remote_data_source.dart'
     as _i551;
 import 'package:salla7ly/features/profile/data/data_sources/remote/profile_remote_data_source_impl.dart'
@@ -113,8 +138,12 @@ extension GetItInjectableX on _i174.GetIt {
     final dioModule = _$DioModule();
     gh.factory<_i694.LocationCubit>(() => _i694.LocationCubit());
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio());
+    gh.lazySingleton<_i188.SocketService>(() => _i188.SocketService());
     gh.lazySingleton<_i837.ApiService>(
       () => dioModule.apiService(gh<_i361.Dio>()),
+    );
+    gh.factory<_i860.OffersRemoteDataSource>(
+      () => _i902.OffersRemoteDataSourceImpl(gh<_i837.ApiService>()),
     );
     gh.factory<_i156.AiEstimationRemoteDataSource>(
       () => _i160.AiEstimationRemoteDataSourceImpl(gh<_i837.ApiService>()),
@@ -124,6 +153,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i711.CategoriesRemoteDataSource>(
       () => _i901.CategoriesRemoteDataSourceImpl(gh<_i837.ApiService>()),
+    );
+    gh.factory<_i221.AcceptOfferRemoteDataSource>(
+      () => _i484.AcceptOfferRemoteDataSourceImpl(gh<_i837.ApiService>()),
+    );
+    gh.factory<_i881.OffersRepo>(
+      () => _i40.OffersRepoImpl(gh<_i860.OffersRemoteDataSource>()),
     );
     gh.factory<_i798.SignUpRemoteDataSource>(
       () => _i217.SignUpRemoteDataSourceImpl(gh<_i837.ApiService>()),
@@ -153,8 +188,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i247.LoginRepo>(
       () => _i209.LoginRepoImpl(gh<_i175.LoginRemoteDataSources>()),
     );
+    gh.factory<_i542.AcceptOfferRepo>(
+      () => _i162.AcceptOfferRepoImpl(gh<_i221.AcceptOfferRemoteDataSource>()),
+    );
     gh.factory<_i624.PublishRepo>(
       () => _i493.PublishRepoImpl(gh<_i322.PublishRemoteDataSource>()),
+    );
+    gh.factory<_i663.GetOffersUseCase>(
+      () => _i663.GetOffersUseCase(gh<_i881.OffersRepo>()),
     );
     gh.factory<_i134.AiEstimationUseCase>(
       () => _i134.AiEstimationUseCase(gh<_i262.AiEstimationRepo>()),
@@ -171,6 +212,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i844.GetProfileUseCase>(
       () => _i844.GetProfileUseCase(gh<_i887.ProfileRepo>()),
     );
+    gh.factory<_i1007.AcceptOfferUseCase>(
+      () => _i1007.AcceptOfferUseCase(gh<_i542.AcceptOfferRepo>()),
+    );
     gh.factory<_i334.ProfileCubit>(
       () => _i334.ProfileCubit(gh<_i844.GetProfileUseCase>()),
     );
@@ -183,6 +227,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i828.VerifyOtpUseCases>(
       () => _i828.VerifyOtpUseCases(gh<_i247.LoginRepo>()),
     );
+    gh.factory<_i437.RequestOffersCubit>(
+      () => _i437.RequestOffersCubit(
+        gh<_i663.GetOffersUseCase>(),
+        gh<_i188.SocketService>(),
+      ),
+    );
     gh.factory<_i488.ProblemDescriptionRepo>(
       () => _i384.ProblemDescriptionRepositoryImpl(
         gh<_i133.ProblemDescriptionRemoteDataSource>(),
@@ -191,8 +241,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1014.PublishUseCase>(
       () => _i1014.PublishUseCase(gh<_i624.PublishRepo>()),
     );
-    gh.factory<_i575.PublishCubit>(
-      () => _i575.PublishCubit(gh<_i1014.PublishUseCase>()),
+    gh.factory<_i899.PublishCubit>(
+      () => _i899.PublishCubit(gh<_i1014.PublishUseCase>()),
     );
     gh.factory<_i290.CategoriesCubit>(
       () => _i290.CategoriesCubit(gh<_i161.CategoriesUseCase>()),
@@ -204,15 +254,18 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i307.RequsetOtpUseCases>(),
       ),
     );
+    gh.factory<_i896.AcceptOfferCubit>(
+      () => _i896.AcceptOfferCubit(gh<_i1007.AcceptOfferUseCase>()),
+    );
     gh.factory<_i813.SignupCubit>(
       () => _i813.SignupCubit(gh<_i158.SignUpUseCase>()),
     );
     gh.factory<_i733.ProblemDescriptionUseCase>(
       () => _i733.ProblemDescriptionUseCase(gh<_i488.ProblemDescriptionRepo>()),
     );
-    gh.factory<_i249.ProblemDescriptionCubit>(
+    gh.factory<_i351.ProblemDescriptionCubit>(
       () =>
-          _i249.ProblemDescriptionCubit(gh<_i733.ProblemDescriptionUseCase>()),
+          _i351.ProblemDescriptionCubit(gh<_i733.ProblemDescriptionUseCase>()),
     );
     return this;
   }
