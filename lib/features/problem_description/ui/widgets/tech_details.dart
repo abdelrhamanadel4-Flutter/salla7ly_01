@@ -8,13 +8,18 @@ import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/features/problem_description/domain/entity/customer_offer.dart';
 
 class TechDetails extends StatelessWidget {
-  const TechDetails({super.key, required this.technician});
+  const TechDetails({
+    super.key,
+    required this.technician,
+    this.rating,
+  });
 
   final OfferTechnician? technician;
+  final double? rating;
 
   @override
   Widget build(BuildContext context) {
-    final rating = technician?.overallRating ?? 0;
+    final displayedRating = rating ?? technician?.overallRating ?? 0;
     final phone = technician?.phone;
 
     return Container(
@@ -48,7 +53,7 @@ class TechDetails extends StatelessWidget {
                 SvgPicture.asset(Assets.svgsRateIcon),
                 horizontalSpace(8),
                 Text(
-                  'تقييم ${rating.toStringAsFixed(2)}',
+                  'تقييم ${displayedRating.toStringAsFixed(2)}',
                   style: AppStyles.mediun12Primary,
                 ),
               ],

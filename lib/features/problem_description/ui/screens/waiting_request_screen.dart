@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salla7ly/core/di/injectoin.dart';
 import 'package:salla7ly/core/helpers/extesions.dart';
@@ -13,6 +14,8 @@ import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
 import 'package:salla7ly/features/auth/signup/ui/widgets/technician_acceptance_progress.dart';
+import 'package:salla7ly/features/problem_description/logic/cancel_request/cancel_request_bloc_listener.dart';
+import 'package:salla7ly/features/problem_description/logic/cancel_request/cancel_request_cubit.dart';
 
 class WaitingRequestScreen extends StatefulWidget {
   const WaitingRequestScreen({
@@ -153,11 +156,12 @@ class _WaitingRequestScreenState
                 CustomElevatedButton(
                   text: 'خرجني',
                   onPressed: () {
-                    context.pushReplacementNamed(
-                      Routes.mainnavigationscreen,
+                    context.read<CancelRequestCubit>().cancelRequest(
+                      widget.requestId,
                     );
                   },
                 ),
+                const CancelRequestBlocListener(),
               ],
             ),
           ),

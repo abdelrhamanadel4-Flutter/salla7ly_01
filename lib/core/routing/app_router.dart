@@ -25,6 +25,7 @@ import 'package:salla7ly/features/orders/screens/orders_screen.dart';
 import 'package:salla7ly/features/ai_detection/ui/screens/ai_detection_screen.dart';
 import 'package:salla7ly/features/problem_description/domain/entity/customer_offer.dart';
 import 'package:salla7ly/features/problem_description/logic/accept_offer/accept_offer_cubit.dart';
+import 'package:salla7ly/features/problem_description/logic/cancel_request/cancel_request_cubit.dart';
 import 'package:salla7ly/features/problem_description/logic/publish_request/publish_cubit.dart';
 import 'package:salla7ly/features/problem_description/logic/request_offers/request_offers_cubit.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/kind_of_problem_screen.dart';
@@ -42,6 +43,7 @@ import 'package:salla7ly/features/requsets/logic/submit_job_offer_cubit.dart';
 import 'package:salla7ly/features/requsets/logic/technician_jobs_cubit.dart';
 import 'package:salla7ly/features/requsets/ui/screens/requsets_screen.dart';
 import 'package:salla7ly/features/reviews/ui/screens/reviews_screen.dart';
+import 'package:salla7ly/features/reviews/logic/technician_reviews_cubit.dart';
 
 class AppRouter {
   Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -150,6 +152,7 @@ class AppRouter {
             providers: [
               BlocProvider(create: (context) => getIt<AiEstimationCubit>()),
               BlocProvider(create: (context) => getIt<PublishCubit>()),
+              BlocProvider(create: (context) => getIt<CancelRequestCubit>()),
             ],
             child: AiDetectionScreen(requestId: requestId),
           ),
@@ -168,9 +171,23 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const RequestReviewScreen());
       case Routes.techProfileCustomerViewScreen:
         final offer = settings.arguments as CustomerOffer;
+        final technicianId = offer.technician?.id;
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (_) => getIt<AcceptOfferCubit>(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => getIt<AcceptOfferCubit>()),
+              BlocProvider(
+                create: (_) {
+                  final cubit = getIt<TechnicianReviewsCubit>();
+
+                  if (technicianId != null && technicianId.isNotEmpty) {
+                    cubit.getReviews(technicianId);
+                  }
+
+                  return cubit;
+                },
+              ),
+            ],
             child: TechProfileCustomerViewScreen(offer: offer),
           ),
         );
@@ -179,7 +196,10 @@ class AppRouter {
 
         final requestId = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => WaitingRequestScreen(requestId: requestId),
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<CancelRequestCubit>(),
+            child: WaitingRequestScreen(requestId: requestId),
+          ),
         );
 
         
