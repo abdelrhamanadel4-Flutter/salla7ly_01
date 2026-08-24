@@ -5,6 +5,10 @@ import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/features/charging/charging_offer_item.dart';
+import 'package:salla7ly/features/charging/add_charging_price_screen.dart';
+import 'package:salla7ly/core/theming/assets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:salla7ly/core/helpers/extesions.dart';
 
 class ChargingScreen extends StatelessWidget {
   const ChargingScreen({super.key});
@@ -21,6 +25,16 @@ class ChargingScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SvgPicture.asset(Assets.svgsSettingIcon),
+                    GestureDetector(
+                      onTap: context.pop,
+                      child: SvgPicture.asset(Assets.svgsArrowBack),
+                    ),
+                  ],
+                ),
                 Image.asset(Assets.imagesLogo),
                 verticalSpace(8),
                 Text('عروض الشحن', style: AppStyles.bold24Primary),
@@ -62,9 +76,13 @@ class ChargingScreen extends StatelessWidget {
                         return ChargingOfferItem(
                           chargingOffer: chargingOffers[index],
                           onTap: () {
-                            final selectedOffer = chargingOffers[index];
-
-                            debugPrint('Selected offer: $selectedOffer');
+                            if (index == chargingOffers.length - 1) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => const AddChargingPriceScreen(),
+                                ),
+                              );
+                            }
                           },
                         );
                       },

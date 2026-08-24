@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/helpers/validatores.dart';
 import 'package:salla7ly/core/routing/routes.dart';
@@ -30,15 +29,18 @@ class LoginScreen extends StatelessWidget {
               children: [
                 Image.asset(Assets.imagesLogo),
                 verticalSpace(8),
-                Text('صباح الفل !', style: AppStyles.bold24Primary),
+                Text('اهلا!', style: AppStyles.bold24Primary),
+                verticalSpace(8),
+                Text(
+                  'هدفنا نسهلها عليك اتبع الخطوات من فضلك',
+                  style: AppStyles.regular14darkBlue,
+                ),
                 verticalSpace(16),
                 Form(
                   key: context.read<LoginCubit>().formKey,
                   child: CustomTextFormField(
                     controller: context.read<LoginCubit>().phoneNoController,
-                    validator: (value) {
-                      return AppValidators.validatePhoneNumber(value);
-                    },
+                    validator: AppValidators.validatePhoneNumber,
                     hintStyle: AppStyles.semiBold14darkBlue,
                     hintText: 'دخل رقمك',
                     prefixIcon: Padding(

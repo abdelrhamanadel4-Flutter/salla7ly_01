@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:salla7ly/core/helpers/flutter_toast.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
@@ -21,7 +22,15 @@ class ProblemImagePicker extends StatelessWidget {
         final cubit = context.read<ProblemDescriptionCubit>();
 
         return InkWell(
-          onTap: cubit.pickProblemImage,
+          onTap: () async {
+            final error = await cubit.pickProblemImage();
+            if (!context.mounted || error == null) return;
+            ToastMessage.toastMsg(
+              error,
+              AppColors.redColor,
+              AppColors.whiteColor,
+            );
+          },
           child: Container(
             width: double.infinity,
             height: 140.h,

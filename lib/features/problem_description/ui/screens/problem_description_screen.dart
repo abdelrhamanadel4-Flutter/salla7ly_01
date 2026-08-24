@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salla7ly/core/helpers/flutter_toast.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
+import 'package:salla7ly/core/helpers/validatores.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
@@ -41,12 +42,14 @@ class ProblemDescriptionScreen extends StatelessWidget {
                     children: [
                       CustomTextFormField(
                         controller: cubit.titleController,
+                        validator: AppValidators.validateProblemTitle,
                         hintStyle: AppStyles.semiBold14darkBlue,
                         hintText: 'عنوان مشكلتك',
                       ),
                       verticalSpace(8),
                       CustomTextFormField(
                         controller: cubit.descriptionController,
+                        validator: AppValidators.validateProblemDescription,
                         hintStyle: AppStyles.semiBold14darkBlue,
                         hintText: 'قول مشكلتك',
                       ),
@@ -59,6 +62,18 @@ class ProblemDescriptionScreen extends StatelessWidget {
                 CustomElevatedButton(
                   text: 'تمام',
                   onPressed: () {
+                    if (!cubit.formKey.currentState!.validate()) return;
+                    final imageSizeError = AppValidators.validateImageSize(
+                      cubit.problemImage,
+                    );
+                    if (imageSizeError != null) {
+                      ToastMessage.toastMsg(
+                        imageSizeError,
+                        AppColors.redColor,
+                        AppColors.whiteColor,
+                      );
+                      return;
+                    }
                     if (cubit.problemImage == null) {
                       ToastMessage.toastMsg(
                         'من فضلك حط صورة للمشكلة',

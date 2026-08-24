@@ -130,6 +130,8 @@
 // }
 // }
 
+import 'dart:io';
+
 class AppValidators {
   AppValidators._();
 
@@ -207,6 +209,68 @@ class AppValidators {
     }
 
     return null;
+  }
+
+  static String? validatePersonName(String? value) {
+    final name = value?.trim() ?? '';
+
+    if (name.isEmpty) return 'الاسم مطلوب';
+    if (name.length < 2 || name.length > 60) {
+      return 'الاسم يجب أن يكون من حرفين إلى 60 حرف';
+    }
+    if (!RegExp(r'^[a-zA-Z\u0621-\u064A\s]+$').hasMatch(name)) {
+      return 'الاسم يجب أن يحتوي على حروف فقط';
+    }
+
+    return null;
+  }
+
+  static String? validateProblemTitle(String? value) {
+    return _validateProblemText(
+      value,
+      minLength: 3,
+      maxLength: 100,
+      requiredMessage: 'اكتب عنوان المشكلة',
+      lengthMessage: 'عنوان المشكلة يجب أن يكون من 3 إلى 100 حرف',
+    );
+  }
+
+  static String? validateProblemDescription(String? value) {
+    return _validateProblemText(
+      value,
+      minLength: 10,
+      maxLength: 1000,
+      requiredMessage: 'اكتب وصف المشكلة',
+      lengthMessage: 'وصف المشكلة يجب أن يكون من 10 إلى 1000 حرف',
+    );
+  }
+
+  static String? _validateProblemText(
+    String? value, {
+    required int minLength,
+    required int maxLength,
+    required String requiredMessage,
+    required String lengthMessage,
+  }) {
+    final text = value?.trim() ?? '';
+
+    if (text.isEmpty) return requiredMessage;
+    if (text.length < minLength || text.length > maxLength) {
+      return lengthMessage;
+    }
+    if (!RegExp(r'[a-zA-Z\u0621-\u064A]').hasMatch(text)) {
+      return 'اكتب نص صحيح يحتوي على حروف';
+    }
+
+    return null;
+  }
+
+  static String? validateImageSize(File? image) {
+    if (image == null || image.lengthSync() <= 2 * 1024 * 1024) {
+      return null;
+    }
+
+    return 'حجم الصورة يجب ألا يتجاوز 2 ميجابايت';
   }
 
   static String normalizePhone(String phone) {

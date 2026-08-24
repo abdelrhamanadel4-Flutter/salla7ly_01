@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
+import 'package:salla7ly/core/helpers/validatores.dart';
 import 'package:salla7ly/core/networking/api_result.dart';
 import 'package:salla7ly/features/problem_description/domain/entity/problem_description_request.dart';
 import 'package:salla7ly/features/problem_description/domain/use_cases/problem_description_use_case.dart';
@@ -38,18 +39,22 @@ class ProblemDescriptionCubit extends Cubit<ProblemDescriptionState> {
     
   }
 
-  Future<void> pickProblemImage() async {
+  Future<String?> pickProblemImage() async {
     final XFile? image = await _imagePicker.pickImage(
       source: ImageSource.gallery,
       imageQuality: 80,
     );
 
-    if (image != null) {
-      problemImage = File(image.path);
+    if (image == null) return null;
 
-      emit(ProblemDescriptionState.initial());
-      emit(const ProblemDescriptionState.refresh());
-    }
+    final imageFile = File(image.path);
+    final validationError = AppValidators.validateImageSize(imageFile);
+    if (validationError != null) return validationError;
+
+    problemImage = imageFile;
+    emit(ProblemDescriptionState.initial());
+    emit(const ProblemDescriptionState.refresh());
+    return null;
   }
 
   @override

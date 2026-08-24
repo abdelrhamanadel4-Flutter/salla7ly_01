@@ -72,9 +72,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       CustomTextFormField(
                         controller: cubit.nameController,
                         validator: (value) {
-                          return AppValidators.validateUsername(
-                            cubit.nameController.text,
-                          );
+                          return AppValidators.validatePersonName(value);
                         },
                         hintStyle: AppStyles.semiBold14darkBlue,
                         hintText: 'دخل اسمك',
@@ -153,6 +151,29 @@ class _SignupScreenState extends State<SignupScreen> {
                               cubit.profileImage == null)) {
                         ToastMessage.toastMsg(
                           'من فضلك قم بإختيار صورة شخصية و الفيش والتشبيه',
+                          AppColors.redColor,
+                          AppColors.whiteColor,
+                        );
+                        return;
+                      }
+                      final imageSizeError = AppValidators.validateImageSize(
+                        cubit.profileImage,
+                      );
+                      if (imageSizeError != null) {
+                        ToastMessage.toastMsg(
+                          imageSizeError,
+                          AppColors.redColor,
+                          AppColors.whiteColor,
+                        );
+                        return;
+                      }
+                      final criminalRecordSizeError =
+                          AppValidators.validateImageSize(
+                            cubit.criminalRecordFile,
+                          );
+                      if (criminalRecordSizeError != null) {
+                        ToastMessage.toastMsg(
+                          criminalRecordSizeError,
                           AppColors.redColor,
                           AppColors.whiteColor,
                         );

@@ -126,7 +126,12 @@ class ProfileScreen extends StatelessWidget {
                           },
                         ),
                         verticalSpace(8),
-                        CustomElevatedButton(text: 'اشحن', onPressed: () {}),
+                        CustomElevatedButton(
+                          text: 'اشحن',
+                          onPressed: () {
+                            context.pushNamed(Routes.chargingScreen);
+                          },
+                        ),
                         verticalSpace(8),
                         CustomElevatedButton(
                           text: 'طلباتك السابقه',

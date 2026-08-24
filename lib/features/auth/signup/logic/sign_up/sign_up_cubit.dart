@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:salla7ly/core/helpers/constansts.dart';
 import 'package:salla7ly/core/helpers/shared_pref_helper.dart';
+import 'package:salla7ly/core/helpers/validatores.dart';
 import 'package:salla7ly/core/networking/api_constants.dart';
 import 'package:salla7ly/core/networking/api_result.dart';
 import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_requset_entity.dart';
@@ -57,32 +58,40 @@ class SignupCubit extends Cubit<SignUpState> {
   }
 
   /// Profile Image
-  Future<void> pickProfileImage() async {
+  Future<String?> pickProfileImage() async {
     final XFile? image = await _imagePicker.pickImage(
       source: ImageSource.gallery,
       imageQuality: 80,
     );
 
-    if (image != null) {
-      profileImage = File(image.path);
+    if (image == null) return null;
 
-      emit(const SignUpState.initial());
-      emit(const SignUpState.refresh());
-    }
+    final imageFile = File(image.path);
+    final validationError = AppValidators.validateImageSize(imageFile);
+    if (validationError != null) return validationError;
+
+    profileImage = imageFile;
+    emit(const SignUpState.initial());
+    emit(const SignUpState.refresh());
+    return null;
   }
 
   /// Criminal Record
-  Future<void> pickCriminalRecord() async {
+  Future<String?> pickCriminalRecord() async {
     final result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
     );
 
-    if (result != null) {
-      criminalRecordFile = File(result.files.single.path!);
+    if (result == null || result.files.single.path == null) return null;
 
-      emit(const SignUpState.initial());
-      emit(const SignUpState.refresh());
-    }
+    final file = File(result.files.single.path!);
+    final validationError = AppValidators.validateImageSize(file);
+    if (validationError != null) return validationError;
+
+    criminalRecordFile = file;
+    emit(const SignUpState.initial());
+    emit(const SignUpState.refresh());
+    return null;
   }
 }

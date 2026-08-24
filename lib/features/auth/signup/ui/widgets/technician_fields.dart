@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:salla7ly/core/helpers/flutter_toast.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/helpers/validatores.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
+import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_text_form_filed.dart';
 import 'package:salla7ly/features/categories/logic/categories/categories_cubit.dart';
@@ -69,8 +71,14 @@ class _TechnicianFieldsState extends State<TechnicianFields> {
 
             UploadImageField(
               imageFile: cubit.profileImage,
-              onTap: () {
-                cubit.pickProfileImage();
+              onTap: () async {
+                final error = await cubit.pickProfileImage();
+                if (!context.mounted || error == null) return;
+                ToastMessage.toastMsg(
+                  error,
+                  AppColors.redColor,
+                  AppColors.whiteColor,
+                );
               },
             ),
 
@@ -78,8 +86,14 @@ class _TechnicianFieldsState extends State<TechnicianFields> {
 
             CriminalRecordField(
               file: cubit.criminalRecordFile,
-              onTap: () {
-                cubit.pickCriminalRecord();
+              onTap: () async {
+                final error = await cubit.pickCriminalRecord();
+                if (!context.mounted || error == null) return;
+                ToastMessage.toastMsg(
+                  error,
+                  AppColors.redColor,
+                  AppColors.whiteColor,
+                );
               },
             ),
           ],

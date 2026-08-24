@@ -16,6 +16,7 @@ import 'package:salla7ly/features/auth/signup/ui/screens/signup_screen.dart';
 import 'package:salla7ly/features/auth/signup/ui/screens/technician_acceptance_screen.dart';
 import 'package:salla7ly/features/categories/ui/screens/categories_screen.dart';
 import 'package:salla7ly/features/charging/charging_screen.dart';
+import 'package:salla7ly/features/charging/add_charging_price_screen.dart';
 import 'package:salla7ly/features/customer_account_in_tech_view/customer_account.dart';
 import 'package:salla7ly/features/edit_profile/ui/screens/edit_profile_screan.dart';
 import 'package:salla7ly/features/edit_profile_tech/ui/screens/edit_profile_screan_tech.dart';
@@ -216,6 +217,10 @@ class AppRouter {
 
       case Routes.chargingScreen:
         return MaterialPageRoute(builder: (_) => const ChargingScreen());
+      case Routes.addChargingPriceScreen:
+        return MaterialPageRoute(
+          builder: (_) => const AddChargingPriceScreen(),
+        );
       case Routes.commissionsScreen:
         return MaterialPageRoute(builder: (_) => const CommissionsScreen());
       case Routes.customeraccount:

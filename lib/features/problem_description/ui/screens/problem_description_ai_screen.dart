@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/flutter_toast.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
+import 'package:salla7ly/core/helpers/validatores.dart';
 import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
@@ -35,23 +36,44 @@ class ProblemDescriptionAiScreen extends StatelessWidget {
                 verticalSpace(8),
                 Text('اوصف مشكلتك ل Ai', style: AppStyles.bold24Primary),
                 verticalSpace(24),
+                Form(
+                  key: cubit.formKey,
+                  child: Column(
+                    children: [
                 CustomTextFormField(
                   controller: cubit.titleController,
+                  validator: AppValidators.validateProblemTitle,
                   hintStyle: AppStyles.semiBold14darkBlue,
                   hintText: 'عنوان مشكلتك',
                 ),
                 verticalSpace(8),
                 CustomTextFormField(
                   controller: cubit.descriptionController,
+                  validator: AppValidators.validateProblemDescription,
                   hintStyle: AppStyles.semiBold14darkBlue,
                   hintText: 'قول مشكلتك',
                 ),
                 verticalSpace(8),
                 ProblemImagePicker(),
+                    ],
+                  ),
+                ),
                 verticalSpace(16),
                 CustomElevatedButton(
                   text: 'تمام',
                   onPressed: () {
+                    if (!cubit.formKey.currentState!.validate()) return;
+                    final imageSizeError = AppValidators.validateImageSize(
+                      cubit.problemImage,
+                    );
+                    if (imageSizeError != null) {
+                      ToastMessage.toastMsg(
+                        imageSizeError,
+                        AppColors.redColor,
+                        AppColors.whiteColor,
+                      );
+                      return;
+                    }
                     if (cubit.problemImage == null) {
                       ToastMessage.toastMsg(
                         'من فضلك حط صورة للمشكلة',

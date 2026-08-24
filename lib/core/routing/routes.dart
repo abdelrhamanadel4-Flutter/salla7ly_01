@@ -23,6 +23,7 @@ class Routes {
   static const String questionscreen = '/questionscreen';
   static const String requestReviewScreen = '/requestReviewScreen';
   static const String chargingScreen = '/chargingScreen';
+  static const String addChargingPriceScreen = '/addChargingPriceScreen';
   static const String commissionsScreen = '/commissionsScreen';
   static const String requsetsscreen = '/requsetsscreen';
   static const String reviewsscreen = '/reviewsscreen';
