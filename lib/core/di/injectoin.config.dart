@@ -68,10 +68,24 @@ import 'package:salla7ly/features/categories/domain/use_cases/categories_use_cas
     as _i161;
 import 'package:salla7ly/features/categories/logic/categories/categories_cubit.dart'
     as _i290;
+import 'package:salla7ly/features/orders/data/data_source/remote/customer_orders_remote_data_source.dart'
+    as _i531;
+import 'package:salla7ly/features/orders/data/repositories/customer_orders_repository_impl.dart'
+    as _i483;
+import 'package:salla7ly/features/orders/domain/repositories/customer_orders_repository.dart'
+    as _i445;
+import 'package:salla7ly/features/orders/domain/use_cases/get_customer_orders_use_case.dart'
+    as _i928;
+import 'package:salla7ly/features/orders/logic/customer_orders_cubit.dart'
+    as _i303;
 import 'package:salla7ly/features/problem_description/data/data_source/remote/accept_offer_remote_data_source.dart'
     as _i221;
 import 'package:salla7ly/features/problem_description/data/data_source/remote/accept_offer_remote_data_source_impl.dart'
     as _i484;
+import 'package:salla7ly/features/problem_description/data/data_source/remote/cancel_request_remote_data_source.dart'
+    as _i673;
+import 'package:salla7ly/features/problem_description/data/data_source/remote/cancel_request_remote_data_source_impl.dart'
+    as _i449;
 import 'package:salla7ly/features/problem_description/data/data_source/remote/offers_remote_data_source.dart'
     as _i860;
 import 'package:salla7ly/features/problem_description/data/data_source/remote/offers_remote_data_source_impl.dart'
@@ -86,6 +100,8 @@ import 'package:salla7ly/features/problem_description/data/data_source/remote/pu
     as _i941;
 import 'package:salla7ly/features/problem_description/data/repo/accept_offer_repo_impl.dart'
     as _i162;
+import 'package:salla7ly/features/problem_description/data/repo/cancel_request_repo_impl.dart'
+    as _i1060;
 import 'package:salla7ly/features/problem_description/data/repo/offers_repo_impl.dart'
     as _i40;
 import 'package:salla7ly/features/problem_description/data/repo/problem_description_repo_impl.dart'
@@ -94,6 +110,8 @@ import 'package:salla7ly/features/problem_description/data/repo/publish_repo_imp
     as _i493;
 import 'package:salla7ly/features/problem_description/domain/repo/accept_offer_repo.dart'
     as _i542;
+import 'package:salla7ly/features/problem_description/domain/repo/cancel_request_repo.dart'
+    as _i696;
 import 'package:salla7ly/features/problem_description/domain/repo/offers_repo.dart'
     as _i881;
 import 'package:salla7ly/features/problem_description/domain/repo/problem_description_repo.dart'
@@ -102,6 +120,8 @@ import 'package:salla7ly/features/problem_description/domain/repo/publish_repo.d
     as _i624;
 import 'package:salla7ly/features/problem_description/domain/use_cases/accept_offer_use_case.dart'
     as _i1007;
+import 'package:salla7ly/features/problem_description/domain/use_cases/cancel_request_use_case.dart'
+    as _i213;
 import 'package:salla7ly/features/problem_description/domain/use_cases/get_offers_use_case.dart'
     as _i663;
 import 'package:salla7ly/features/problem_description/domain/use_cases/problem_description_use_case.dart'
@@ -110,22 +130,14 @@ import 'package:salla7ly/features/problem_description/domain/use_cases/publish_u
     as _i1014;
 import 'package:salla7ly/features/problem_description/logic/accept_offer/accept_offer_cubit.dart'
     as _i896;
+import 'package:salla7ly/features/problem_description/logic/cancel_request/cancel_request_cubit.dart'
+    as _i323;
 import 'package:salla7ly/features/problem_description/logic/problem_description/problem_description_cubit.dart'
     as _i351;
 import 'package:salla7ly/features/problem_description/logic/publish_request/publish_cubit.dart'
     as _i899;
 import 'package:salla7ly/features/problem_description/logic/request_offers/request_offers_cubit.dart'
     as _i437;
-import 'package:salla7ly/features/orders/data/data_source/remote/customer_orders_remote_data_source.dart'
-    as _i500;
-import 'package:salla7ly/features/orders/data/repositories/customer_orders_repository_impl.dart'
-    as _i501;
-import 'package:salla7ly/features/orders/domain/repositories/customer_orders_repository.dart'
-    as _i502;
-import 'package:salla7ly/features/orders/domain/use_cases/get_customer_orders_use_case.dart'
-    as _i503;
-import 'package:salla7ly/features/orders/logic/customer_orders_cubit.dart'
-    as _i504;
 import 'package:salla7ly/features/profile/data/data_sources/remote/profile_remote_data_source.dart'
     as _i551;
 import 'package:salla7ly/features/profile/data/data_sources/remote/profile_remote_data_source_impl.dart'
@@ -153,16 +165,26 @@ import 'package:salla7ly/features/requsets/logic/submit_job_offer_cubit.dart'
     as _i44;
 import 'package:salla7ly/features/requsets/logic/technician_jobs_cubit.dart'
     as _i1030;
+import 'package:salla7ly/features/reviews/data/data_source/remote/customer_tech_reviews_remote_data_source.dart'
+    as _i800;
 import 'package:salla7ly/features/reviews/data/data_sources/remote/technician_reviews_remote_data_source.dart'
-    as _i110;
+    as _i56;
 import 'package:salla7ly/features/reviews/data/repo/technician_reviews_repo_impl.dart'
-    as _i111;
+    as _i861;
+import 'package:salla7ly/features/reviews/data/repositories/customer_tech_reviews_repository_impl.dart'
+    as _i975;
 import 'package:salla7ly/features/reviews/domain/repo/technician_reviews_repo.dart'
-    as _i112;
+    as _i908;
+import 'package:salla7ly/features/reviews/domain/repositories/customer_tech_reviews_repository.dart'
+    as _i31;
+import 'package:salla7ly/features/reviews/domain/use_cases/get_customer_tech_reviews_use_case.dart'
+    as _i123;
 import 'package:salla7ly/features/reviews/domain/use_cases/get_technician_reviews_use_case.dart'
-    as _i113;
+    as _i297;
+import 'package:salla7ly/features/reviews/logic/customer_tech_reviews_cubit.dart'
+    as _i464;
 import 'package:salla7ly/features/reviews/logic/technician_reviews_cubit.dart'
-    as _i114;
+    as _i729;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -178,6 +200,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i837.ApiService>(
       () => dioModule.apiService(gh<_i361.Dio>()),
     );
+    gh.factory<_i673.CancelRequestRemoteDataSource>(
+      () => _i449.CancelRequestRemoteDataSourceImpl(gh<_i837.ApiService>()),
+    );
+    gh.factory<_i531.CustomerOrdersRemoteDataSource>(
+      () => _i531.CustomerOrdersRemoteDataSourceImpl(gh<_i837.ApiService>()),
+    );
     gh.factory<_i860.OffersRemoteDataSource>(
       () => _i902.OffersRemoteDataSourceImpl(gh<_i837.ApiService>()),
     );
@@ -186,6 +214,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i551.ProfileRemoteDataSource>(
       () => _i925.ProfileRemoteDataSourceImpl(gh<_i837.ApiService>()),
+    );
+    gh.factory<_i445.CustomerOrdersRepository>(
+      () => _i483.CustomerOrdersRepositoryImpl(
+        gh<_i531.CustomerOrdersRemoteDataSource>(),
+      ),
     );
     gh.factory<_i711.CategoriesRemoteDataSource>(
       () => _i901.CategoriesRemoteDataSourceImpl(gh<_i837.ApiService>()),
@@ -196,11 +229,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i234.TechnicianJobsRemoteDataSource>(
       () => _i234.TechnicianJobsRemoteDataSourceImpl(gh<_i837.ApiService>()),
     );
-    gh.factory<_i110.TechnicianReviewsRemoteDataSource>(
-      () => _i110.TechnicianReviewsRemoteDataSourceImpl(gh<_i837.ApiService>()),
-    );
-    gh.factory<_i500.CustomerOrdersRemoteDataSource>(
-      () => _i500.CustomerOrdersRemoteDataSourceImpl(gh<_i837.ApiService>()),
+    gh.factory<_i928.GetCustomerOrdersUseCase>(
+      () =>
+          _i928.GetCustomerOrdersUseCase(gh<_i445.CustomerOrdersRepository>()),
     );
     gh.factory<_i881.OffersRepo>(
       () => _i40.OffersRepoImpl(gh<_i860.OffersRemoteDataSource>()),
@@ -210,6 +241,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i537.SignUpRepo>(
       () => _i1019.SignUpRepoImpl(gh<_i798.SignUpRemoteDataSource>()),
+    );
+    gh.factory<_i56.TechnicianReviewsRemoteDataSource>(
+      () => _i56.TechnicianReviewsRemoteDataSourceImpl(gh<_i837.ApiService>()),
+    );
+    gh.factory<_i800.CustomerTechReviewsRemoteDataSource>(
+      () =>
+          _i800.CustomerTechReviewsRemoteDataSourceImpl(gh<_i837.ApiService>()),
     );
     gh.factory<_i133.ProblemDescriptionRemoteDataSource>(
       () => _i907.ProblemDescriptionDataSourceImpl(gh<_i837.ApiService>()),
@@ -233,6 +271,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i247.LoginRepo>(
       () => _i209.LoginRepoImpl(gh<_i175.LoginRemoteDataSources>()),
     );
+    gh.factory<_i908.TechnicianReviewsRepo>(
+      () => _i861.TechnicianReviewsRepoImpl(
+        gh<_i56.TechnicianReviewsRemoteDataSource>(),
+      ),
+    );
     gh.factory<_i542.AcceptOfferRepo>(
       () => _i162.AcceptOfferRepoImpl(gh<_i221.AcceptOfferRemoteDataSource>()),
     );
@@ -241,6 +284,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i663.GetOffersUseCase>(
       () => _i663.GetOffersUseCase(gh<_i881.OffersRepo>()),
+    );
+    gh.factory<_i31.CustomerTechReviewsRepository>(
+      () => _i975.CustomerTechReviewsRepositoryImpl(
+        gh<_i800.CustomerTechReviewsRemoteDataSource>(),
+      ),
     );
     gh.factory<_i134.AiEstimationUseCase>(
       () => _i134.AiEstimationUseCase(gh<_i262.AiEstimationRepo>()),
@@ -251,19 +299,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i887.ProfileRepo>(
       () => _i108.ProfileRepoImpl(gh<_i551.ProfileRemoteDataSource>()),
     );
+    gh.factory<_i303.CustomerOrdersCubit>(
+      () => _i303.CustomerOrdersCubit(gh<_i928.GetCustomerOrdersUseCase>()),
+    );
+    gh.factory<_i696.CancelRequestRepo>(
+      () => _i1060.CancelRequestRepoImpl(
+        gh<_i673.CancelRequestRemoteDataSource>(),
+      ),
+    );
     gh.factory<_i744.TechnicianJobsRepo>(
       () => _i375.TechnicianJobsRepoImpl(
         gh<_i234.TechnicianJobsRemoteDataSource>(),
-      ),
-    );
-    gh.factory<_i112.TechnicianReviewsRepo>(
-      () => _i111.TechnicianReviewsRepoImpl(
-        gh<_i110.TechnicianReviewsRemoteDataSource>(),
-      ),
-    );
-    gh.factory<_i502.CustomerOrdersRepository>(
-      () => _i501.CustomerOrdersRepositoryImpl(
-        gh<_i500.CustomerOrdersRemoteDataSource>(),
       ),
     );
     gh.factory<_i158.SignUpUseCase>(
@@ -280,14 +326,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i489.GetTechnicianJobsUseCase>(
       () => _i489.GetTechnicianJobsUseCase(gh<_i744.TechnicianJobsRepo>()),
-    );
-    gh.factory<_i113.GetTechnicianReviewsUseCase>(
-      () =>
-          _i113.GetTechnicianReviewsUseCase(gh<_i112.TechnicianReviewsRepo>()),
-    );
-    gh.factory<_i503.GetCustomerOrdersUseCase>(
-      () =>
-          _i503.GetCustomerOrdersUseCase(gh<_i502.CustomerOrdersRepository>()),
     );
     gh.factory<_i1048.SubmitJobOfferUseCase>(
       () => _i1048.SubmitJobOfferUseCase(gh<_i744.TechnicianJobsRepo>()),
@@ -312,6 +350,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i133.ProblemDescriptionRemoteDataSource>(),
       ),
     );
+    gh.factory<_i213.CancelRequestUseCase>(
+      () => _i213.CancelRequestUseCase(gh<_i696.CancelRequestRepo>()),
+    );
     gh.factory<_i1014.PublishUseCase>(
       () => _i1014.PublishUseCase(gh<_i624.PublishRepo>()),
     );
@@ -320,13 +361,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i489.GetTechnicianJobsUseCase>(),
         gh<_i188.SocketService>(),
       ),
-    );
-    gh.factory<_i114.TechnicianReviewsCubit>(
-      () =>
-          _i114.TechnicianReviewsCubit(gh<_i113.GetTechnicianReviewsUseCase>()),
-    );
-    gh.factory<_i504.CustomerOrdersCubit>(
-      () => _i504.CustomerOrdersCubit(gh<_i503.GetCustomerOrdersUseCase>()),
     );
     gh.factory<_i899.PublishCubit>(
       () => _i899.PublishCubit(gh<_i1014.PublishUseCase>()),
@@ -350,11 +384,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i896.AcceptOfferCubit>(
       () => _i896.AcceptOfferCubit(gh<_i1007.AcceptOfferUseCase>()),
     );
+    gh.factory<_i123.GetCustomerTechReviewsUseCase>(
+      () => _i123.GetCustomerTechReviewsUseCase(
+        gh<_i31.CustomerTechReviewsRepository>(),
+      ),
+    );
     gh.factory<_i813.SignupCubit>(
       () => _i813.SignupCubit(gh<_i158.SignUpUseCase>()),
     );
+    gh.factory<_i297.GetTechnicianReviewsUseCase>(
+      () =>
+          _i297.GetTechnicianReviewsUseCase(gh<_i908.TechnicianReviewsRepo>()),
+    );
     gh.factory<_i44.SubmitJobOfferCubit>(
       () => _i44.SubmitJobOfferCubit(gh<_i1048.SubmitJobOfferUseCase>()),
+    );
+    gh.factory<_i729.TechnicianReviewsCubit>(
+      () =>
+          _i729.TechnicianReviewsCubit(gh<_i297.GetTechnicianReviewsUseCase>()),
+    );
+    gh.factory<_i464.CustomerTechReviewsCubit>(
+      () => _i464.CustomerTechReviewsCubit(
+        gh<_i123.GetCustomerTechReviewsUseCase>(),
+      ),
     );
     gh.factory<_i733.ProblemDescriptionUseCase>(
       () => _i733.ProblemDescriptionUseCase(gh<_i488.ProblemDescriptionRepo>()),
@@ -362,6 +414,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i351.ProblemDescriptionCubit>(
       () =>
           _i351.ProblemDescriptionCubit(gh<_i733.ProblemDescriptionUseCase>()),
+    );
+    gh.factory<_i323.CancelRequestCubit>(
+      () => _i323.CancelRequestCubit(gh<_i213.CancelRequestUseCase>()),
     );
     return this;
   }

@@ -15,11 +15,17 @@ class ApiConstants {
       'api/v1/customer/requests/{id}/offers/{offerId}/accept';
   static const String technicianJobs = 'api/v1/technician/jobs';
   static const String submitJobOffer = 'api/v1/technician/jobs/{id}/offer';
+
+  static const String customerTechReviews =
+      'api/v1/customer/technicians/{id}/reviews';
+  static const String cancelRequest = 'api/v1/customer/requests/{id}/cancel';
+
   static const String notifications = 'api/v1/me/notifications';
   static const String notificationsUnreadCount =
       'api/v1/me/notifications/unread-count';
   static const String notificationsReadAll = 'api/v1/me/notifications/read-all';
   static const String technicianReviews = 'api/v1/technician/reviews';
+
 
   // Socket.IO runs on the REST API origin. 443 is the standard HTTPS port,
   // stated explicitly because socket_io_client otherwise serializes it as :0.

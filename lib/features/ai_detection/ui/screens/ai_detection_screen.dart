@@ -14,6 +14,8 @@ import 'package:salla7ly/features/ai_detection/ui/widgets/ai_detection_bloc_list
 import 'package:salla7ly/features/ai_detection/ui/widgets/ai_message_widget.dart';
 import 'package:salla7ly/features/problem_description/logic/publish_request/publish_bloc_listener.dart';
 import 'package:salla7ly/features/problem_description/logic/publish_request/publish_cubit.dart';
+import 'package:salla7ly/features/problem_description/logic/cancel_request/cancel_request_bloc_listener.dart';
+import 'package:salla7ly/features/problem_description/logic/cancel_request/cancel_request_cubit.dart';
 
 class AiDetectionScreen extends StatefulWidget {
   final String requestId;
@@ -108,8 +110,8 @@ class _AiDetectionScreenState extends State<AiDetectionScreen> {
                                 CustomElevatedButton(
                                   text: 'خرجني',
                                   onPressed: () {
-                                    context.pushReplacementNamed(
-                                      Routes.mainnavigationscreen,
+                                    context.read<CancelRequestCubit>().cancelRequest(
+                                      widget.requestId,
                                     );
                                   },
                                 ),
@@ -125,6 +127,7 @@ class _AiDetectionScreenState extends State<AiDetectionScreen> {
                 ),
                 const PublishBlocListener(),
                 const AiEstimationBlocListener(),
+                const CancelRequestBlocListener(),
               ],
             ),
           ),
