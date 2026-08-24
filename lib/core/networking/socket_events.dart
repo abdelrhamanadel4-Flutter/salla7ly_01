@@ -1,6 +1,8 @@
 import 'package:salla7ly/core/mappers/mappers.dart';
 import 'package:salla7ly/features/problem_description/data/models/offers_response_dto.dart';
 import 'package:salla7ly/features/problem_description/domain/entity/customer_offer.dart';
+import 'package:salla7ly/features/requsets/data/models/technician_jobs_response_dto.dart';
+import 'package:salla7ly/features/requsets/domain/entity/technician_job.dart';
 
 class SocketEvents {
   SocketEvents._();
@@ -41,6 +43,29 @@ class RequestUpdatedEvent {
     return RequestUpdatedEvent(
       requestId: json['requestId'] as String?,
       status: json['status'] as String?,
+    );
+  }
+}
+
+class JobNewEvent {
+  final TechnicianJob job;
+  JobNewEvent(this.job);
+
+  factory JobNewEvent.fromJson(Map<String, dynamic> json) {
+    return JobNewEvent(TechnicianJobDto.fromJson(json).toDomain());
+  }
+}
+
+class JobClosedEvent {
+  final String? requestId;
+  final String? reason;
+
+  JobClosedEvent({this.requestId, this.reason});
+
+  factory JobClosedEvent.fromJson(Map<String, dynamic> json) {
+    return JobClosedEvent(
+      requestId: json['requestId'] as String?,
+      reason: json['reason'] as String?,
     );
   }
 }

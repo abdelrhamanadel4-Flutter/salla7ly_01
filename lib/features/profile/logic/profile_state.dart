@@ -12,7 +12,5 @@ class ProfileState with _$ProfileState {
 
   const factory ProfileState.success(ProfileResponse data) = Success;
 
-  const factory ProfileState.error(
-    ApiErrorModel apiErrorModel,
-  ) = Error;
+  const factory ProfileState.error(ApiErrorModel apiErrorModel) = Error;
 }

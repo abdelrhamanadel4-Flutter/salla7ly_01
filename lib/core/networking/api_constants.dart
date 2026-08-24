@@ -12,6 +12,8 @@ class ApiConstants {
   static const String customerOffers = 'api/v1/customer/requests/{id}/offers';
   static const String acceptOffer =
       'api/v1/customer/requests/{id}/offers/{offerId}/accept';
+  static const String technicianJobs = 'api/v1/technician/jobs';
+  static const String submitJobOffer = 'api/v1/technician/jobs/{id}/offer';
 
   // Socket.IO runs on the REST API origin. 443 is the standard HTTPS port,
   // stated explicitly because socket_io_client otherwise serializes it as :0.

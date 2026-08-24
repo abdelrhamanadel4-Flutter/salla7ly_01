@@ -8,7 +8,6 @@ import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
-import 'package:salla7ly/core/widgets/custom_app_bar.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
 import 'package:salla7ly/core/widgets/dilaog_utils.dart';
 import 'package:salla7ly/features/profile/logic/profile_cubit.dart';
@@ -74,7 +73,10 @@ class ProfileScreen extends StatelessWidget {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        ProfileHeader(name: fullName ?? ""),
+                        ProfileHeader(
+                          name: fullName ?? "",
+                          profileImage: user?.profileImage,
+                        ),
                         verticalSpace(40),
                         Container(
                           width: double.infinity,

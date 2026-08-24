@@ -9,11 +9,11 @@ class ProfileResponseDto {
 
   ProfileResponseDto({this.data});
 
-  factory ProfileResponseDto.fromJson(Map<String, dynamic> json) => _$ProfileResponseDtoFromJson(json);
+  factory ProfileResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$ProfileResponseDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProfileResponseDtoToJson(this);
 }
-
 
 @JsonSerializable()
 class DataProfileResponseDto {
@@ -33,7 +33,8 @@ class DataProfileResponseDto {
     this.message,
   });
 
-  factory DataProfileResponseDto.fromJson(Map<String, dynamic> json) => _$DataProfileResponseDtoFromJson(json);
+  factory DataProfileResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$DataProfileResponseDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$DataProfileResponseDtoToJson(this);
 }
@@ -58,6 +59,8 @@ class UserProfileResponseDto {
   final double? latitude;
   @JsonKey(name: 'longitude')
   final double? longitude;
+  @JsonKey(name: 'profileImage')
+  final String? profileImage;
   @JsonKey(name: 'createdAt')
   final String? createdAt;
   @JsonKey(name: 'updatedAt')
@@ -75,15 +78,16 @@ class UserProfileResponseDto {
     this.address,
     this.latitude,
     this.longitude,
+    this.profileImage,
     this.createdAt,
     this.updatedAt,
     this.pointsBalance,
   });
 
-  factory UserProfileResponseDto.fromJson(Map<String, dynamic> json) => _$UserProfileResponseDtoFromJson(json);
+  factory UserProfileResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$UserProfileResponseDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserProfileResponseDtoToJson(this);
-  
 }
 
 @JsonSerializable()
@@ -119,14 +123,14 @@ class TechnicianProfileResponseDto {
     this.totalReviews,
     this.profileImage,
     this.createdAt,
-    this.updatedAt
+    this.updatedAt,
   });
 
-  factory TechnicianProfileResponseDto.fromJson(Map<String, dynamic> json) => _$TechnicianProfileResponseDtoFromJson(json);
+  factory TechnicianProfileResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$TechnicianProfileResponseDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$TechnicianProfileResponseDtoToJson(this);
 }
-
 
 //customer
 // {

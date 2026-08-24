@@ -15,6 +15,8 @@ import 'package:salla7ly/features/problem_description/data/models/offers_respons
 import 'package:salla7ly/features/problem_description/data/models/problem_description_response_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/publish_request_response_dto.dart';
 import 'package:salla7ly/features/profile/data/model/profile_response_dto.dart';
+import 'package:salla7ly/features/requsets/data/models/submit_job_offer_dto.dart';
+import 'package:salla7ly/features/requsets/data/models/technician_jobs_response_dto.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
@@ -36,6 +38,12 @@ abstract class ApiService {
   @GET(ApiConstants.getProfile)
   Future<ProfileResponseDto> getProfile();
 
+  @PATCH(ApiConstants.getProfile)
+  Future<ProfileResponseDto> updateProfile(@Body() Map<String, dynamic> body);
+
+  @PATCH(ApiConstants.getProfile)
+  Future<ProfileResponseDto> updateProfileWithImage(@Body() FormData body);
+
   @POST(ApiConstants.request)
   Future<ProblemDescriptionResponseDto> createProblemDescription(
     @Body() FormData formData,
@@ -54,5 +62,18 @@ abstract class ApiService {
   Future<AcceptOfferResponseDto> acceptOffer(
     @Path('id') String id,
     @Path('offerId') String offerId,
+  );
+
+  @GET(ApiConstants.technicianJobs)
+  Future<TechnicianJobsResponseDto> getTechnicianJobs({
+    @Query('page') int? page,
+    @Query('limit') int? limit,
+    @Query('status') String? status,
+  });
+
+  @POST(ApiConstants.submitJobOffer)
+  Future<SubmitJobOfferResponseDto> submitJobOffer(
+    @Path('id') String id,
+    @Body() SubmitJobOfferDto body,
   );
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
@@ -65,11 +64,26 @@ class HomeScreen extends StatelessWidget {
 
                     return Column(
                       children: [
-                        ProfileHeader(name: fullName),
+                        ProfileHeader(
+                          name: fullName,
+                          profileImage:
+                              profileResponse.data?.technician?.profileImage ??
+                              user?.profileImage,
+                        ),
 
                         verticalSpace(24),
 
-                        const RatingSection(),
+                        RatingSection(
+                          rating:
+                              double.tryParse(
+                                profileResponse
+                                        .data
+                                        ?.technician
+                                        ?.overallRating ??
+                                    '',
+                              ) ??
+                              0,
+                        ),
 
                         verticalSpace(18),
 
