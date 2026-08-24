@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salla7ly/core/di/injectoin.dart';
 import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
+import 'package:salla7ly/core/networking/api_result.dart';
 import 'package:salla7ly/core/networking/socket_service.dart';
 import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
@@ -14,6 +15,7 @@ import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/widgets/custom_elveted_buttom.dart';
 import 'package:salla7ly/features/auth/signup/ui/widgets/technician_acceptance_progress.dart';
+import 'package:salla7ly/features/problem_description/domain/use_cases/get_offers_use_case.dart';
 import 'package:salla7ly/features/problem_description/logic/cancel_request/cancel_request_bloc_listener.dart';
 import 'package:salla7ly/features/problem_description/logic/cancel_request/cancel_request_cubit.dart';
 
@@ -35,7 +37,14 @@ class _WaitingRequestScreenState
   final SocketService _socketService =
       getIt<SocketService>();
 
+  final GetOffersUseCase _getOffersUseCase =
+      getIt<GetOffersUseCase>();
+
   StreamSubscription? _offerNewSubscription;
+
+  Timer? _pollingTimer;
+
+  static const _pollingInterval = Duration(seconds: 5);
 
   bool _navigated = false;
 
@@ -44,6 +53,59 @@ class _WaitingRequestScreenState
     super.initState();
 
     _connectAndListen();
+    _startPolling();
+  }
+
+  void _startPolling() {
+    _pollingTimer?.cancel();
+
+    _pollingTimer = Timer.periodic(_pollingInterval, (_) {
+      _pollOffersOnce();
+    });
+  }
+
+  Future<void> _pollOffersOnce() async {
+    if (!mounted || _navigated) {
+      return;
+    }
+
+    final result =
+        await _getOffersUseCase.invoke(widget.requestId);
+
+    if (!mounted || _navigated) {
+      return;
+    }
+
+    result.when(
+      success: (offers) {
+        if (offers.isNotEmpty) {
+          print(
+            'WAITING SCREEN: offer found via polling '
+            '(${offers.length})',
+          );
+          _goToOffersScreen();
+        }
+      },
+      failure: (error) {
+        print(
+          'WAITING SCREEN: polling error -> $error',
+        );
+      },
+    );
+  }
+
+  void _goToOffersScreen() {
+    if (!mounted || _navigated) {
+      return;
+    }
+
+    _navigated = true;
+    _pollingTimer?.cancel();
+
+    context.pushReplacementNamed(
+      Routes.requestTechnicianScreen,
+      arguments: widget.requestId,
+    );
   }
 
   Future<void> _connectAndListen() async {
@@ -55,21 +117,12 @@ class _WaitingRequestScreenState
         return;
       }
 
-      if (!mounted || _navigated) {
-        return;
-      }
-
-      _navigated = true;
-
       print(
         'WAITING SCREEN: offer received -> '
         '${event.offer?.offerId}',
       );
 
-      context.pushReplacementNamed(
-        Routes.requestTechnicianScreen,
-        arguments: widget.requestId,
-      );
+      _goToOffersScreen();
     });
 
     await _socketService.connect();
@@ -84,6 +137,7 @@ class _WaitingRequestScreenState
   @override
   void dispose() {
     _offerNewSubscription?.cancel();
+    _pollingTimer?.cancel();
     super.dispose();
   }
 

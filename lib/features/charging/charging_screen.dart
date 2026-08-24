@@ -6,7 +6,6 @@ import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/features/charging/charging_offer_item.dart';
 import 'package:salla7ly/features/charging/add_charging_price_screen.dart';
-import 'package:salla7ly/core/theming/assets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:salla7ly/core/helpers/extesions.dart';
 
