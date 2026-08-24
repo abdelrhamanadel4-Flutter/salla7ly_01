@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,14 +8,25 @@ import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
+import 'package:salla7ly/core/networking/api_constants.dart';
 
 class ProfileHeader extends StatelessWidget {
-  ProfileHeader({super.key, this.name = '', this.isEditPROFILE = false,this.isReviewScreen=false});
+  const ProfileHeader({
+    super.key,
+    this.name = '',
+    this.isEditPROFILE = false,
+    this.isReviewScreen = false,
+    this.profileImage,
+    this.localProfileImage,
+    this.onEditImage,
+  });
 
   final String name;
   final bool isEditPROFILE;
-    final bool isReviewScreen;
-
+  final bool isReviewScreen;
+  final String? profileImage;
+  final File? localProfileImage;
+  final VoidCallback? onEditImage;
 
   @override
   Widget build(BuildContext context) {
@@ -29,19 +42,7 @@ class ProfileHeader extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100.r),
                 border: Border.all(color: AppColors.primaryColor, width: 1.5.w),
               ),
-              child: ClipOval(
-                child: CachedNetworkImage(
-                  imageUrl: Assets.imagesProfileImage,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
-                  errorWidget: (context, url, error) =>
-                      Image.asset(Assets.imagesProfileImage, fit: BoxFit.cover),
-                ),
-              ),
+              child: ClipOval(child: _buildProfileImage()),
             ),
 
             Visibility(
@@ -67,7 +68,7 @@ class ProfileHeader extends StatelessWidget {
                         vertical: 1.h,
                       ),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: onEditImage,
                         child: SvgPicture.asset(Assets.svgsEditImage),
                       ),
                     ),
@@ -81,7 +82,7 @@ class ProfileHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            isEditPROFILE ||isReviewScreen
+            isEditPROFILE || isReviewScreen
                 ? SizedBox()
                 : IconButton(
                     icon: Icon(
@@ -96,6 +97,32 @@ class ProfileHeader extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+
+  Widget _buildProfileImage() {
+    if (localProfileImage != null) {
+      return Image.file(localProfileImage!, fit: BoxFit.cover);
+    }
+
+    final imageUrl = profileImage == null || profileImage!.isEmpty
+        ? null
+        : profileImage!.startsWith('http')
+        ? profileImage!
+        : '${ApiConstants.baseUrl}${profileImage!.replaceFirst(RegExp(r'^/'), '')}';
+
+    if (imageUrl == null) {
+      return Image.asset(Assets.imagesProfileImage, fit: BoxFit.cover);
+    }
+
+    return CachedNetworkImage(
+      imageUrl: imageUrl,
+      fit: BoxFit.cover,
+      placeholder: (context, url) => Center(
+        child: CircularProgressIndicator(color: AppColors.primaryColor),
+      ),
+      errorWidget: (context, url, error) =>
+          Image.asset(Assets.imagesProfileImage, fit: BoxFit.cover),
     );
   }
 }

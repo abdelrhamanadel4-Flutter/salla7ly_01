@@ -6,14 +6,34 @@ import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 
 class ConsultationPriceDialog extends StatefulWidget {
-  const ConsultationPriceDialog({super.key, this.onCompleted});
+  const ConsultationPriceDialog({
+    super.key,
+    this.onSubmit,
+    this.minFee,
+    this.maxFee,
+    this.suggestedFee,
+  });
 
-  final VoidCallback? onCompleted;
+  final void Function(num price)? onSubmit;
+  final num? minFee;
+  final num? maxFee;
+  final num? suggestedFee;
 
-  static Future<void> show(BuildContext context, {VoidCallback? onCompleted}) {
+  static Future<void> show(
+    BuildContext context, {
+    void Function(num price)? onSubmit,
+    num? minFee,
+    num? maxFee,
+    num? suggestedFee,
+  }) {
     return showDialog<void>(
       context: context,
-      builder: (_) => ConsultationPriceDialog(onCompleted: onCompleted),
+      builder: (_) => ConsultationPriceDialog(
+        onSubmit: onSubmit,
+        minFee: minFee,
+        maxFee: maxFee,
+        suggestedFee: suggestedFee,
+      ),
     );
   }
 
@@ -23,10 +43,18 @@ class ConsultationPriceDialog extends StatefulWidget {
 }
 
 class _ConsultationPriceDialogState extends State<ConsultationPriceDialog> {
-  int _price = 100;
+  late int _price;
 
-  void _changePrice(int value) {
-    setState(() => _price = (_price + value).clamp(0, 100000));
+  @override
+  void initState() {
+    super.initState();
+    _price = (widget.suggestedFee ?? 100).toInt();
+  }
+
+  void _changePrice(int delta) {
+    final min = (widget.minFee ?? 0).toInt();
+    final max = (widget.maxFee ?? 100000).toInt();
+    setState(() => _price = (_price + delta).clamp(min, max));
   }
 
   @override
@@ -71,15 +99,17 @@ class _ConsultationPriceDialogState extends State<ConsultationPriceDialog> {
                 onIncrease: () => _changePrice(10),
               ),
               SizedBox(height: 16.h),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  'تحديد سعر الكشف بالكامل',
-                  style: AppStyles.semiBold11primary.copyWith(fontSize: 17.sp),
+              if (widget.maxFee != null)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    'تحديد سعر الكشف بالكامل',
+                    style: AppStyles.semiBold11primary.copyWith(fontSize: 17.sp),
+                  ),
                 ),
-              ),
               SizedBox(height: 12.h),
-              const _DisabledPriceControl(value: 300),
+              _DisabledPriceControl(
+                  value: (widget.maxFee ?? 300).toInt()),
               SizedBox(height: 38.h),
               SizedBox(
                 width: 210.w,
@@ -87,7 +117,7 @@ class _ConsultationPriceDialogState extends State<ConsultationPriceDialog> {
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop();
-                    widget.onCompleted?.call();
+                    widget.onSubmit?.call(_price);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,

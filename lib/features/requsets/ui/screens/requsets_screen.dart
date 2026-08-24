@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salla7ly/core/helpers/extesions.dart';
 import 'package:salla7ly/core/routing/routes.dart';
@@ -6,6 +7,8 @@ import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/features/offers/widgets/offer_card.dart';
 import 'package:salla7ly/features/offers/widgets/offers_header.dart';
+import 'package:salla7ly/features/requsets/domain/entity/technician_job.dart';
+import 'package:salla7ly/features/requsets/logic/technician_jobs_cubit.dart';
 
 class RequsetsScreen extends StatelessWidget {
   const RequsetsScreen({super.key});
@@ -15,39 +18,89 @@ class RequsetsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.scaffoldColor,
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
-          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const OffersHeader(),
-
-              SizedBox(height: 20.h),
-
-              Text('طلبات العملاء ', style: AppStyles.semiBold24Primary),
-              SizedBox(height: 10.h),
-
-              GestureDetector(
-                onTap: () {
-                  context.pushNamed(Routes.customeraccount);
-                },
-                child: const OfferCard(
-                  technicianName: 'محمد احمد',
-                  serviceName: 'المسافه : 2 كيلومتر',
-                  date: '',
+          slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const OffersHeader(),
+                    SizedBox(height: 20.h),
+                    Text(
+                      'طلبات العملاء',
+                      style: AppStyles.semiBold24Primary,
+                    ),
+                    SizedBox(height: 10.h),
+                  ],
                 ),
               ),
+            ),
+            BlocBuilder<TechnicianJobsCubit, TechnicianJobsState>(
+              builder: (context, state) {
+                if (state is TechnicianJobsLoading) {
+                  return const SliverFillRemaining(
+                    child: Center(child: CircularProgressIndicator()),
+                  );
+                }
 
-              const OfferCard(
-                technicianName: 'محمد احمد',
-                serviceName: 'المسافه : 2 كيلومتر',
-                date: '',
-              ),
-            ],
-          ),
+                if (state is TechnicianJobsError) {
+                  return SliverFillRemaining(
+                    child: Center(child: Text(state.message)),
+                  );
+                }
+
+                final jobs = _getJobs(state);
+
+                if (jobs.isEmpty) {
+                  return SliverFillRemaining(
+                    child: Center(
+                      child: Text(
+                        'لا توجد طلبات حالياً',
+                        style: AppStyles.mediun12Primary,
+                      ),
+                    ),
+                  );
+                }
+
+                return SliverPadding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  sliver: SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        final job = jobs[index];
+                        return GestureDetector(
+                          onTap: () => context.pushNamed(
+                            Routes.customeraccount,
+                            arguments: job,
+                          ),
+                          child: OfferCard(
+                            technicianName:
+                                job.request?.customer?.fullName ?? '',
+                            serviceName:
+                                'المسافة: ${job.request?.customer?.distanceKm ?? '—'} كم',
+                            date: job.request?.categoryName ?? '',
+                          ),
+                        );
+                      },
+                      childCount: jobs.length,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  List<TechnicianJob> _getJobs(TechnicianJobsState state) {
+    if (state is TechnicianJobsSuccess) return state.jobs;
+    if (state is TechnicianJobsLoadingMore) return state.jobs;
+    if (state is TechnicianJobsLoadMoreError) return state.jobs;
+    return [];
   }
 }

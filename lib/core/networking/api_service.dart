@@ -10,10 +10,14 @@ import 'package:salla7ly/features/auth/login/data/model/verify_otp_request_dto.d
 import 'package:salla7ly/features/auth/login/data/model/verify_otp_response_dto.dart';
 import 'package:salla7ly/features/categories/data/models/categories_response_dto.dart';
 import 'package:salla7ly/features/auth/signup/data/model/sign_up_responsedto.dart';
+import 'package:salla7ly/features/problem_description/data/models/accept_offer_response_dto.dart';
+import 'package:salla7ly/features/problem_description/data/models/offers_response_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/problem_description_request_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/problem_description_response_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/publish_request_response_dto.dart';
 import 'package:salla7ly/features/profile/data/model/profile_response_dto.dart';
+import 'package:salla7ly/features/requsets/data/models/submit_job_offer_dto.dart';
+import 'package:salla7ly/features/requsets/data/models/technician_jobs_response_dto.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
@@ -35,6 +39,12 @@ abstract class ApiService {
   @GET(ApiConstants.getProfile)
   Future<ProfileResponseDto> getProfile();
 
+  @PATCH(ApiConstants.getProfile)
+  Future<ProfileResponseDto> updateProfile(@Body() Map<String, dynamic> body);
+
+  @PATCH(ApiConstants.getProfile)
+  Future<ProfileResponseDto> updateProfileWithImage(@Body() FormData body);
+
   @POST(ApiConstants.request)
   Future<ProblemDescriptionResponseDto> createProblemDescription(
     @Body() ProblemDescriptionRequestDto body,
@@ -45,4 +55,26 @@ abstract class ApiService {
 
   @POST(ApiConstants.publishRequest)
   Future<PublishRequestResponseDto> publishRequest(@Path('id') String id);
+
+  @GET(ApiConstants.customerOffers)
+  Future<OffersResponseDto> getOffers(@Path('id') String id);
+
+  @POST(ApiConstants.acceptOffer)
+  Future<AcceptOfferResponseDto> acceptOffer(
+    @Path('id') String id,
+    @Path('offerId') String offerId,
+  );
+
+  @GET(ApiConstants.technicianJobs)
+  Future<TechnicianJobsResponseDto> getTechnicianJobs({
+    @Query('page') int? page,
+    @Query('limit') int? limit,
+    @Query('status') String? status,
+  });
+
+  @POST(ApiConstants.submitJobOffer)
+  Future<SubmitJobOfferResponseDto> submitJobOffer(
+    @Path('id') String id,
+    @Body() SubmitJobOfferDto body,
+  );
 }

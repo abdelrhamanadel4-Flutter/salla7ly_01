@@ -26,12 +26,23 @@ class PublishBlocListener extends StatelessWidget {
           success: (data) {
             DialogUtils.hideLoading(context);
 
-            final technicianCount =
-                data.data?.technicianCount ?? 0;
+            final technicianCount = data.data?.technicianCount ?? 0;
+            final requestId = data.data?.request?.id;
+
+            if (requestId == null) {
+              DialogUtils.showMessage(
+                context: context,
+                type: DialogType.error,
+                title: 'حصل خطأ',
+                message: 'رقم الطلب غير موجود',
+              );
+              return;
+            }
 
             if (technicianCount == 0) {
               context.pushReplacementNamed(
                 Routes.waitingRequestScreen,
+                arguments: requestId,
               );
             } else {
               // هنا بعدين هنبدأ Offers

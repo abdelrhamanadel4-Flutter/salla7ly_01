@@ -5,29 +5,22 @@ import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
+import 'package:salla7ly/features/problem_description/domain/entity/customer_offer.dart';
 
 class TechnicianRequestContainer extends StatelessWidget {
-  TechnicianRequestContainer({
+  const TechnicianRequestContainer({
     super.key,
-    required this.technicianName,
-    required this.technicianField,
-    required this.distance,
-    required this.noOfRates,
-    required this.price,
-    required this.priceOfConsultation,
-    required this.onTap
+    required this.offer,
+    required this.onTap,
   });
 
-  final String technicianName;
-  final String technicianField;
-  final num distance;
-  final int noOfRates;
-  final num price;
-  final num priceOfConsultation;
+  final CustomerOffer offer;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
+    final technician = offer.technician;
+
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -53,7 +46,7 @@ class TechnicianRequestContainer extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            '$technicianName ($technicianField)',
+                            '${technician?.fullName ?? ''} (${technician?.categoryName ?? ''})',
                             style: AppStyles.semiBold14primary,
                           ),
                           horizontalSpace(4),
@@ -62,21 +55,21 @@ class TechnicianRequestContainer extends StatelessWidget {
                       ),
                       verticalSpace(4),
                       Text(
-                        'المسافه : $distance كيلومتر',
+                        'المسافه : ${technician?.distanceKm ?? 0} كيلومتر',
                         style: AppStyles.semiBold11primary,
                       ),
                       verticalSpace(4),
                       Text(
-                        '(+$noOfRates تقييم)',
+                        '(+${technician?.totalReviews ?? 0} تقييم)',
                         style: AppStyles.medium11FoundationGrey,
                       ),
                     ],
                   ),
                 ],
               ),
-      
+
               Text(
-                'موافق ب $price \n + $priceOfConsultation استشارة',
+                'موافق ب ${offer.price ?? 0} \n + ${offer.consultationFee ?? 0} استشارة',
                 style: AppStyles.mediun12Primary,
               ),
             ],

@@ -23,7 +23,10 @@ import 'package:salla7ly/features/home/home_screen.dart';
 import 'package:salla7ly/features/problem_description/logic/problem_description/problem_description_cubit.dart';
 import 'package:salla7ly/features/orders/screens/orders_screen.dart';
 import 'package:salla7ly/features/ai_detection/ui/screens/ai_detection_screen.dart';
+import 'package:salla7ly/features/problem_description/domain/entity/customer_offer.dart';
+import 'package:salla7ly/features/problem_description/logic/accept_offer/accept_offer_cubit.dart';
 import 'package:salla7ly/features/problem_description/logic/publish_request/publish_cubit.dart';
+import 'package:salla7ly/features/problem_description/logic/request_offers/request_offers_cubit.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/kind_of_problem_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/problem_description_ai_screen.dart';
 import 'package:salla7ly/features/problem_description/ui/screens/problem_description_screen.dart';
@@ -34,6 +37,9 @@ import 'package:salla7ly/features/problem_description/ui/screens/tech_profile_cu
 import 'package:salla7ly/features/problem_description/ui/screens/waiting_request_screen.dart';
 import 'package:salla7ly/features/profile/logic/profile_cubit.dart';
 import 'package:salla7ly/features/profile/ui/screens/profile_screen.dart';
+import 'package:salla7ly/features/requsets/domain/entity/technician_job.dart';
+import 'package:salla7ly/features/requsets/logic/submit_job_offer_cubit.dart';
+import 'package:salla7ly/features/requsets/logic/technician_jobs_cubit.dart';
 import 'package:salla7ly/features/requsets/ui/screens/requsets_screen.dart';
 import 'package:salla7ly/features/reviews/ui/screens/reviews_screen.dart';
 
@@ -120,7 +126,12 @@ class AppRouter {
       case Routes.questionscreen:
         return MaterialPageRoute(builder: (_) => const QuestionScreen());
       case Routes.requsetsscreen:
-        return MaterialPageRoute(builder: (_) => const RequsetsScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<TechnicianJobsCubit>()..fetchJobs(),
+            child: const RequsetsScreen(),
+          ),
+        );
       case Routes.ordersscreen:
         return MaterialPageRoute(builder: (_) => const OrdersScreen());
       case Routes.editprofilescreantech:
@@ -145,26 +156,47 @@ class AppRouter {
         );
 
       case Routes.requestTechnicianScreen:
+        final requestId = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => const RequestTechnicianScreen(),
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<RequestOffersCubit>()..loadOffers(requestId),
+            child: RequestTechnicianScreen(requestId: requestId),
+          ),
         );
 
       case Routes.requestReviewScreen:
         return MaterialPageRoute(builder: (_) => const RequestReviewScreen());
       case Routes.techProfileCustomerViewScreen:
+        final offer = settings.arguments as CustomerOffer;
         return MaterialPageRoute(
-          builder: (_) => const TechProfileCustomerViewScreen(),
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<AcceptOfferCubit>(),
+            child: TechProfileCustomerViewScreen(offer: offer),
+          ),
         );
 
       case Routes.waitingRequestScreen:
-        return MaterialPageRoute(builder: (_) => const WaitingRequestScreen());
+
+        final requestId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => WaitingRequestScreen(requestId: requestId),
+        );
+
+        
       case Routes.reviewsscreen:
         return MaterialPageRoute(builder: (_) => const ReviewsScreen());
+
 
       case Routes.chargingScreen:
         return MaterialPageRoute(builder: (_) => const ChargingScreen());
             case Routes.customeraccount:
-        return MaterialPageRoute(builder: (_) => const CustomerAccount());
+        final job = settings.arguments as TechnicianJob;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<SubmitJobOfferCubit>(),
+            child: CustomerAccount(job: job),
+          ),
+        );
 
         
 

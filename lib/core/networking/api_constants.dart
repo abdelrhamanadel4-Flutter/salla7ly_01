@@ -9,6 +9,14 @@ class ApiConstants {
   static const String request = 'api/v1/customer/requests';
   static const String aiEstimation = 'api/v1/customer/requests/{id}/ai-estimation';
   static const String publishRequest = 'api/v1/customer/requests/{id}/publish';
+  static const String customerOffers = 'api/v1/customer/requests/{id}/offers';
+  static const String acceptOffer =
+      'api/v1/customer/requests/{id}/offers/{offerId}/accept';
+  static const String technicianJobs = 'api/v1/technician/jobs';
+  static const String submitJobOffer = 'api/v1/technician/jobs/{id}/offer';
+
+  static String get socketUrl =>
+      baseUrl.endsWith('/') ? baseUrl.substring(0, baseUrl.length - 1) : baseUrl;
 }
 
 class ApiErrors {

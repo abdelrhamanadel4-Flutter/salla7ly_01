@@ -26,9 +26,9 @@ class ProfileShimmer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100.r),
                 ),
               ),
-        
+
               verticalSpace(16),
-        
+
               // Name
               Container(
                 width: 150.w,
@@ -38,9 +38,9 @@ class ProfileShimmer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.r),
                 ),
               ),
-        
+
               verticalSpace(40),
-        
+
               // Wallet
               Container(
                 width: double.infinity,
@@ -50,9 +50,9 @@ class ProfileShimmer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12.r),
                 ),
               ),
-        
+
               verticalSpace(40),
-        
+
               // Button
               Container(
                 width: double.infinity,
@@ -62,9 +62,9 @@ class ProfileShimmer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.r),
                 ),
               ),
-        
+
               verticalSpace(8),
-        
+
               // Button
               Container(
                 width: double.infinity,
@@ -75,7 +75,7 @@ class ProfileShimmer extends StatelessWidget {
                 ),
               ),
               verticalSpace(8),
-        
+
               // Button
               Container(
                 width: double.infinity,

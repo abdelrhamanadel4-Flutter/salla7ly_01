@@ -38,7 +38,10 @@ class ProblemDescriptionBlocListener extends StatelessWidget {
             }
             context.read<PublishCubit>().publishRequest(requestId);
 
-            context.pushReplacementNamed(Routes.waitingRequestScreen);
+            context.pushReplacementNamed(
+              Routes.waitingRequestScreen,
+              arguments: requestId,
+            );
           },
 
           error: (error) {
