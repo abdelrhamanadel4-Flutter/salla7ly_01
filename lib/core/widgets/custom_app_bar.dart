@@ -36,3 +36,25 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
+
+class BackAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const BackAppBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      leading: const SizedBox.shrink(),
+      actions: [
+        IconButton(
+          onPressed: () => context.pop(),
+          icon: SvgPicture.asset(Assets.svgsArrowBack),
+        ),
+        SizedBox(width: 12.w),
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}

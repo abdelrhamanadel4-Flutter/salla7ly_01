@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:salla7ly/core/helpers/extesions.dart';
+import 'package:salla7ly/core/helpers/shared_pref_helper.dart';
+import 'package:salla7ly/core/routing/routes.dart';
 import 'package:salla7ly/core/helpers/spacing.dart';
 import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
@@ -72,6 +75,12 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
     );
   }
 
+  Future<void> _logout() async {
+    await SharedPrefHelper.logout();
+    if (!mounted) return;
+    context.pushAndRemoveUntil(Routes.loginScreen);
+  }
+
   @override
   Widget build(BuildContext context) {
     final profileImage =
@@ -138,7 +147,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
               Expanded(
                 child: CustomElevatedButton(
                   text: 'تسجيل خروج',
-                  onPressed: () {},
+                  onPressed: _logout,
                 ),
               ),
               horizontalSpace(10.w),
