@@ -223,7 +223,10 @@ class AppRouter {
           ),
         );
       case Routes.mainnavigationscreen:
-        return MaterialPageRoute(builder: (_) => const MainNavigationScreen());
+        final initialIndex = settings.arguments as int? ?? 0;
+        return MaterialPageRoute(
+          builder: (_) => MainNavigationScreen(initialIndex: initialIndex),
+        );
       case Routes.mainnavigationscreentech:
         return MaterialPageRoute(
           builder: (_) => const MainNavigationScreenTech(),

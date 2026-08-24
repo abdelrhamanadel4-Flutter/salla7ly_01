@@ -116,6 +116,16 @@ import 'package:salla7ly/features/problem_description/logic/publish_request/publ
     as _i899;
 import 'package:salla7ly/features/problem_description/logic/request_offers/request_offers_cubit.dart'
     as _i437;
+import 'package:salla7ly/features/orders/data/data_source/remote/customer_orders_remote_data_source.dart'
+    as _i500;
+import 'package:salla7ly/features/orders/data/repositories/customer_orders_repository_impl.dart'
+    as _i501;
+import 'package:salla7ly/features/orders/domain/repositories/customer_orders_repository.dart'
+    as _i502;
+import 'package:salla7ly/features/orders/domain/use_cases/get_customer_orders_use_case.dart'
+    as _i503;
+import 'package:salla7ly/features/orders/logic/customer_orders_cubit.dart'
+    as _i504;
 import 'package:salla7ly/features/profile/data/data_sources/remote/profile_remote_data_source.dart'
     as _i551;
 import 'package:salla7ly/features/profile/data/data_sources/remote/profile_remote_data_source_impl.dart'
@@ -176,6 +186,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i234.TechnicianJobsRemoteDataSource>(
       () => _i234.TechnicianJobsRemoteDataSourceImpl(gh<_i837.ApiService>()),
     );
+    gh.factory<_i500.CustomerOrdersRemoteDataSource>(
+      () => _i500.CustomerOrdersRemoteDataSourceImpl(gh<_i837.ApiService>()),
+    );
     gh.factory<_i881.OffersRepo>(
       () => _i40.OffersRepoImpl(gh<_i860.OffersRemoteDataSource>()),
     );
@@ -230,6 +243,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i234.TechnicianJobsRemoteDataSource>(),
       ),
     );
+    gh.factory<_i502.CustomerOrdersRepository>(
+      () => _i501.CustomerOrdersRepositoryImpl(
+        gh<_i500.CustomerOrdersRemoteDataSource>(),
+      ),
+    );
     gh.factory<_i158.SignUpUseCase>(
       () => _i158.SignUpUseCase(gh<_i537.SignUpRepo>()),
     );
@@ -244,6 +262,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i489.GetTechnicianJobsUseCase>(
       () => _i489.GetTechnicianJobsUseCase(gh<_i744.TechnicianJobsRepo>()),
+    );
+    gh.factory<_i503.GetCustomerOrdersUseCase>(
+      () => _i503.GetCustomerOrdersUseCase(gh<_i502.CustomerOrdersRepository>()),
     );
     gh.factory<_i1048.SubmitJobOfferUseCase>(
       () => _i1048.SubmitJobOfferUseCase(gh<_i744.TechnicianJobsRepo>()),
@@ -276,6 +297,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i489.GetTechnicianJobsUseCase>(),
         gh<_i188.SocketService>(),
       ),
+    );
+    gh.factory<_i504.CustomerOrdersCubit>(
+      () => _i504.CustomerOrdersCubit(gh<_i503.GetCustomerOrdersUseCase>()),
     );
     gh.factory<_i899.PublishCubit>(
       () => _i899.PublishCubit(gh<_i1014.PublishUseCase>()),

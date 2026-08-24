@@ -15,6 +15,7 @@ import 'package:salla7ly/features/problem_description/data/models/offers_respons
 import 'package:salla7ly/features/problem_description/data/models/problem_description_response_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/publish_request_response_dto.dart';
 import 'package:salla7ly/features/profile/data/model/profile_response_dto.dart';
+import 'package:salla7ly/features/orders/data/models/customer_orders_response_dto.dart';
 import 'package:salla7ly/features/requsets/data/models/submit_job_offer_dto.dart';
 import 'package:salla7ly/features/requsets/data/models/technician_jobs_response_dto.dart';
 part 'api_service.g.dart';
@@ -63,6 +64,13 @@ abstract class ApiService {
     @Path('id') String id,
     @Path('offerId') String offerId,
   );
+
+  @GET(ApiConstants.request)
+  Future<CustomerOrdersResponseDto> getCustomerOrders({
+    @Query('page') int page = 1,
+    @Query('limit') int limit = 20,
+    @Query('status') String? status,
+  });
 
   @GET(ApiConstants.technicianJobs)
   Future<TechnicianJobsResponseDto> getTechnicianJobs({
