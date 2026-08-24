@@ -9,6 +9,7 @@ import 'package:salla7ly/core/theming/app_color.dart';
 import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 import 'package:salla7ly/core/networking/api_constants.dart';
+import 'package:salla7ly/core/widgets/notification_bell.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({
@@ -84,14 +85,7 @@ class ProfileHeader extends StatelessWidget {
           children: [
             isEditPROFILE || isReviewScreen
                 ? SizedBox()
-                : IconButton(
-                    icon: Icon(
-                      Icons.notifications,
-                      color: AppColors.primaryColor,
-                      size: 40.r,
-                    ),
-                    onPressed: () {},
-                  ),
+                : const NotificationBell(),
             horizontalSpace(4),
             Text(name, style: AppStyles.bold24Primary),
           ],
