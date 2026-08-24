@@ -28,6 +28,8 @@ import 'package:salla7ly/features/problem_description/domain/entity/problem_desc
 import 'package:salla7ly/features/problem_description/domain/entity/publish_request_response.dart';
 import 'package:salla7ly/features/profile/data/model/profile_response_dto.dart';
 import 'package:salla7ly/features/profile/domain/entity/profile_response.dart';
+import 'package:salla7ly/features/requsets/data/models/technician_jobs_response_dto.dart';
+import 'package:salla7ly/features/requsets/domain/entity/technician_job.dart';
 
 extension RequestOtpRequestMapper on RequsetOtpRequset {
   RequsetOtpRequsetDto toDto() {
@@ -493,3 +495,58 @@ extension AcceptOfferTechnicianDtoMapper on AcceptOfferTechnicianDto {
     return AcceptedTechnician(id: id, fullName: fullName, phone: phone);
   }
 }
+
+extension TechnicianJobDtoMapper on TechnicianJobDto {
+  TechnicianJob toDomain() {
+    return TechnicianJob(
+      id: id,
+      status: status,
+      createdAt: createdAt,
+      request: request?.toDomain(),
+      fee: fee?.toDomain(),
+    );
+  }
+}
+
+extension JobRequestDtoMapper on JobRequestDto {
+  JobRequest toDomain() {
+    return JobRequest(
+      id: id,
+      title: title,
+      description: description,
+      categoryName: categoryName,
+      requestType: requestType,
+      images: images,
+      aiEstimation: aiEstimation?.toDomain(),
+      customer: customer?.toDomain(),
+    );
+  }
+}
+
+extension JobAiEstimationDtoMapper on JobAiEstimationDto {
+  JobAiEstimation toDomain() {
+    return JobAiEstimation(
+      severity: severity,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+      confidence: confidence,
+    );
+  }
+}
+
+extension JobCustomerDtoMapper on JobCustomerDto {
+  JobCustomer toDomain() {
+    return JobCustomer(
+      fullName: fullName,
+      city: city,
+      distanceKm: distanceKm,
+    );
+  }
+}
+
+extension JobFeeDtoMapper on JobFeeDto {
+  JobFee toDomain() {
+    return JobFee(suggested: suggested, min: min, max: max);
+  }
+}
+

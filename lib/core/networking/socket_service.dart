@@ -15,10 +15,14 @@ class SocketService {
   final _offerNewController = StreamController<OfferNewEvent>.broadcast();
   final _requestUpdatedController =
       StreamController<RequestUpdatedEvent>.broadcast();
+  final _jobNewController = StreamController<JobNewEvent>.broadcast();
+  final _jobClosedController = StreamController<JobClosedEvent>.broadcast();
 
   Stream<OfferNewEvent> get offerNew => _offerNewController.stream;
   Stream<RequestUpdatedEvent> get requestUpdated =>
       _requestUpdatedController.stream;
+  Stream<JobNewEvent> get jobNew => _jobNewController.stream;
+  Stream<JobClosedEvent> get jobClosed => _jobClosedController.stream;
 
   bool get isConnected => _socket?.connected ?? false;
 
@@ -41,6 +45,8 @@ class SocketService {
     _socket!
       ..on(SocketEvents.offerNew, _handleOfferNew)
       ..on(SocketEvents.requestUpdated, _handleRequestUpdated)
+      ..on(SocketEvents.jobNew, _handleJobNew)
+      ..on(SocketEvents.jobClosed, _handleJobClosed)
       ..onConnectError((_) => _reconnectWithFreshToken())
       ..connect();
   }
@@ -54,6 +60,18 @@ class SocketService {
   void _handleRequestUpdated(dynamic data) {
     _requestUpdatedController.add(
       RequestUpdatedEvent.fromJson(Map<String, dynamic>.from(data as Map)),
+    );
+  }
+
+  void _handleJobNew(dynamic data) {
+    _jobNewController.add(
+      JobNewEvent.fromJson(Map<String, dynamic>.from(data as Map)),
+    );
+  }
+
+  void _handleJobClosed(dynamic data) {
+    _jobClosedController.add(
+      JobClosedEvent.fromJson(Map<String, dynamic>.from(data as Map)),
     );
   }
 
