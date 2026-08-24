@@ -7,7 +7,7 @@ class Routes {
   static const String homeScreen = '/homeScreen';
   static const String mapScreen = '/mapScreen';
   static const String profileScreen = '/profileScreen';
-    static const String editprofilescrean = '/editprofileScreen';
+  static const String editprofilescrean = '/editprofileScreen';
 
   static const String categoriesScreen = '/categoriesScreen';
   static const String kindOfProblemScreen = '/kindOfProblemScreen';
@@ -21,24 +21,15 @@ class Routes {
   static const String waitingRequestScreen = '/waitingRequestScreen';
   static const String mainnavigationscreen = '/mainnavigationscreen';
   static const String questionscreen = '/questionscreen';
-    static const String requestReviewScreen = '/requestReviewScreen';
+  static const String requestReviewScreen = '/requestReviewScreen';
   static const String chargingScreen = '/chargingScreen';
-    static const String requsetsscreen = '/requsetsscreen';
-        static const String reviewsscreen = '/reviewsscreen';
-                static const String customeraccount = '/customeraccount';
+  static const String commissionsScreen = '/commissionsScreen';
+  static const String requsetsscreen = '/requsetsscreen';
+  static const String reviewsscreen = '/reviewsscreen';
+  static const String customeraccount = '/customeraccount';
 
+  static const String ordersscreen = '/  ordersscreen';
 
-
-
-    static const String   ordersscreen
- = '/  ordersscreen';
-
-    static const String mainnavigationscreentech = '/mainnavigationscreentech';
-        static const String editprofilescreantech = '/editprofilescreantech';
-
-
-    
-
-  
-
+  static const String mainnavigationscreentech = '/mainnavigationscreentech';
+  static const String editprofilescreantech = '/editprofilescreantech';
 }
