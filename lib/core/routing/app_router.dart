@@ -16,6 +16,7 @@ import 'package:salla7ly/features/auth/signup/ui/screens/signup_screen.dart';
 import 'package:salla7ly/features/auth/signup/ui/screens/technician_acceptance_screen.dart';
 import 'package:salla7ly/features/categories/ui/screens/categories_screen.dart';
 import 'package:salla7ly/features/charging/charging_screen.dart';
+import 'package:salla7ly/features/customer_account_in_tech_view/customer_account.dart';
 import 'package:salla7ly/features/edit_profile/ui/screens/edit_profile_screan.dart';
 import 'package:salla7ly/features/edit_profile_tech/ui/screens/edit_profile_screan_tech.dart';
 import 'package:salla7ly/features/home/home_screen.dart';
@@ -36,6 +37,8 @@ import 'package:salla7ly/features/problem_description/ui/screens/tech_profile_cu
 import 'package:salla7ly/features/problem_description/ui/screens/waiting_request_screen.dart';
 import 'package:salla7ly/features/profile/logic/profile_cubit.dart';
 import 'package:salla7ly/features/profile/ui/screens/profile_screen.dart';
+import 'package:salla7ly/features/requsets/ui/screens/requsets_screen.dart';
+import 'package:salla7ly/features/reviews/ui/screens/reviews_screen.dart';
 
 class AppRouter {
   Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -66,7 +69,12 @@ class AppRouter {
           ),
         );
       case Routes.homeScreen:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<ProfileCubit>()..getProfile(),
+            child: const HomeScreen(),
+          ),
+        );
 
       case Routes.profileScreen:
         return MaterialPageRoute(
@@ -114,6 +122,8 @@ class AppRouter {
 
       case Routes.questionscreen:
         return MaterialPageRoute(builder: (_) => const QuestionScreen());
+      case Routes.requsetsscreen:
+        return MaterialPageRoute(builder: (_) => const RequsetsScreen());
       case Routes.ordersscreen:
         return MaterialPageRoute(builder: (_) => const OrdersScreen());
       case Routes.editprofilescreantech:
@@ -158,13 +168,23 @@ class AppRouter {
         );
 
       case Routes.waitingRequestScreen:
+
         final requestId = settings.arguments as String;
         return MaterialPageRoute(
           builder: (_) => WaitingRequestScreen(requestId: requestId),
         );
 
+        return MaterialPageRoute(builder: (_) => const WaitingRequestScreen());
+      case Routes.reviewsscreen:
+        return MaterialPageRoute(builder: (_) => const ReviewsScreen());
+
+
       case Routes.chargingScreen:
         return MaterialPageRoute(builder: (_) => const ChargingScreen());
+            case Routes.customeraccount:
+        return MaterialPageRoute(builder: (_) => const CustomerAccount());
+
+        
 
       case Routes.categoriesScreen:
         return MaterialPageRoute(

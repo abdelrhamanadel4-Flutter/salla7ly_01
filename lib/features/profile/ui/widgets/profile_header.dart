@@ -8,10 +8,12 @@ import 'package:salla7ly/core/theming/app_style.dart';
 import 'package:salla7ly/core/theming/assets.dart';
 
 class ProfileHeader extends StatelessWidget {
-  ProfileHeader({super.key, this.name = '', this.isEditPROFILE = false});
+  ProfileHeader({super.key, this.name = '', this.isEditPROFILE = false,this.isReviewScreen=false});
 
   final String name;
   final bool isEditPROFILE;
+    final bool isReviewScreen;
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +81,7 @@ class ProfileHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            isEditPROFILE
+            isEditPROFILE ||isReviewScreen
                 ? SizedBox()
                 : IconButton(
                     icon: Icon(
