@@ -482,7 +482,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<TechnicianReviewsResponseDto> getTechnicianReviews(
+  Future<CustomerTechReviewsResponseDto> getCustomerTechReviews(
     String id, {
     int page = 1,
     int limit = 20,
@@ -494,7 +494,7 @@ class _ApiService implements ApiService {
     };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<TechnicianReviewsResponseDto>(
+    final _options = _setStreamType<CustomerTechReviewsResponseDto>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -505,9 +505,9 @@ class _ApiService implements ApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late TechnicianReviewsResponseDto _value;
+    late CustomerTechReviewsResponseDto _value;
     try {
-      _value = TechnicianReviewsResponseDto.fromJson(_result.data!);
+      _value = CustomerTechReviewsResponseDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;

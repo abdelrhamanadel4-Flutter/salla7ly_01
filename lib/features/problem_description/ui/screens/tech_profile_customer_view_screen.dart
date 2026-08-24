@@ -9,8 +9,8 @@ import 'package:salla7ly/features/problem_description/logic/accept_offer/accept_
 import 'package:salla7ly/features/problem_description/ui/widgets/customer_evalution.dart';
 import 'package:salla7ly/features/problem_description/ui/widgets/tech_details.dart';
 import 'package:salla7ly/features/problem_description/ui/widgets/tech_profile_header.dart';
-import 'package:salla7ly/features/reviews/domain/entities/technician_review.dart';
-import 'package:salla7ly/features/reviews/logic/technician_reviews_cubit.dart';
+import 'package:salla7ly/features/reviews/domain/entities/customer_tech_review.dart';
+import 'package:salla7ly/features/reviews/logic/customer_tech_reviews_cubit.dart';
 
 class TechProfileCustomerViewScreen extends StatelessWidget {
   const TechProfileCustomerViewScreen({super.key, required this.offer});
@@ -31,9 +31,9 @@ class TechProfileCustomerViewScreen extends StatelessWidget {
               children: [
                 TechProfileHeader(technician: technician),
                 verticalSpace(40),
-                BlocBuilder<TechnicianReviewsCubit, TechnicianReviewsState>(
+                BlocBuilder<CustomerTechReviewsCubit, CustomerTechReviewsState>(
                   builder: (context, state) {
-                    final averageRating = state is TechnicianReviewsSuccess
+                    final averageRating = state is CustomerTechReviewsSuccess
                         ? double.tryParse(state.data.averageRating ?? '')
                         : null;
 
@@ -44,17 +44,17 @@ class TechProfileCustomerViewScreen extends StatelessWidget {
                   },
                 ),
                 verticalSpace(24),
-                BlocBuilder<TechnicianReviewsCubit, TechnicianReviewsState>(
+                BlocBuilder<CustomerTechReviewsCubit, CustomerTechReviewsState>(
                   builder: (context, state) {
-                    if (state is TechnicianReviewsLoading) {
+                    if (state is CustomerTechReviewsLoading) {
                       return const CircularProgressIndicator();
                     }
 
-                    if (state is TechnicianReviewsError) {
+                    if (state is CustomerTechReviewsError) {
                       return Text(state.message);
                     }
 
-                    if (state is! TechnicianReviewsSuccess ||
+                    if (state is! CustomerTechReviewsSuccess ||
                         state.data.reviews.isEmpty) {
                       return const SizedBox.shrink();
                     }
@@ -96,7 +96,7 @@ class TechProfileCustomerViewScreen extends StatelessWidget {
     );
   }
 
-  String _reviewMessage(TechnicianReview review) {
+  String _reviewMessage(CustomerTechReview review) {
     final name = review.customerName ?? 'عميل';
     final comment = review.comment;
 

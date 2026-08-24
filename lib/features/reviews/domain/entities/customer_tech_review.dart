@@ -1,4 +1,4 @@
-class TechnicianReview {
+class CustomerTechReview {
   final String? id;
   final String? rating;
   final int? punctuality;
@@ -10,7 +10,7 @@ class TechnicianReview {
   final String? customerName;
   final String? createdAt;
 
-  TechnicianReview({
+  CustomerTechReview({
     this.id,
     this.rating,
     this.punctuality,
@@ -24,9 +24,9 @@ class TechnicianReview {
   });
 }
 
-class TechnicianReviewsData {
-  final List<TechnicianReview> reviews;
+class CustomerTechReviewsData {
+  final List<CustomerTechReview> reviews;
   final String? averageRating;
 
-  TechnicianReviewsData({required this.reviews, this.averageRating});
+  CustomerTechReviewsData({required this.reviews, this.averageRating});
 }

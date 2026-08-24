@@ -14,7 +14,7 @@ class ApiConstants {
       'api/v1/customer/requests/{id}/offers/{offerId}/accept';
   static const String technicianJobs = 'api/v1/technician/jobs';
   static const String submitJobOffer = 'api/v1/technician/jobs/{id}/offer';
-  static const String technicianReviews =
+  static const String customerTechReviews =
       'api/v1/customer/technicians/{id}/reviews';
   static const String cancelRequest = 'api/v1/customer/requests/{id}/cancel';
 

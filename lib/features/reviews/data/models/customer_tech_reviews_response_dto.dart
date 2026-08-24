@@ -1,36 +1,36 @@
-class TechnicianReviewsResponseDto {
-  final List<TechnicianReviewDto> data;
-  final TechnicianReviewsMetaDto? meta;
+class CustomerTechReviewsResponseDto {
+  final List<CustomerTechReviewDto> data;
+  final CustomerTechReviewsMetaDto? meta;
 
-  TechnicianReviewsResponseDto({required this.data, this.meta});
+  CustomerTechReviewsResponseDto({required this.data, this.meta});
 
-  factory TechnicianReviewsResponseDto.fromJson(Map<String, dynamic> json) {
-    return TechnicianReviewsResponseDto(
+  factory CustomerTechReviewsResponseDto.fromJson(Map<String, dynamic> json) {
+    return CustomerTechReviewsResponseDto(
       data: (json['data'] as List<dynamic>? ?? [])
-          .map((item) => TechnicianReviewDto.fromJson(item as Map<String, dynamic>))
+          .map((item) => CustomerTechReviewDto.fromJson(item as Map<String, dynamic>))
           .toList(),
       meta: json['meta'] == null
           ? null
-          : TechnicianReviewsMetaDto.fromJson(
+          : CustomerTechReviewsMetaDto.fromJson(
               json['meta'] as Map<String, dynamic>,
             ),
     );
   }
 }
 
-class TechnicianReviewsMetaDto {
+class CustomerTechReviewsMetaDto {
   final String? averageRating;
 
-  TechnicianReviewsMetaDto({this.averageRating});
+  CustomerTechReviewsMetaDto({this.averageRating});
 
-  factory TechnicianReviewsMetaDto.fromJson(Map<String, dynamic> json) {
-    return TechnicianReviewsMetaDto(
+  factory CustomerTechReviewsMetaDto.fromJson(Map<String, dynamic> json) {
+    return CustomerTechReviewsMetaDto(
       averageRating: json['averageRating'] as String?,
     );
   }
 }
 
-class TechnicianReviewDto {
+class CustomerTechReviewDto {
   final String? id;
   final String? rating;
   final int? punctuality;
@@ -42,7 +42,7 @@ class TechnicianReviewDto {
   final ReviewCustomerDto? customer;
   final String? createdAt;
 
-  TechnicianReviewDto({
+  CustomerTechReviewDto({
     this.id,
     this.rating,
     this.punctuality,
@@ -55,8 +55,8 @@ class TechnicianReviewDto {
     this.createdAt,
   });
 
-  factory TechnicianReviewDto.fromJson(Map<String, dynamic> json) {
-    return TechnicianReviewDto(
+  factory CustomerTechReviewDto.fromJson(Map<String, dynamic> json) {
+    return CustomerTechReviewDto(
       id: json['id'] as String?,
       rating: json['rating'] as String?,
       punctuality: json['punctuality'] as int?,

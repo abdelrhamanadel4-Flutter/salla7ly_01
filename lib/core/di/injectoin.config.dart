@@ -138,15 +138,15 @@ import 'package:salla7ly/features/orders/domain/use_cases/get_customer_orders_us
     as _i503;
 import 'package:salla7ly/features/orders/logic/customer_orders_cubit.dart'
     as _i504;
-import 'package:salla7ly/features/reviews/data/data_source/remote/technician_reviews_remote_data_source.dart'
+import 'package:salla7ly/features/reviews/data/data_source/remote/customer_tech_reviews_remote_data_source.dart'
     as _i505;
-import 'package:salla7ly/features/reviews/data/repositories/technician_reviews_repository_impl.dart'
+import 'package:salla7ly/features/reviews/data/repositories/customer_tech_reviews_repository_impl.dart'
     as _i506;
-import 'package:salla7ly/features/reviews/domain/repositories/technician_reviews_repository.dart'
+import 'package:salla7ly/features/reviews/domain/repositories/customer_tech_reviews_repository.dart'
     as _i507;
-import 'package:salla7ly/features/reviews/domain/use_cases/get_technician_reviews_use_case.dart'
+import 'package:salla7ly/features/reviews/domain/use_cases/get_customer_tech_reviews_use_case.dart'
     as _i508;
-import 'package:salla7ly/features/reviews/logic/technician_reviews_cubit.dart'
+import 'package:salla7ly/features/reviews/logic/customer_tech_reviews_cubit.dart'
     as _i509;
 import 'package:salla7ly/features/profile/data/data_sources/remote/profile_remote_data_source.dart'
     as _i551;
@@ -214,8 +214,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i500.CustomerOrdersRemoteDataSource>(
       () => _i500.CustomerOrdersRemoteDataSourceImpl(gh<_i837.ApiService>()),
     );
-    gh.factory<_i505.TechnicianReviewsRemoteDataSource>(
-      () => _i505.TechnicianReviewsRemoteDataSourceImpl(gh<_i837.ApiService>()),
+    gh.factory<_i505.CustomerTechReviewsRemoteDataSource>(
+      () => _i505.CustomerTechReviewsRemoteDataSourceImpl(gh<_i837.ApiService>()),
     );
     gh.factory<_i881.OffersRepo>(
       () => _i40.OffersRepoImpl(gh<_i860.OffersRemoteDataSource>()),
@@ -279,9 +279,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i500.CustomerOrdersRemoteDataSource>(),
       ),
     );
-    gh.factory<_i507.TechnicianReviewsRepository>(
-      () => _i506.TechnicianReviewsRepositoryImpl(
-        gh<_i505.TechnicianReviewsRemoteDataSource>(),
+    gh.factory<_i507.CustomerTechReviewsRepository>(
+      () => _i506.CustomerTechReviewsRepositoryImpl(
+        gh<_i505.CustomerTechReviewsRemoteDataSource>(),
       ),
     );
     gh.factory<_i158.SignUpUseCase>(
@@ -305,9 +305,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i503.GetCustomerOrdersUseCase>(
       () => _i503.GetCustomerOrdersUseCase(gh<_i502.CustomerOrdersRepository>()),
     );
-    gh.factory<_i508.GetTechnicianReviewsUseCase>(
-      () => _i508.GetTechnicianReviewsUseCase(
-        gh<_i507.TechnicianReviewsRepository>(),
+    gh.factory<_i508.GetCustomerTechReviewsUseCase>(
+      () => _i508.GetCustomerTechReviewsUseCase(
+        gh<_i507.CustomerTechReviewsRepository>(),
       ),
     );
     gh.factory<_i1048.SubmitJobOfferUseCase>(
@@ -345,9 +345,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i504.CustomerOrdersCubit>(
       () => _i504.CustomerOrdersCubit(gh<_i503.GetCustomerOrdersUseCase>()),
     );
-    gh.factory<_i509.TechnicianReviewsCubit>(
-      () => _i509.TechnicianReviewsCubit(
-        gh<_i508.GetTechnicianReviewsUseCase>(),
+    gh.factory<_i509.CustomerTechReviewsCubit>(
+      () => _i509.CustomerTechReviewsCubit(
+        gh<_i508.GetCustomerTechReviewsUseCase>(),
       ),
     );
     gh.factory<_i899.PublishCubit>(

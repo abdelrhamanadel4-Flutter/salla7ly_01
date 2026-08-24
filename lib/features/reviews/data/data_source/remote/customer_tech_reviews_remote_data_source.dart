@@ -3,38 +3,38 @@ import 'package:salla7ly/core/mappers/mappers.dart';
 import 'package:salla7ly/core/networking/api_error_handler.dart';
 import 'package:salla7ly/core/networking/api_result.dart';
 import 'package:salla7ly/core/networking/api_service.dart';
-import 'package:salla7ly/features/reviews/domain/entities/technician_review.dart';
+import 'package:salla7ly/features/reviews/domain/entities/customer_tech_review.dart';
 
-abstract class TechnicianReviewsRemoteDataSource {
-  Future<ApiResult<TechnicianReviewsData>> getReviews(
+abstract class CustomerTechReviewsRemoteDataSource {
+  Future<ApiResult<CustomerTechReviewsData>> getReviews(
     String technicianId, {
     int page,
     int limit,
   });
 }
 
-@Injectable(as: TechnicianReviewsRemoteDataSource)
-class TechnicianReviewsRemoteDataSourceImpl
-    implements TechnicianReviewsRemoteDataSource {
+@Injectable(as: CustomerTechReviewsRemoteDataSource)
+class CustomerTechReviewsRemoteDataSourceImpl
+    implements CustomerTechReviewsRemoteDataSource {
   final ApiService _apiService;
 
-  TechnicianReviewsRemoteDataSourceImpl(this._apiService);
+  CustomerTechReviewsRemoteDataSourceImpl(this._apiService);
 
   @override
-  Future<ApiResult<TechnicianReviewsData>> getReviews(
+  Future<ApiResult<CustomerTechReviewsData>> getReviews(
     String technicianId, {
     int page = 1,
     int limit = 20,
   }) async {
     try {
-      final response = await _apiService.getTechnicianReviews(
+      final response = await _apiService.getCustomerTechReviews(
         technicianId,
         page: page,
         limit: limit,
       );
 
       return ApiResult.success(
-        TechnicianReviewsData(
+        CustomerTechReviewsData(
           reviews: response.data.map((review) => review.toEntity()).toList(),
           averageRating: response.meta?.averageRating,
         ),

@@ -43,7 +43,7 @@ import 'package:salla7ly/features/requsets/logic/submit_job_offer_cubit.dart';
 import 'package:salla7ly/features/requsets/logic/technician_jobs_cubit.dart';
 import 'package:salla7ly/features/requsets/ui/screens/requsets_screen.dart';
 import 'package:salla7ly/features/reviews/ui/screens/reviews_screen.dart';
-import 'package:salla7ly/features/reviews/logic/technician_reviews_cubit.dart';
+import 'package:salla7ly/features/reviews/logic/customer_tech_reviews_cubit.dart';
 
 class AppRouter {
   Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -178,7 +178,7 @@ class AppRouter {
               BlocProvider(create: (_) => getIt<AcceptOfferCubit>()),
               BlocProvider(
                 create: (_) {
-                  final cubit = getIt<TechnicianReviewsCubit>();
+                  final cubit = getIt<CustomerTechReviewsCubit>();
 
                   if (technicianId != null && technicianId.isNotEmpty) {
                     cubit.getReviews(technicianId);

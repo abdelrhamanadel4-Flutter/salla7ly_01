@@ -31,8 +31,8 @@ import 'package:salla7ly/features/orders/data/models/customer_orders_response_dt
 import 'package:salla7ly/features/orders/domain/entities/customer_order.dart';
 import 'package:salla7ly/features/requsets/data/models/technician_jobs_response_dto.dart';
 import 'package:salla7ly/features/requsets/domain/entity/technician_job.dart';
-import 'package:salla7ly/features/reviews/data/models/technician_reviews_response_dto.dart';
-import 'package:salla7ly/features/reviews/domain/entities/technician_review.dart';
+import 'package:salla7ly/features/reviews/data/models/customer_tech_reviews_response_dto.dart';
+import 'package:salla7ly/features/reviews/domain/entities/customer_tech_review.dart';
 
 extension RequestOtpRequestMapper on RequsetOtpRequset {
   RequsetOtpRequsetDto toDto() {
@@ -596,9 +596,9 @@ extension CustomerOrderDtoMapper on CustomerOrderDto {
   }
 }
 
-extension TechnicianReviewDtoMapper on TechnicianReviewDto {
-  TechnicianReview toEntity() {
-    return TechnicianReview(
+extension CustomerTechReviewDtoMapper on CustomerTechReviewDto {
+  CustomerTechReview toEntity() {
+    return CustomerTechReview(
       id: id,
       rating: rating,
       punctuality: punctuality,
