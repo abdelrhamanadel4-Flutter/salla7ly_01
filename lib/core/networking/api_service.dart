@@ -12,7 +12,6 @@ import 'package:salla7ly/features/categories/data/models/categories_response_dto
 import 'package:salla7ly/features/auth/signup/data/model/sign_up_responsedto.dart';
 import 'package:salla7ly/features/problem_description/data/models/accept_offer_response_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/offers_response_dto.dart';
-import 'package:salla7ly/features/problem_description/data/models/problem_description_request_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/problem_description_response_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/publish_request_response_dto.dart';
 import 'package:salla7ly/features/profile/data/model/profile_response_dto.dart';
@@ -39,7 +38,7 @@ abstract class ApiService {
 
   @POST(ApiConstants.request)
   Future<ProblemDescriptionResponseDto> createProblemDescription(
-    @Body() ProblemDescriptionRequestDto body,
+    @Body() FormData formData,
   );
 
   @POST(ApiConstants.aiEstimation)

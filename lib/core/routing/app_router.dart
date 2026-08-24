@@ -174,7 +174,6 @@ class AppRouter {
           builder: (_) => WaitingRequestScreen(requestId: requestId),
         );
 
-        return MaterialPageRoute(builder: (_) => const WaitingRequestScreen());
       case Routes.reviewsscreen:
         return MaterialPageRoute(builder: (_) => const ReviewsScreen());
 

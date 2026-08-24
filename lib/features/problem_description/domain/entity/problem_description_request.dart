@@ -1,9 +1,11 @@
+import 'dart:io';
+
 class ProblemDescriptionRequest {
   final String? title;
   final String? description;
   final String? categoryId;
   final String? requestType;
-  final List<String>? images;
+  final List<File>? images;
   final String? serviceAddress;
   final String? serviceCity;
   final double? latitude;
