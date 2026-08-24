@@ -18,7 +18,6 @@ import 'package:salla7ly/features/auth/signup/domain/entity/sign_up_response.dar
 import 'package:salla7ly/features/categories/domain/entity/categories_responce.dart';
 import 'package:salla7ly/features/problem_description/data/models/accept_offer_response_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/offers_response_dto.dart';
-import 'package:salla7ly/features/problem_description/data/models/problem_description_request_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/problem_description_response_dto.dart';
 import 'package:salla7ly/features/problem_description/data/models/publish_request_response_dto.dart';
 import 'package:salla7ly/features/problem_description/domain/entity/accept_offer_response.dart';
@@ -28,6 +27,8 @@ import 'package:salla7ly/features/problem_description/domain/entity/problem_desc
 import 'package:salla7ly/features/problem_description/domain/entity/publish_request_response.dart';
 import 'package:salla7ly/features/profile/data/model/profile_response_dto.dart';
 import 'package:salla7ly/features/profile/domain/entity/profile_response.dart';
+import 'package:salla7ly/features/orders/data/models/customer_orders_response_dto.dart';
+import 'package:salla7ly/features/orders/domain/entities/customer_order.dart';
 import 'package:salla7ly/features/requsets/data/models/technician_jobs_response_dto.dart';
 import 'package:salla7ly/features/requsets/domain/entity/technician_job.dart';
 
@@ -351,18 +352,47 @@ extension TechnicianProfileResponseDtoMapper on TechnicianProfileResponseDto {
 }
 
 extension ProblemDescriptionRequestMapper on ProblemDescriptionRequest {
-  ProblemDescriptionRequestDto toDto() {
-    return ProblemDescriptionRequestDto(
-      title: title,
-      description: description,
-      categoryId: categoryId,
-      requestType: requestType,
-      images: images,
-      serviceAddress: serviceAddress,
-      serviceCity: serviceCity,
-      latitude: latitude,
-      longitude: longitude,
-    );
+  Future<FormData> toFormData() async {
+    final formData = FormData();
+
+    formData.fields.addAll([
+      if (title != null) MapEntry('title', title!),
+      if (description != null) MapEntry('description', description!),
+      if (categoryId != null) MapEntry('categoryId', categoryId!),
+      if (requestType != null) MapEntry('requestType', requestType!),
+    ]);
+
+    if (serviceAddress != null) {
+      formData.fields.add(MapEntry('serviceAddress', serviceAddress!));
+    }
+
+    if (serviceCity != null) {
+      formData.fields.add(MapEntry('serviceCity', serviceCity!));
+    }
+
+    if (latitude != null) {
+      formData.fields.add(MapEntry('latitude', latitude.toString()));
+    }
+
+    if (longitude != null) {
+      formData.fields.add(MapEntry('longitude', longitude.toString()));
+    }
+
+    if (images != null) {
+      for (final image in images!) {
+        formData.files.add(
+          MapEntry(
+            'images',
+            await MultipartFile.fromFile(
+              image.path,
+              filename: image.path.split('/').last,
+            ),
+          ),
+        );
+      }
+    }
+
+    return formData;
   }
 }
 
@@ -545,5 +575,21 @@ extension JobCustomerDtoMapper on JobCustomerDto {
 extension JobFeeDtoMapper on JobFeeDto {
   JobFee toDomain() {
     return JobFee(suggested: suggested, min: min, max: max);
+  }
+}
+
+extension CustomerOrderDtoMapper on CustomerOrderDto {
+  CustomerOrder toEntity() {
+    return CustomerOrder(
+      id: id,
+      title: title,
+      categoryName: categoryName,
+      status: status,
+      requestType: requestType,
+      visitFee: visitFee,
+      technicianName: technicianName,
+      offersCount: offersCount,
+      createdAt: createdAt,
+    );
   }
 }

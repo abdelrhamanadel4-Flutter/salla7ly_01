@@ -7,13 +7,15 @@ import 'package:salla7ly/core/theming/assets.dart';
 
 class OrderCard extends StatelessWidget {
   final String messagename;
-  final String time;
+  final String date;
+  final String status;
   final String price;
 
   const OrderCard({
     super.key,
     required this.messagename,
-    required this.time,
+    required this.date,
+    required this.status,
     required this.price,
   });
 
@@ -31,7 +33,6 @@ class OrderCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // User icon
           SvgPicture.asset(Assets.svgsOrderIcon),
 
           SizedBox(width: 7.w),
@@ -50,27 +51,45 @@ class OrderCard extends StatelessWidget {
 
                 SizedBox(height: 1.h),
 
-                Row(
-                  children: [
-                    Text(
-                      time,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppStyles.semiBold14primary,
-                    ),
-                    Text(
-                      price,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppStyles.semiBold14primary,
-                    ),
-                  ],
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          date,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppStyles.semiBold14primary,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Text(
+                          status,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: AppStyles.semiBold14primary,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Text(
+                          price,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.end,
+                          style: AppStyles.semiBold14primary,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-
-          SizedBox(width: 30.w),
         ],
       ),
     );

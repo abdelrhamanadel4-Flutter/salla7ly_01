@@ -11,20 +11,27 @@ import 'package:salla7ly/features/profile/ui/screens/profile_screen.dart';
 import 'bottom_nav_bar.dart';
 
 class MainNavigationScreen extends StatefulWidget {
-  const MainNavigationScreen({super.key});
+  const MainNavigationScreen({
+    super.key,
+    this.initialIndex = 0,
+  });
+
+  final int initialIndex;
 
   @override
   State<MainNavigationScreen> createState() => _MainNavigationScreenState();
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int currentIndex = 0;
+  late int currentIndex;
 
   late final List<Widget> screens;
 
   @override
   void initState() {
     super.initState();
+
+    currentIndex = widget.initialIndex;
 
     screens = [
       BlocProvider(

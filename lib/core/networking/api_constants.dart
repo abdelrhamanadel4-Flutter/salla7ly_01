@@ -21,9 +21,9 @@ class ApiConstants {
   static const String notificationsReadAll = 'api/v1/me/notifications/read-all';
   static const String technicianReviews = 'api/v1/technician/reviews';
 
-  static String get socketUrl => baseUrl.endsWith('/')
-      ? baseUrl.substring(0, baseUrl.length - 1)
-      : baseUrl;
+  // Socket.IO runs on the REST API origin. 443 is the standard HTTPS port,
+  // stated explicitly because socket_io_client otherwise serializes it as :0.
+  static const String socketUrl = 'https://back.markwasfy00.xyz:443';
 }
 
 class ApiErrors {

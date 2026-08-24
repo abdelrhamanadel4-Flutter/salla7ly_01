@@ -243,13 +243,12 @@ class _ApiService implements ApiService {
 
   @override
   Future<ProblemDescriptionResponseDto> createProblemDescription(
-    ProblemDescriptionRequestDto body,
+    FormData formData,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    final _data = formData;
     final _options = _setStreamType<ProblemDescriptionResponseDto>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -372,6 +371,42 @@ class _ApiService implements ApiService {
     late AcceptOfferResponseDto _value;
     try {
       _value = AcceptOfferResponseDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<CustomerOrdersResponseDto> getCustomerOrders({
+    int page = 1,
+    int limit = 20,
+    String? status,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'limit': limit,
+      r'status': status,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<CustomerOrdersResponseDto>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'api/v1/customer/requests',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late CustomerOrdersResponseDto _value;
+    try {
+      _value = CustomerOrdersResponseDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;

@@ -131,7 +131,10 @@ class ProfileScreen extends StatelessWidget {
                         CustomElevatedButton(
                           text: 'طلباتك السابقه',
                           onPressed: () {
-                            context.pushNamed(Routes.ordersscreen);
+                            context.pushReplacementNamed(
+                              Routes.mainnavigationscreen,
+                              arguments: 2,
+                            );
                           },
                         ),
                       ],
