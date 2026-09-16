@@ -1,88 +1,110 @@
 # Salla7ly 🔧
 
-An early-stage Flutter project for **Salla7ly**. The repository currently provides the application's foundation: routing, theming, a reusable widget layer, and the beginning of the authentication flow.
+A Flutter mobile application built to provide users with convenient home maintenance and service solutions.
 
-> This is the initial foundation of the project. Feature screens are being built incrementally on top of the core modules.
+Salla7ly is a fully working Flutter application with a structured architecture, reusable components, authentication flow, networking infrastructure, local storage, and a scalable feature-first project structure.
+
+---
 
 ## ✨ Overview
 
-Salla7ly is being built as a Flutter application. The current codebase establishes the app shell, centralized routing, theme and asset management, core helpers, reusable widgets, and native splash configuration — with the login screen as the first feature being built out.
+**Salla7ly** is a home services application developed with Flutter and designed with a scalable and maintainable codebase.
+
+The application provides a structured foundation for connecting users with home maintenance and service solutions while maintaining a clean and organized user experience.
+
+The project demonstrates practical Flutter development using modern tools and development practices, including state management, dependency injection, API communication, local storage, and reusable UI components.
+
+---
 
 ## 🚀 Features
 
-Current status — foundation and first feature:
+- 🔐 User authentication
+- 👤 Login and user account flow
+- 🏠 Home services experience
+- 🧭 Centralized application navigation
+- 📱 Responsive UI across different screen sizes
+- 🎨 Consistent application theming
+- 🧩 Reusable custom widgets
+- 🌐 API communication
+- 💾 Local data storage
+- 🔒 Secure local storage
+- 💉 Dependency injection
+- 📡 Network request logging
+- 🖼️ SVG asset support
+- ✨ Smooth and responsive user interface
+- 💠 Native splash screen
 
-- 📱 App shell with `ScreenUtil` responsive sizing and `DevicePreview`
-- 🧭 Centralized routing via `AppRouter` (named-route generation)
-- 🎨 Theming: app colors, text styles, and generated asset constants
-- 🛠️ Core helpers: input validators, spacing, toast notifications, shared preferences wrapper
-- 🧩 Reusable widgets: custom elevated button, custom text field, dialog utils
-- 💠 Native splash screen configuration
-- 👤 Login screen (initial auth feature, placeholder)
+---
 
 ## 🛠️ Tech Stack
 
 ### Framework & Language
 
-- Flutter
-- Dart
+- **Flutter**
+- **Dart**
 
 ### State Management & Architecture
 
-- `flutter_bloc` — state management
-- `get_it` + `injectable` — dependency injection
-- Feature-first layout under `core/` and `feature_user/`
+- **Flutter BLoC** — state management
+- **GetIt** — dependency injection
+- **Injectable** — dependency injection code generation
+- **Feature-first architecture**
 
 ### Networking
 
-- `dio` + `retrofit` + `pretty_dio_logger`
-- `json_annotation` + `freezed` — models
+- **Dio** — HTTP client
+- **Retrofit** — API client generation
+- **Pretty Dio Logger** — network request logging
+- **JSON Annotation** — JSON serialization
+- **Freezed** — immutable models and code generation
 
-### Local Storage & Device Services
+### Local Storage
 
-- `hive`
-- `shared_preferences`
-- `flutter_secure_storage`
+- **Hive** — local database/storage
+- **Shared Preferences** — lightweight local storage
+- **Flutter Secure Storage** — secure local data storage
 
 ### UI & Design
 
-- `flutter_screenutil` — responsive UI
-- `device_preview` — device preview in development
-- `shimmer`, `auto_size_text`, `flutter_svg`, `google_fonts`
-- `fluttertoast` — notifications
-- `flutter_native_splash` — splash screen
+- **Flutter ScreenUtil** — responsive UI
+- **Device Preview** — device testing and preview
+- **Flutter SVG** — SVG rendering
+- **Google Fonts** — custom typography
+- **Shimmer** — loading states
+- **Auto Size Text** — responsive text
+- **Fluttertoast** — user notifications
+- **Flutter Native Splash** — native splash screen
 
-## 🏗️ Project Structure
+---
 
-```
+## 🏗️ Architecture & Project Structure
+
+The project follows a **feature-first architecture**, separating shared application infrastructure from individual application features.
+
+```text
 lib/
 ├── core/
-│   ├── helpers/       # validators, spacing, toasts, shared prefs helper
-│   ├── routing/       # routes + AppRouter
-│   ├── theming/       # colors, styles, generated asset constants
-│   └── widgets/       # reusable UI widgets
+│   ├── helpers/
+│   │   ├── validators
+│   │   ├── spacing
+│   │   ├── toast utilities
+│   │   └── shared preferences
+│   │
+│   ├── routing/
+│   │   ├── routes
+│   │   └── AppRouter
+│   │
+│   ├── theming/
+│   │   ├── colors
+│   │   ├── styles
+│   │   └── generated assets
+│   │
+│   └── widgets/
+│       ├── custom buttons
+│       ├── custom text fields
+│       └── dialog utilities
+│
 └── feature_user/
     └── auth/
-        └── login/     # login feature (UI present, logic/data planned)
-```
-
-## 📱 Application Version
-
-Current project version: **1.0.0+1**
-
-## 📸 Screenshots
-
-Add screenshots here to showcase the app shell and the login screen once the feature UI is complete.
-
-## ▶️ Getting Started
-
-```bash
-git clone https://github.com/abdelrhamanadel4-Flutter/salla7ly_01.git
-cd salla7ly_01
-flutter pub get
-flutter run
-```
-
-## 📄 Note
-
-This is an early-stage repository. The architecture and core modules are in place; the login screen is currently a placeholder awaiting its data layer.
+        └── login/
+            └── Login Feature
